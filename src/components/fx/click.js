@@ -22,13 +22,14 @@ module.exports = function click(gd, evt, subplot) {
         hover(gd, evt, subplot, true);
     }
 
-    function emitClick() { gd.emit('plotly_click', {points: gd._hoverdata, event: evt}); }
+    function emitClick() {
+        gd.emit('plotly_click', {points: gd._hoverdata, event: evt});
+    }
 
     if(gd._hoverdata && evt && evt.target) {
         if(annotationsDone && annotationsDone.then) {
             annotationsDone.then(emitClick);
-        }
-        else emitClick();
+        } else emitClick();
 
         // why do we get a double event without this???
         if(evt.stopImmediatePropagation) evt.stopImmediatePropagation();

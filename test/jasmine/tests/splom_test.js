@@ -690,7 +690,9 @@ describe('Test splom interactions:', function() {
 
         function _assert(dims) {
             var gridData = gd._fullLayout._splomGrid.passes;
-            var gridLengths = gridData.map(function(d) { return d.count * 2; });
+            var gridLengths = gridData.map(function(d) {
+                return d.count * 2;
+            });
             var msg = ' - call #' + cnt;
 
             expect(Object.keys(gridData).length)
@@ -911,7 +913,9 @@ describe('Test splom interactions:', function() {
 
         function _assert(msg, exp) {
             var splomScenes = gd._fullLayout._splomScenes;
-            var ids = gd._fullData.map(function(trace) { return trace.uid; });
+            var ids = gd._fullData.map(function(trace) {
+                return trace.uid;
+            });
 
             for(var i = 0; i < 3; i++) {
                 var drawFn = splomScenes[ids[i]].draw;
@@ -958,7 +962,9 @@ describe('Test splom interactions:', function() {
 
         var methods = ['cleanPlot', 'supplyDefaults', 'doCalcdata'];
 
-        methods.forEach(function(m) { spyOn(Plots, m).and.callThrough(); });
+        methods.forEach(function(m) {
+            spyOn(Plots, m).and.callThrough();
+        });
 
         function assertFnCall(msg, exp) {
             methods.forEach(function(m) {
@@ -1539,7 +1545,9 @@ describe('Test splom drag:', function() {
                 [0.3, 7.6]
             ]);
         })
-        .then(function() { return _drag([130, 130], [150, 150]); })
+        .then(function() {
+            return _drag([130, 130], [150, 150]);
+        })
         .then(function() {
             var uid = gd._fullData[0].uid;
             var scene = gd._fullLayout._splomScenes[uid];
@@ -1639,7 +1647,9 @@ describe('Test splom select:', function() {
         }
 
         Plotly.newPlot(gd, fig)
-        .then(function() { return _select([[5, 5], [195, 195]]); })
+        .then(function() {
+            return _select([[5, 5], [195, 195]]);
+        })
         .then(function() {
             _assert('first', [
                 {pointNumber: 0, x: 1, y: 1},
@@ -1650,7 +1660,9 @@ describe('Test splom select:', function() {
                 selectionOutlineCnt: 2
             });
         })
-        .then(function() { return _select([[50, 50], [100, 100]]); })
+        .then(function() {
+            return _select([[50, 50], [100, 100]]);
+        })
         .then(function() {
             _assert('second', [
                 {pointNumber: 1, x: 2, y: 2}
@@ -1659,7 +1671,9 @@ describe('Test splom select:', function() {
                 selectionOutlineCnt: 2
             });
         })
-        .then(function() { return _select([[5, 195], [100, 100]], {shiftKey: true}); })
+        .then(function() {
+            return _select([[5, 195], [100, 100]], {shiftKey: true});
+        })
         .then(function() {
             _assert('multi-select', [
                 {pointNumber: 0, x: 1, y: 1},
@@ -1670,7 +1684,9 @@ describe('Test splom select:', function() {
                 selectionOutlineCnt: 2
             });
         })
-        .then(function() { return _select([[205, 205], [395, 395]]); })
+        .then(function() {
+            return _select([[205, 205], [395, 395]]);
+        })
         .then(function() {
             _assert('across other subplot', [
                 {pointNumber: 0, x: 2, y: 2},
@@ -1682,7 +1698,9 @@ describe('Test splom select:', function() {
                 selectionOutlineCnt: 2
             });
         })
-        .then(function() { return _select([[50, 50], [100, 100]]); })
+        .then(function() {
+            return _select([[50, 50], [100, 100]]);
+        })
         .then(function() {
             _assert('multi-select across other subplot (prohibited for now)', [
                 {pointNumber: 1, x: 2, y: 2}
@@ -1724,7 +1742,9 @@ describe('Test splom select:', function() {
                 splomCnt = cnt;
             });
         })
-        .then(function() { return _select([[20, 395], [195, 205]]); })
+        .then(function() {
+            return _select([[20, 395], [195, 205]]);
+        })
         .then(function() {
             expect(scatterglScene.draw).toHaveBeenCalledTimes(1);
             expect(splomScene.draw).toHaveBeenCalledTimes(1);
@@ -1775,7 +1795,9 @@ describe('Test splom select:', function() {
                 unselectBatch: null
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'dragmode', 'select'); })
+        .then(function() {
+            return Plotly.relayout(gd, 'dragmode', 'select');
+        })
         .then(function() {
             _assert('under dragmode:select', {
                 updateCnt: 3,     // updates positions, viewport and style in 3 calls
@@ -1785,7 +1807,9 @@ describe('Test splom select:', function() {
                 unselectBatch: []
             });
         })
-        .then(function() { return _select([[5, 5], [100, 100]]); })
+        .then(function() {
+            return _select([[5, 5], [100, 100]]);
+        })
         .then(function() {
             _assert('after selection', {
                 updateCnt: 0,
@@ -1795,7 +1819,9 @@ describe('Test splom select:', function() {
                 unselectBatch: [0, 2]
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'dragmode', 'pan'); })
+        .then(function() {
+            return Plotly.relayout(gd, 'dragmode', 'pan');
+        })
         .then(function() {
             _assert('under dragmode:pan with active selection', {
                 updateCnt: 0,
@@ -1805,7 +1831,9 @@ describe('Test splom select:', function() {
                 unselectBatch: [0, 2]
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'dragmode', 'select'); })
+        .then(function() {
+            return Plotly.relayout(gd, 'dragmode', 'select');
+        })
         .then(function() {
             _assert('back dragmode:select', {
                 updateCnt: 3,
@@ -1815,7 +1843,9 @@ describe('Test splom select:', function() {
                 unselectBatch: [0, 2]
             });
         })
-        .then(function() { return doubleClick(100, 100); })
+        .then(function() {
+            return doubleClick(100, 100);
+        })
         .then(function() {
             _assert('after dblclick clearing selection', {
                 updateCnt: 0,
@@ -1825,7 +1855,9 @@ describe('Test splom select:', function() {
                 unselectBatch: []
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'dragmode', 'pan'); })
+        .then(function() {
+            return Plotly.relayout(gd, 'dragmode', 'pan');
+        })
         .then(function() {
             _assert('under dragmode:pan with NO active selection', {
                 updateCnt: 1,       // to clear off 1 matrixTrace

@@ -35,7 +35,9 @@ var imageNames = fs.readFileSync(
         'utf8'
     )
     .split('\n')
-    .filter(function(x) { return x; })
+    .filter(function(x) {
+        return x;
+    })
     .map(function(x) {
         return x.split('diff-')[1].split('.png')[0];
     });

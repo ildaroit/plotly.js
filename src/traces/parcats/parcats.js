@@ -177,7 +177,9 @@ function performPlot(parcatsModels, graphDiv, layout, svg) {
             }, key);
 
     // Raise all update bands to the top so that fading enter/exit bands will be behind
-    bandSelection.each(function() {Lib.raiseToTop(this);});
+    bandSelection.each(function() {
+        Lib.raiseToTop(this);
+    });
 
     // Update band color
     bandSelection
@@ -653,7 +655,9 @@ function styleForColorHovermode(bandElement) {
     // Style category for drag
     d3.select(bandElement.parentNode)
         .selectAll('rect.bandrect')
-        .filter(function(b) {return b.color === bandViewModel.color;})
+        .filter(function(b) {
+            return b.color === bandViewModel.color;
+        })
         .each(function() {
             Lib.raiseToTop(this);
             styleBandsHover(d3.select(this));
@@ -1030,7 +1034,9 @@ function dragDimensionStart(d) {
 
     // Save off initial drag indexes for dimension
     d.dragDimensionDisplayInd = d.model.displayInd;
-    d.initialDragDimensionDisplayInds = d.parcatsViewModel.model.dimensions.map(function(d) {return d.displayInd;});
+    d.initialDragDimensionDisplayInds = d.parcatsViewModel.model.dimensions.map(function(d) {
+        return d.displayInd;
+    });
     d.dragHasMoved = false;
 
     // Check for category hit
@@ -1197,7 +1203,9 @@ function dragDimensionEnd(d) {
     var traceInd = getTraceIndex(d.parcatsViewModel);
 
     // ### Handle dimension reordering ###
-    var finalDragDimensionDisplayInds = d.parcatsViewModel.model.dimensions.map(function(d) {return d.displayInd;});
+    var finalDragDimensionDisplayInds = d.parcatsViewModel.model.dimensions.map(function(d) {
+        return d.displayInd;
+    });
     var anyDimsReordered = d.initialDragDimensionDisplayInds.some(function(initDimDisplay, dimInd) {
         return initDimDisplay !== finalDragDimensionDisplayInds[dimInd];
     });
@@ -1223,11 +1231,17 @@ function dragDimensionEnd(d) {
         if(anyCatsReordered) {
             // Sort a shallow copy of the category models by display index
             var sortedCategoryModels = d.model.categories.slice().sort(
-                function(a, b) { return a.displayInd - b.displayInd; });
+                function(a, b) {
+                    return a.displayInd - b.displayInd;
+                });
 
             // Get new categoryarray and ticktext values
-            var newCategoryArray = sortedCategoryModels.map(function(v) { return v.categoryValue; });
-            var newCategoryLabels = sortedCategoryModels.map(function(v) { return v.categoryLabel; });
+            var newCategoryArray = sortedCategoryModels.map(function(v) {
+                return v.categoryValue;
+            });
+            var newCategoryLabels = sortedCategoryModels.map(function(v) {
+                return v.categoryLabel;
+            });
 
             restyleData['dimensions[' + d.model.containerInd + '].categoryarray'] = [newCategoryArray];
             restyleData['dimensions[' + d.model.containerInd + '].ticktext'] = [newCategoryLabels];
@@ -1344,11 +1358,14 @@ function updateSvgCategories(parcatsViewModel, hasTransition) {
     // Update binding
     parcatsViewModel.dimensionSelection
         .data(function(d) {
-            return d.dimensions;}, key);
+            return d.dimensions;
+        }, key);
 
     var categorySelection = parcatsViewModel.dimensionSelection
         .selectAll('g.category')
-        .data(function(d) {return d.categories;}, key);
+        .data(function(d) {
+            return d.categories;
+        }, key);
 
     // Update dimension position
     transition(parcatsViewModel.dimensionSelection)
@@ -1457,7 +1474,9 @@ function updateSvgCategories(parcatsViewModel, hasTransition) {
     styleBandsNoHover(bandsSelectionEnter);
 
     // Raise bands to the top
-    bandSelection.each(function() {Lib.raiseToTop(this);});
+    bandSelection.each(function() {
+        Lib.raiseToTop(this);
+    });
 
     // Remove unused bands
     bandSelection.exit().remove();
@@ -1634,12 +1653,18 @@ function updatePathViewModels(parcatsViewModel) {
     // Array from category index to category display index for each true dimension index
     var catToDisplayIndPerDim = parcatsViewModel.model.dimensions.map(
         function(d) {
-            return d.categories.map(function(c) {return c.displayInd;});
+            return d.categories.map(function(c) {
+                return c.displayInd;
+            });
         });
 
     // Array from true dimension index to dimension display index
-    var dimToDisplayInd = parcatsViewModel.model.dimensions.map(function(d) {return d.displayInd;});
-    var displayToDimInd = parcatsViewModel.dimensions.map(function(d) {return d.model.dimensionInd;});
+    var dimToDisplayInd = parcatsViewModel.model.dimensions.map(function(d) {
+        return d.displayInd;
+    });
+    var displayToDimInd = parcatsViewModel.dimensions.map(function(d) {
+        return d.model.dimensionInd;
+    });
 
     // Array of the x position of the left edge of the rectangles for each dimension
     var leftXPositions = dimensionViewModels.map(
@@ -1648,7 +1673,9 @@ function updatePathViewModels(parcatsViewModel) {
         });
 
     // Compute dimension widths
-    var dimWidths = dimensionViewModels.map(function(d) {return d.width;});
+    var dimWidths = dimensionViewModels.map(function(d) {
+        return d.width;
+    });
 
     // Build sorted Array of PathModel objects
     var pathModels = [];
@@ -1660,7 +1687,9 @@ function updatePathViewModels(parcatsViewModel) {
 
     // Compute category display inds to use for sorting paths
     function pathDisplayCategoryInds(pathModel) {
-        var dimensionInds = pathModel.categoryInds.map(function(catInd, dimInd) {return catToDisplayIndPerDim[dimInd][catInd];});
+        var dimensionInds = pathModel.categoryInds.map(function(catInd, dimInd) {
+            return catToDisplayIndPerDim[dimInd][catInd];
+        });
         var displayInds = displayToDimInd.map(function(dimInd) {
             return dimensionInds[dimInd];
         });
@@ -1705,8 +1734,12 @@ function updatePathViewModels(parcatsViewModel) {
     var pathViewModels = new Array(pathModels.length);
     var totalCount = dimensionViewModels[0].model.count;
     var totalHeight = dimensionViewModels[0].categories
-        .map(function(c) { return c.height; })
-        .reduce(function(v1, v2) { return v1 + v2; });
+        .map(function(c) {
+            return c.height;
+        })
+        .reduce(function(v1, v2) {
+            return v1 + v2;
+        });
 
 
     for(var pathNumber = 0; pathNumber < pathModels.length; pathNumber++) {

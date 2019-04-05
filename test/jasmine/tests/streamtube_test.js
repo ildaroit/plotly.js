@@ -269,7 +269,9 @@ describe('Test streamtube interactions', function() {
         function _assert(msg, exp) {
             var scene = gd._fullLayout.scene._scene;
             var objs = scene.glplot.objects;
-            var objTypes = objs.map(function(o) { return o._trace.data.type; });
+            var objTypes = objs.map(function(o) {
+                return o._trace.data.type;
+            });
             expect(objTypes).toEqual(exp.objTypes);
         }
 
@@ -435,7 +437,9 @@ describe('Test streamtube hover', function() {
         Plotly.plot(gd, fig)
         .then(delay(20))
         .then(function() {
-            gd.on('plotly_hover', function(d) { ptData = d.points[0]; });
+            gd.on('plotly_hover', function(d) {
+                ptData = d.points[0];
+            });
         })
         .then(_hover)
         .then(delay(20))

@@ -97,7 +97,9 @@ function convert(scene, trace) {
     function toDataCoords(arr, axisName) {
         var ax = sceneLayout[axisName];
         var scale = dataScale[axisName2scaleIndex[axisName]];
-        return Lib.simpleMap(arr, function(v) { return ax.d2l(v) * scale; });
+        return Lib.simpleMap(arr, function(v) {
+            return ax.d2l(v) * scale;
+        });
     }
 
     tubeOpts.vectors = zip3(

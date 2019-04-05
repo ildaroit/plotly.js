@@ -11,8 +11,12 @@ module.exports = function makeSchema(plotlyPath, schemaPath) {
         // jsdom by itself doesn't support getContext, and adding the npm canvas
         // package is annoying and platform-dependent.
         // see https://github.com/tmpvar/jsdom/issues/1782
-        w.HTMLCanvasElement.prototype.getContext = function() { return null; };
-        w.URL.createObjectURL = function() { return null; };
+        w.HTMLCanvasElement.prototype.getContext = function() {
+            return null;
+        };
+        w.URL.createObjectURL = function() {
+            return null;
+        };
 
         w.eval(plotlyjsCode);
 

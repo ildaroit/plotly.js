@@ -510,9 +510,15 @@ proto.update = function(data) {
         ndarray(new Float32Array(xlen * ylen), [xlen, ylen]),
         ndarray(new Float32Array(xlen * ylen), [xlen, ylen])
     ];
-    fill(coords[0], function(row, col) { return rawCoords[0][row][col]; });
-    fill(coords[1], function(row, col) { return rawCoords[1][row][col]; });
-    fill(coords[2], function(row, col) { return rawCoords[2][row][col]; });
+    fill(coords[0], function(row, col) {
+        return rawCoords[0][row][col];
+    });
+    fill(coords[1], function(row, col) {
+        return rawCoords[1][row][col];
+    });
+    fill(coords[2], function(row, col) {
+        return rawCoords[2][row][col];
+    });
     rawCoords = []; // free memory
 
     var params = {
@@ -545,8 +551,7 @@ proto.update = function(data) {
         });
 
         coords.push(intensity);
-    }
-    else {
+    } else {
         // when 'z' is used as 'intensity',
         // we must scale its value
         params.intensityBounds[0] *= scaleFactor[2];
@@ -593,8 +598,7 @@ proto.update = function(data) {
 
             if(contourParams.usecolormap) {
                 surface.highlightTint[i] = params.contourTint[i] = 0;
-            }
-            else {
+            } else {
                 surface.highlightTint[i] = params.contourTint[i] = 1;
             }
             params.contourWidth[i] = contourParams.width;

@@ -40,7 +40,9 @@ module.exports = function plot(gd, cdparcoords) {
         // without having to incur heavy UI blocking due to an actual `Plotly.restyle` call
 
         var gdDimension = gdDimensionsOriginalOrder[i][originalDimensionIndex];
-        var newConstraints = newRanges.map(function(r) { return r.slice(); });
+        var newConstraints = newRanges.map(function(r) {
+            return r.slice();
+        });
 
         // Store constraint range in preGUI
         // This one doesn't work if it's stored in pieces in _storeDirectGUIEdit
@@ -59,8 +61,7 @@ module.exports = function plot(gd, cdparcoords) {
             delete gdDimension.constraintrange;
             delete fullDimension.constraintrange;
             newConstraints = null;
-        }
-        else {
+        } else {
             if(newConstraints.length === 1) newConstraints = newConstraints[0];
             gdDimension.constraintrange = newConstraints;
             fullDimension.constraintrange = newConstraints.slice();
@@ -85,7 +86,9 @@ module.exports = function plot(gd, cdparcoords) {
         // Have updated order data on `gd.data` and raise `Plotly.restyle` event
         // without having to incur heavy UI blocking due to an actual `Plotly.restyle` call
 
-        function visible(dimension) {return !('visible' in dimension) || dimension.visible;}
+        function visible(dimension) {
+            return !('visible' in dimension) || dimension.visible;
+        }
 
         function newIdx(visibleIndices, orig, dim) {
             var origIndex = orig.indexOf(dim);
@@ -111,7 +114,9 @@ module.exports = function plot(gd, cdparcoords) {
 
         // invisible dimensions are not interpreted in the context of drag&drop sorting as an invisible dimension
         // cannot be dragged; they're interspersed into their original positions by this subsequent merging step
-        gdDimensionsOriginalOrder[i].filter(function(d) {return !visible(d);})
+        gdDimensionsOriginalOrder[i].filter(function(d) {
+            return !visible(d);
+        })
              .sort(function(d) {
                  // subsequent splicing to be done left to right, otherwise indices may be incorrect
                  return gdDimensionsOriginalOrder[i].indexOf(d);

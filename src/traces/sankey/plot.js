@@ -17,10 +17,14 @@ var cn = require('./constants').cn;
 
 var _ = Lib._;
 
-function renderableValuePresent(d) {return d !== '';}
+function renderableValuePresent(d) {
+    return d !== '';
+}
 
 function ownTrace(selection, d) {
-    return selection.filter(function(s) {return s.key === d.traceId;});
+    return selection.filter(function(s) {
+        return s.key === d.traceId;
+    });
 }
 
 function makeTranslucent(element, alpha) {
@@ -80,7 +84,9 @@ function linkHoveredStyle(d, sankey, visitNodes, sankeyLink) {
     if(label) {
         ownTrace(sankey, d)
             .selectAll('.' + cn.sankeyLink)
-            .filter(function(l) {return l.link.label === label;})
+            .filter(function(l) {
+                return l.link.label === label;
+            })
             .style('fill-opacity', function(l) {
                 if(!l.link.concentrationscale) {
                     return 0.4;
@@ -99,12 +105,18 @@ function linkHoveredStyle(d, sankey, visitNodes, sankeyLink) {
 function linkNonHoveredStyle(d, sankey, visitNodes, sankeyLink) {
     var label = sankeyLink.datum().link.label;
 
-    sankeyLink.style('fill-opacity', function(d) {return d.tinyColorAlpha;});
+    sankeyLink.style('fill-opacity', function(d) {
+        return d.tinyColorAlpha;
+    });
     if(label) {
         ownTrace(sankey, d)
             .selectAll('.' + cn.sankeyLink)
-            .filter(function(l) {return l.link.label === label;})
-            .style('fill-opacity', function(d) {return d.tinyColorAlpha;});
+            .filter(function(l) {
+                return l.link.label === label;
+            })
+            .style('fill-opacity', function(d) {
+                return d.tinyColorAlpha;
+            });
     }
 
     if(visitNodes) {

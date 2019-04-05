@@ -32,9 +32,13 @@ module.exports = function calc(gd, trace) {
     var groupWidth = Math.floor(gd._fullLayout._size.w * (domain.x[1] - domain.x[0]));
     var groupHeight = Math.floor(gd._fullLayout._size.h * (domain.y[1] - domain.y[0]));
     var headerRowHeights = trace.header.values.length ?
-        headerValues[0].map(function() { return trace.header.height; }) :
+        headerValues[0].map(function() {
+            return trace.header.height;
+        }) :
         [c.emptyHeaderHeight];
-    var rowHeights = cellsValues.length ? cellsValues[0].map(function() { return trace.cells.height; }) : [];
+    var rowHeights = cellsValues.length ? cellsValues[0].map(function() {
+        return trace.cells.height;
+    }) : [];
     var headerHeight = headerRowHeights.reduce(sum, 0);
     var scrollHeight = groupHeight - headerHeight;
     var minimumFillHeight = scrollHeight + c.uplift;
@@ -43,7 +47,9 @@ module.exports = function calc(gd, trace) {
     var headerRowBlocks = makeRowBlock(anchorToHeaderRowBlock, []);
     var rowBlocks = makeRowBlock(anchorToRowBlock, headerRowBlocks);
     var uniqueKeys = {};
-    var columnOrder = trace._fullInput.columnorder.concat(slicer(cellsValues.map(function(d, i) {return i;})));
+    var columnOrder = trace._fullInput.columnorder.concat(slicer(cellsValues.map(function(d, i) {
+        return i;
+    })));
     var columnWidths = headerValues.map(function(d, i) {
         var value = Array.isArray(trace.columnwidth) ?
             trace.columnwidth[Math.min(i, trace.columnwidth.length - 1)] :
@@ -53,7 +59,9 @@ module.exports = function calc(gd, trace) {
     var totalColumnWidths = columnWidths.reduce(sum, 0);
 
     // fit columns in the available vertical space as there's no vertical scrolling now
-    columnWidths = columnWidths.map(function(d) { return d / totalColumnWidths * groupWidth; });
+    columnWidths = columnWidths.map(function(d) {
+        return d / totalColumnWidths * groupWidth;
+    });
 
     var maxLineWidth = Math.max(arrayMax(trace.header.line.width), arrayMax(trace.cells.line.width));
 
@@ -73,8 +81,12 @@ module.exports = function calc(gd, trace) {
         scrollY: 0, // will be mutated on scroll
         cells: extendFlat({}, trace.cells, {values: cellsValues}),
         headerCells: extendFlat({}, trace.header, {values: headerValues}),
-        gdColumns: headerValues.map(function(d) {return d[0];}),
-        gdColumnsOriginalOrder: headerValues.map(function(d) {return d[0];}),
+        gdColumns: headerValues.map(function(d) {
+            return d[0];
+        }),
+        gdColumnsOriginalOrder: headerValues.map(function(d) {
+            return d[0];
+        }),
         prevPages: [0, 0],
         scrollbarState: {scrollbarScrollInProgress: false},
         columns: headerValues.map(function(label, i) {
@@ -113,7 +125,9 @@ function arrayMax(maybeArray) {
     return maybeArray;
 }
 
-function sum(a, b) { return a + b; }
+function sum(a, b) {
+    return a + b;
+}
 
 // fill matrix in place to equal lengths
 // and ensure it's uniformly 2D
@@ -151,7 +165,9 @@ function xScale(d) {
 
 function makeRowBlock(anchorToRowBlock, auxiliary) {
     var blockAnchorKeys = Object.keys(anchorToRowBlock);
-    return blockAnchorKeys.map(function(k) {return extendFlat({}, anchorToRowBlock[k], {auxiliaryBlocks: auxiliary});});
+    return blockAnchorKeys.map(function(k) {
+        return extendFlat({}, anchorToRowBlock[k], {auxiliaryBlocks: auxiliary});
+    });
 }
 
 function makeAnchorToRowBlock(rowHeights, minimumFillHeight) {

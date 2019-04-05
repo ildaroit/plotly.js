@@ -948,7 +948,9 @@ describe('Test click interactions:', function() {
                 expect(gd._fullLayout.yaxis._rangeInitial).toBe(undefined);
                 expect(gd._fullLayout.yaxis2).toBe(undefined);
             })
-            .then(function() { return Plotly.react(gd, fig); })
+            .then(function() {
+                return Plotly.react(gd, fig);
+            })
             .then(function() {
                 _assert('after react into fig', {
                     xRng: [0, 4],
@@ -956,7 +958,9 @@ describe('Test click interactions:', function() {
                     y2Rng: [-1, 1]
                 });
             })
-            .then(function() { return drag(200, 200, 250, 250); })
+            .then(function() {
+                return drag(200, 200, 250, 250);
+            })
             .then(function() {
                 _assert('after zoom', {
                     xRng: [1.509, 2.138],
@@ -964,7 +968,9 @@ describe('Test click interactions:', function() {
                     y2Rng: [-1, 1]
                 });
             })
-            .then(function() { return doubleClick(250, 250); })
+            .then(function() {
+                return doubleClick(250, 250);
+            })
             .then(function() {
                 _assert('after double click autorange', {
                     xRng: [0.788, 4.211],
@@ -972,7 +978,9 @@ describe('Test click interactions:', function() {
                     y2Rng: [-1, 1]
                 });
             })
-            .then(function() { return doubleClick(250, 250); })
+            .then(function() {
+                return doubleClick(250, 250);
+            })
             .then(function() {
                 // more info in: https://github.com/plotly/plotly.js/issues/2718
                 _assert('after 2nd double click autorange (does not reset as rangeInitial is not set)', {

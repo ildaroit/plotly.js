@@ -215,8 +215,12 @@ describe('table', function() {
                     glyph: 1
                 });
             })
-            .then(function() { return Plotly.purge(gd); })
-            .then(function() { return Plotly.plot(gd, mockCopy.data, mockCopy.layout, {staticPlot: true}); })
+            .then(function() {
+                return Plotly.purge(gd);
+            })
+            .then(function() {
+                return Plotly.plot(gd, mockCopy.data, mockCopy.layout, {staticPlot: true});
+            })
             .then(function() {
                 _assert('staticPlot:true', {
                     captureZone: 0,
@@ -392,16 +396,36 @@ describe('table', function() {
                 };
             }
 
-            restyleValues('cells.fill.color', function(gd) {return gd.data[0].cells.fill.color;}, [['green', 'red']])()
-                .then(restyleValues('cells.line.color', function(gd) {return gd.data[0].cells.line.color;}, [['magenta', 'blue']]))
-                .then(restyleValues('cells.line.width', function(gd) {return gd.data[0].cells.line.width;}, [[5, 3]]))
-                .then(restyleValues('cells.format', function(gd) {return gd.data[0].cells.format;}, [['', '']]))
-                .then(restyleValues('cells.prefix', function(gd) {return gd.data[0].cells.prefix;}, [['p1']]))
-                .then(restyleValues('cells.suffix', function(gd) {return gd.data[0].cells.suffix;}, [['s1']]))
-                .then(restyleValues('header.fill.color', function(gd) {return gd.data[0].header.fill.color;}, [['yellow', 'purple']]))
-                .then(restyleValues('header.line.color', function(gd) {return gd.data[0].header.line.color;}, [['green', 'red']]))
-                .then(restyleValues('header.line.width', function(gd) {return gd.data[0].header.line.width;}, [[2, 6]]))
-                .then(restyleValues('header.format', function(gd) {return gd.data[0].header.format;}, [['', '']]))
+            restyleValues('cells.fill.color', function(gd) {
+                return gd.data[0].cells.fill.color;
+            }, [['green', 'red']])()
+                .then(restyleValues('cells.line.color', function(gd) {
+                    return gd.data[0].cells.line.color;
+                }, [['magenta', 'blue']]))
+                .then(restyleValues('cells.line.width', function(gd) {
+                    return gd.data[0].cells.line.width;
+                }, [[5, 3]]))
+                .then(restyleValues('cells.format', function(gd) {
+                    return gd.data[0].cells.format;
+                }, [['', '']]))
+                .then(restyleValues('cells.prefix', function(gd) {
+                    return gd.data[0].cells.prefix;
+                }, [['p1']]))
+                .then(restyleValues('cells.suffix', function(gd) {
+                    return gd.data[0].cells.suffix;
+                }, [['s1']]))
+                .then(restyleValues('header.fill.color', function(gd) {
+                    return gd.data[0].header.fill.color;
+                }, [['yellow', 'purple']]))
+                .then(restyleValues('header.line.color', function(gd) {
+                    return gd.data[0].header.line.color;
+                }, [['green', 'red']]))
+                .then(restyleValues('header.line.width', function(gd) {
+                    return gd.data[0].header.line.width;
+                }, [[2, 6]]))
+                .then(restyleValues('header.format', function(gd) {
+                    return gd.data[0].header.format;
+                }, [['', '']]))
                 .then(done);
         });
     });

@@ -608,7 +608,9 @@ describe('Animate API details', function() {
 
     it('redraws after a layout animation', function(done) {
         var redraws = 0;
-        gd.on('plotly_redraw', function() {redraws++;});
+        gd.on('plotly_redraw', function() {
+            redraws++;
+        });
 
         Plotly.animate(gd,
             {layout: {'xaxis.range': [0, 1]}},
@@ -622,9 +624,15 @@ describe('Animate API details', function() {
         var relayouts = 0;
         var restyles = 0;
         var redraws = 0;
-        gd.on('plotly_relayout', function() {relayouts++;});
-        gd.on('plotly_restyle', function() {restyles++;});
-        gd.on('plotly_redraw', function() {redraws++;});
+        gd.on('plotly_relayout', function() {
+            relayouts++;
+        });
+        gd.on('plotly_restyle', function() {
+            restyles++;
+        });
+        gd.on('plotly_redraw', function() {
+            redraws++;
+        });
 
         Plotly.animate(gd,
             {layout: {'xaxis.range': [0, 1]}},
@@ -638,7 +646,9 @@ describe('Animate API details', function() {
 
     it('triggers plotly_animated after a single layout animation', function(done) {
         var animateds = 0;
-        gd.on('plotly_animated', function() {animateds++;});
+        gd.on('plotly_animated', function() {
+            animateds++;
+        });
 
         Plotly.animate(gd, [
             {layout: {'xaxis.range': [0, 1]}},
@@ -654,7 +664,9 @@ describe('Animate API details', function() {
 
     it('triggers plotly_animated after a multi-step layout animation', function(done) {
         var animateds = 0;
-        gd.on('plotly_animated', function() {animateds++;});
+        gd.on('plotly_animated', function() {
+            animateds++;
+        });
 
         Plotly.animate(gd, [
             {layout: {'xaxis.range': [0, 1]}},
@@ -684,7 +696,9 @@ describe('Animate API details', function() {
 
     it('ignores null and undefined frames', function(done) {
         var cnt = 0;
-        gd.on('plotly_animatingframe', function() {cnt++;});
+        gd.on('plotly_animatingframe', function() {
+            cnt++;
+        });
 
         Plotly.addFrames(gd, mockCopy.frames).then(function() {
             return Plotly.animate(gd, ['frame0', null, undefined], {transition: {duration: 0}, frame: {duration: 0}});

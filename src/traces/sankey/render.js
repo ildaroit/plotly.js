@@ -542,11 +542,17 @@ function updateShapes(sankeyNode, sankeyLink) {
 
 function sizeNode(rect) {
     rect
-      .attr('width', function(d) {return d.node.x1 - d.node.x0;})
-      .attr('height', function(d) {return d.visibleHeight;});
+      .attr('width', function(d) {
+          return d.node.x1 - d.node.x0;
+      })
+      .attr('height', function(d) {
+          return d.visibleHeight;
+      });
 }
 
-function salientEnough(d) {return (d.link.width > 1 || d.linkLineWidth > 0);}
+function salientEnough(d) {
+    return (d.link.width > 1 || d.linkLineWidth > 0);
+}
 
 function sankeyTransform(d) {
     var offset = 'translate(' + d.translateX + ',' + d.translateY + ')';
@@ -561,12 +567,21 @@ function textGuidePath(d) {
     return d3.svg.line()([
         [d.horizontal ? (d.left ? -d.sizeAcross : d.visibleWidth + c.nodeTextOffsetHorizontal) : c.nodeTextOffsetHorizontal, 0],
         [d.horizontal ? (d.left ? - c.nodeTextOffsetHorizontal : d.sizeAcross) : d.visibleHeight - c.nodeTextOffsetHorizontal, 0]
-    ]);}
+    ]);
+}
 
-function sankeyInverseTransform(d) {return d.horizontal ? 'matrix(1 0 0 1 0 0)' : 'matrix(0 1 1 0 0 0)';}
-function textFlip(d) {return d.horizontal ? 'scale(1 1)' : 'scale(-1 1)';}
-function nodeTextColor(d) {return d.darkBackground && !d.horizontal ? 'rgb(255,255,255)' : 'rgb(0,0,0)';}
-function nodeTextOffset(d) {return d.horizontal && d.left ? '100%' : '0%';}
+function sankeyInverseTransform(d) {
+    return d.horizontal ? 'matrix(1 0 0 1 0 0)' : 'matrix(0 1 1 0 0 0)';
+}
+function textFlip(d) {
+    return d.horizontal ? 'scale(1 1)' : 'scale(-1 1)';
+}
+function nodeTextColor(d) {
+    return d.darkBackground && !d.horizontal ? 'rgb(255,255,255)' : 'rgb(0,0,0)';
+}
+function nodeTextOffset(d) {
+    return d.horizontal && d.left ? '100%' : '0%';
+}
 
 // event handling
 
@@ -680,13 +695,19 @@ function attachForce(sankeyNode, forceKey, d, gd) {
     // Attach force to nodes in the same column (same x coordinate)
     switchToForceFormat(d.graph.nodes);
     var nodes = d.graph.nodes
-        .filter(function(n) {return n.originalX === d.node.originalX;})
+        .filter(function(n) {
+            return n.originalX === d.node.originalX;
+        })
         // Filter out children
-        .filter(function(n) {return !n.partOfGroup;});
+        .filter(function(n) {
+            return !n.partOfGroup;
+        });
     d.forceLayouts[forceKey] = d3Force.forceSimulation(nodes)
         .alphaDecay(0)
         .force('collide', d3Force.forceCollide()
-            .radius(function(n) {return n.dy / 2 + d.nodePad / 2;})
+            .radius(function(n) {
+                return n.dy / 2 + d.nodePad / 2;
+            })
             .strength(1)
             .iterations(c.forceIterations))
         .force('constrain', snappingForce(sankeyNode, forceKey, nodes, d, gd))
@@ -770,7 +791,9 @@ function persistOriginalPlace(nodes) {
             distinctLayerPositions.push(nodes[i].originalX);
         }
     }
-    distinctLayerPositions.sort(function(a, b) {return a - b;});
+    distinctLayerPositions.sort(function(a, b) {
+        return a - b;
+    });
     for(i = 0; i < nodes.length; i++) {
         nodes[i].originalLayerIndex = distinctLayerPositions.indexOf(nodes[i].originalX);
         nodes[i].originalLayer = nodes[i].originalLayerIndex / (distinctLayerPositions.length - 1);
@@ -783,7 +806,9 @@ function saveCurrentDragPosition(d) {
 }
 
 function sameLayer(d) {
-    return function(n) {return n.node.originalX === d.node.originalX;};
+    return function(n) {
+        return n.node.originalX === d.node.originalX;
+    };
 }
 
 function switchToForceFormat(nodes) {
@@ -817,7 +842,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
     var dragcover = gd._fullLayout._dragCover;
 
     var styledData = calcData
-            .filter(function(d) {return unwrap(d).trace.visible;})
+            .filter(function(d) {
+                return unwrap(d).trace.visible;
+            })
             .map(sankeyModel.bind(null, layout));
 
     var sankey = svg.selectAll('.' + c.cn.sankey)
@@ -852,7 +879,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
           .data(function(d) {
               var links = d.graph.links;
               return links
-                .filter(function(l) {return l.value;})
+                .filter(function(l) {
+                    return l.value;
+                })
                 .map(linkModel.bind(null, d));
           }, keyFun);
 
@@ -880,7 +909,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
         .attr('d', linkPath());
 
     sankeyLink
-        .style('opacity', function() { return (gd._context.staticPlot || firstRender || dragcover) ? 1 : 0;})
+        .style('opacity', function() {
+            return (gd._context.staticPlot || firstRender || dragcover) ? 1 : 0;
+        })
         .transition()
         .ease(c.ease).duration(c.duration)
         .style('opacity', 1);
@@ -919,7 +950,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
         .append('g')
         .classed(c.cn.sankeyNode, true)
         .call(updateNodePositions)
-        .style('opacity', function(n) { return ((gd._context.staticPlot || firstRender) && !n.partOfGroup) ? 1 : 0;});
+        .style('opacity', function(n) {
+            return ((gd._context.staticPlot || firstRender) && !n.partOfGroup) ? 1 : 0;
+        });
 
     sankeyNode
         .call(attachPointerEvents, sankey, callbacks.nodeEvents)
@@ -928,7 +961,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
     sankeyNode.transition()
         .ease(c.ease).duration(c.duration)
         .call(updateNodePositions)
-        .style('opacity', function(n) { return n.partOfGroup ? 0 : 1;});
+        .style('opacity', function(n) {
+            return n.partOfGroup ? 0 : 1;
+        });
 
     sankeyNode.exit()
         .transition()
@@ -945,11 +980,21 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
         .call(sizeNode);
 
     nodeRect
-        .style('stroke-width', function(d) {return d.nodeLineWidth;})
-        .style('stroke', function(d) {return Color.tinyRGB(tinycolor(d.nodeLineColor));})
-        .style('stroke-opacity', function(d) {return Color.opacity(d.nodeLineColor);})
-        .style('fill', function(d) {return d.tinyColorHue;})
-        .style('fill-opacity', function(d) {return d.tinyColorAlpha;});
+        .style('stroke-width', function(d) {
+            return d.nodeLineWidth;
+        })
+        .style('stroke', function(d) {
+            return Color.tinyRGB(tinycolor(d.nodeLineColor));
+        })
+        .style('stroke-opacity', function(d) {
+            return Color.opacity(d.nodeLineColor);
+        })
+        .style('fill', function(d) {
+            return d.tinyColorHue;
+        })
+        .style('fill-opacity', function(d) {
+            return d.tinyColorAlpha;
+        });
 
     nodeRect.transition()
         .ease(c.ease).duration(c.duration)
@@ -964,10 +1009,18 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
         .style('fill-opacity', 0);
 
     nodeCapture
-        .attr('x', function(d) {return d.zoneX;})
-        .attr('y', function(d) {return d.zoneY;})
-        .attr('width', function(d) {return d.zoneWidth;})
-        .attr('height', function(d) {return d.zoneHeight;});
+        .attr('x', function(d) {
+            return d.zoneX;
+        })
+        .attr('y', function(d) {
+            return d.zoneY;
+        })
+        .attr('width', function(d) {
+            return d.zoneWidth;
+        })
+        .attr('height', function(d) {
+            return d.zoneHeight;
+        });
 
     var nodeCentered = sankeyNode.selectAll('.' + c.cn.nodeCentered)
         .data(repeat);
@@ -988,7 +1041,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
     nodeLabelGuide.enter()
         .append('path')
         .classed(c.cn.nodeLabelGuide, true)
-        .attr('id', function(d) {return d.uniqueNodeLabelPathId;})
+        .attr('id', function(d) {
+            return d.uniqueNodeLabelPathId;
+        })
         .attr('d', textGuidePath)
         .attr('transform', sankeyInverseTransform);
 
@@ -1013,7 +1068,9 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
         .style('text-shadow', function(d) {
             return d.horizontal ? '-1px 1px 1px #fff, 1px 1px 1px #fff, 1px -1px 1px #fff, -1px -1px 1px #fff' : 'none';
         })
-        .each(function(d) {Drawing.font(nodeLabel, d.textFont);});
+        .each(function(d) {
+            Drawing.font(nodeLabel, d.textFont);
+        });
 
     nodeLabel
         .transition()
@@ -1027,13 +1084,19 @@ module.exports = function(gd, svg, calcData, layout, callbacks) {
         .append('textPath')
         .classed(c.cn.nodeLabelTextPath, true)
         .attr('alignment-baseline', 'middle')
-        .attr('xlink:href', function(d) {return '#' + d.uniqueNodeLabelPathId;})
+        .attr('xlink:href', function(d) {
+            return '#' + d.uniqueNodeLabelPathId;
+        })
         .attr('startOffset', nodeTextOffset)
         .style('fill', nodeTextColor);
 
     nodeLabelTextPath
-        .text(function(d) {return d.horizontal || d.node.dy > 5 ? d.node.label : '';})
-        .attr('text-anchor', function(d) {return d.horizontal && d.left ? 'end' : 'start';});
+        .text(function(d) {
+            return d.horizontal || d.node.dy > 5 ? d.node.label : '';
+        })
+        .attr('text-anchor', function(d) {
+            return d.horizontal && d.left ? 'end' : 'start';
+        });
 
     nodeLabelTextPath
         .transition()

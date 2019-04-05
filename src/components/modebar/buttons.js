@@ -84,7 +84,9 @@ modeBarButtons.toImage = {
 
 modeBarButtons.sendDataToCloud = {
     name: 'sendDataToCloud',
-    title: function(gd) { return _(gd, 'Edit in Chart Studio'); },
+    title: function(gd) {
+        return _(gd, 'Edit in Chart Studio');
+    },
     icon: Icons.disk,
     click: function(gd) {
         Plots.sendDataToCloud(gd);
@@ -93,7 +95,9 @@ modeBarButtons.sendDataToCloud = {
 
 modeBarButtons.zoom2d = {
     name: 'zoom2d',
-    title: function(gd) { return _(gd, 'Zoom'); },
+    title: function(gd) {
+        return _(gd, 'Zoom');
+    },
     attr: 'dragmode',
     val: 'zoom',
     icon: Icons.zoombox,
@@ -102,7 +106,9 @@ modeBarButtons.zoom2d = {
 
 modeBarButtons.pan2d = {
     name: 'pan2d',
-    title: function(gd) { return _(gd, 'Pan'); },
+    title: function(gd) {
+        return _(gd, 'Pan');
+    },
     attr: 'dragmode',
     val: 'pan',
     icon: Icons.pan,
@@ -111,7 +117,9 @@ modeBarButtons.pan2d = {
 
 modeBarButtons.select2d = {
     name: 'select2d',
-    title: function(gd) { return _(gd, 'Box Select'); },
+    title: function(gd) {
+        return _(gd, 'Box Select');
+    },
     attr: 'dragmode',
     val: 'select',
     icon: Icons.selectbox,
@@ -120,7 +128,9 @@ modeBarButtons.select2d = {
 
 modeBarButtons.lasso2d = {
     name: 'lasso2d',
-    title: function(gd) { return _(gd, 'Lasso Select'); },
+    title: function(gd) {
+        return _(gd, 'Lasso Select');
+    },
     attr: 'dragmode',
     val: 'lasso',
     icon: Icons.lasso,
@@ -129,7 +139,9 @@ modeBarButtons.lasso2d = {
 
 modeBarButtons.zoomIn2d = {
     name: 'zoomIn2d',
-    title: function(gd) { return _(gd, 'Zoom in'); },
+    title: function(gd) {
+        return _(gd, 'Zoom in');
+    },
     attr: 'zoom',
     val: 'in',
     icon: Icons.zoom_plus,
@@ -138,7 +150,9 @@ modeBarButtons.zoomIn2d = {
 
 modeBarButtons.zoomOut2d = {
     name: 'zoomOut2d',
-    title: function(gd) { return _(gd, 'Zoom out'); },
+    title: function(gd) {
+        return _(gd, 'Zoom out');
+    },
     attr: 'zoom',
     val: 'out',
     icon: Icons.zoom_minus,
@@ -147,7 +161,9 @@ modeBarButtons.zoomOut2d = {
 
 modeBarButtons.autoScale2d = {
     name: 'autoScale2d',
-    title: function(gd) { return _(gd, 'Autoscale'); },
+    title: function(gd) {
+        return _(gd, 'Autoscale');
+    },
     attr: 'zoom',
     val: 'auto',
     icon: Icons.autoscale,
@@ -156,7 +172,9 @@ modeBarButtons.autoScale2d = {
 
 modeBarButtons.resetScale2d = {
     name: 'resetScale2d',
-    title: function(gd) { return _(gd, 'Reset axes'); },
+    title: function(gd) {
+        return _(gd, 'Reset axes');
+    },
     attr: 'zoom',
     val: 'reset',
     icon: Icons.home,
@@ -165,7 +183,9 @@ modeBarButtons.resetScale2d = {
 
 modeBarButtons.hoverClosestCartesian = {
     name: 'hoverClosestCartesian',
-    title: function(gd) { return _(gd, 'Show closest data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Show closest data on hover');
+    },
     attr: 'hovermode',
     val: 'closest',
     icon: Icons.tooltip_basic,
@@ -175,7 +195,9 @@ modeBarButtons.hoverClosestCartesian = {
 
 modeBarButtons.hoverCompareCartesian = {
     name: 'hoverCompareCartesian',
-    title: function(gd) { return _(gd, 'Compare data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Compare data on hover');
+    },
     attr: 'hovermode',
     val: function(gd) {
         return gd._fullLayout._isHoriz ? 'y' : 'x';
@@ -211,8 +233,7 @@ function handleCartesian(gd, ev) {
                 else if(val === 'reset') {
                     if(ax._rangeInitial === undefined) {
                         aobj[axName + '.autorange'] = true;
-                    }
-                    else {
+                    } else {
                         var rangeInitial = ax._rangeInitial.slice();
                         aobj[axName + '.range[0]'] = rangeInitial[0];
                         aobj[axName + '.range[1]'] = rangeInitial[1];
@@ -223,8 +244,7 @@ function handleCartesian(gd, ev) {
                             allSpikesEnabled = 'off';
                         }
                     }
-                }
-                else {
+                } else {
                     var rangeNow = [
                         ax.r2l(ax.range[0]),
                         ax.r2l(ax.range[1]),
@@ -241,8 +261,7 @@ function handleCartesian(gd, ev) {
             }
         }
         fullLayout._cartesianSpikesEnabled = allSpikesEnabled;
-    }
-    else {
+    } else {
         // if ALL traces have orientation 'h', 'hovermode': 'x' otherwise: 'y'
         if(astr === 'hovermode' && (val === 'x' || val === 'y')) {
             val = fullLayout._isHoriz ? 'y' : 'x';
@@ -265,7 +284,9 @@ function handleCartesian(gd, ev) {
 
 modeBarButtons.zoom3d = {
     name: 'zoom3d',
-    title: function(gd) { return _(gd, 'Zoom'); },
+    title: function(gd) {
+        return _(gd, 'Zoom');
+    },
     attr: 'scene.dragmode',
     val: 'zoom',
     icon: Icons.zoombox,
@@ -274,7 +295,9 @@ modeBarButtons.zoom3d = {
 
 modeBarButtons.pan3d = {
     name: 'pan3d',
-    title: function(gd) { return _(gd, 'Pan'); },
+    title: function(gd) {
+        return _(gd, 'Pan');
+    },
     attr: 'scene.dragmode',
     val: 'pan',
     icon: Icons.pan,
@@ -283,7 +306,9 @@ modeBarButtons.pan3d = {
 
 modeBarButtons.orbitRotation = {
     name: 'orbitRotation',
-    title: function(gd) { return _(gd, 'Orbital rotation'); },
+    title: function(gd) {
+        return _(gd, 'Orbital rotation');
+    },
     attr: 'scene.dragmode',
     val: 'orbit',
     icon: Icons['3d_rotate'],
@@ -292,7 +317,9 @@ modeBarButtons.orbitRotation = {
 
 modeBarButtons.tableRotation = {
     name: 'tableRotation',
-    title: function(gd) { return _(gd, 'Turntable rotation'); },
+    title: function(gd) {
+        return _(gd, 'Turntable rotation');
+    },
     attr: 'scene.dragmode',
     val: 'turntable',
     icon: Icons['z-axis'],
@@ -321,7 +348,9 @@ function handleDrag3d(gd, ev) {
 
 modeBarButtons.resetCameraDefault3d = {
     name: 'resetCameraDefault3d',
-    title: function(gd) { return _(gd, 'Reset camera to default'); },
+    title: function(gd) {
+        return _(gd, 'Reset camera to default');
+    },
     attr: 'resetDefault',
     icon: Icons.home,
     click: handleCamera3d
@@ -329,7 +358,9 @@ modeBarButtons.resetCameraDefault3d = {
 
 modeBarButtons.resetCameraLastSave3d = {
     name: 'resetCameraLastSave3d',
-    title: function(gd) { return _(gd, 'Reset camera to last save'); },
+    title: function(gd) {
+        return _(gd, 'Reset camera to last save');
+    },
     attr: 'resetLastSave',
     icon: Icons.movie,
     click: handleCamera3d
@@ -363,7 +394,9 @@ function handleCamera3d(gd, ev) {
 
 modeBarButtons.hoverClosest3d = {
     name: 'hoverClosest3d',
-    title: function(gd) { return _(gd, 'Toggle show closest data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Toggle show closest data on hover');
+    },
     attr: 'hovermode',
     val: null,
     toggle: true,
@@ -387,8 +420,7 @@ function getNextHover3d(gd, ev) {
     if(val) {
         layoutUpdate = val;
         button._previousVal = null;
-    }
-    else {
+    } else {
         for(var i = 0; i < sceneIds.length; i++) {
             var sceneId = sceneIds[i];
             var sceneLayout = fullLayout[sceneId];
@@ -418,7 +450,9 @@ function handleHover3d(gd, ev) {
 
 modeBarButtons.zoomInGeo = {
     name: 'zoomInGeo',
-    title: function(gd) { return _(gd, 'Zoom in'); },
+    title: function(gd) {
+        return _(gd, 'Zoom in');
+    },
     attr: 'zoom',
     val: 'in',
     icon: Icons.zoom_plus,
@@ -427,7 +461,9 @@ modeBarButtons.zoomInGeo = {
 
 modeBarButtons.zoomOutGeo = {
     name: 'zoomOutGeo',
-    title: function(gd) { return _(gd, 'Zoom out'); },
+    title: function(gd) {
+        return _(gd, 'Zoom out');
+    },
     attr: 'zoom',
     val: 'out',
     icon: Icons.zoom_minus,
@@ -436,7 +472,9 @@ modeBarButtons.zoomOutGeo = {
 
 modeBarButtons.resetGeo = {
     name: 'resetGeo',
-    title: function(gd) { return _(gd, 'Reset'); },
+    title: function(gd) {
+        return _(gd, 'Reset');
+    },
     attr: 'reset',
     val: null,
     icon: Icons.autoscale,
@@ -445,7 +483,9 @@ modeBarButtons.resetGeo = {
 
 modeBarButtons.hoverClosestGeo = {
     name: 'hoverClosestGeo',
-    title: function(gd) { return _(gd, 'Toggle show closest data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Toggle show closest data on hover');
+    },
     attr: 'hovermode',
     val: null,
     toggle: true,
@@ -478,7 +518,9 @@ function handleGeo(gd, ev) {
 
 modeBarButtons.hoverClosestGl2d = {
     name: 'hoverClosestGl2d',
-    title: function(gd) { return _(gd, 'Toggle show closest data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Toggle show closest data on hover');
+    },
     attr: 'hovermode',
     val: null,
     toggle: true,
@@ -489,7 +531,9 @@ modeBarButtons.hoverClosestGl2d = {
 
 modeBarButtons.hoverClosestPie = {
     name: 'hoverClosestPie',
-    title: function(gd) { return _(gd, 'Toggle show closest data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Toggle show closest data on hover');
+    },
     attr: 'hovermode',
     val: 'closest',
     icon: Icons.tooltip_basic,
@@ -517,7 +561,9 @@ function toggleHover(gd) {
 
 modeBarButtons.toggleHover = {
     name: 'toggleHover',
-    title: function(gd) { return _(gd, 'Toggle show closest data on hover'); },
+    title: function(gd) {
+        return _(gd, 'Toggle show closest data on hover');
+    },
     attr: 'hovermode',
     val: null,
     toggle: true,
@@ -533,7 +579,9 @@ modeBarButtons.toggleHover = {
 
 modeBarButtons.resetViews = {
     name: 'resetViews',
-    title: function(gd) { return _(gd, 'Reset views'); },
+    title: function(gd) {
+        return _(gd, 'Reset views');
+    },
     icon: Icons.home,
     click: function(gd, ev) {
         var button = ev.currentTarget;
@@ -552,7 +600,9 @@ modeBarButtons.resetViews = {
 
 modeBarButtons.toggleSpikelines = {
     name: 'toggleSpikelines',
-    title: function(gd) { return _(gd, 'Toggle Spike Lines'); },
+    title: function(gd) {
+        return _(gd, 'Toggle Spike Lines');
+    },
     icon: Icons.spikeline,
     attr: '_cartesianSpikesEnabled',
     val: 'on',
@@ -585,7 +635,9 @@ function setSpikelineVisibility(gd) {
 
 modeBarButtons.resetViewMapbox = {
     name: 'resetViewMapbox',
-    title: function(gd) { return _(gd, 'Reset view'); },
+    title: function(gd) {
+        return _(gd, 'Reset view');
+    },
     attr: 'reset',
     icon: Icons.home,
     click: function(gd) {

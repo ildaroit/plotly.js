@@ -77,9 +77,13 @@ module.exports = function draw(gd, id) {
         var linelevels = [];
         var filllevels = [];
         var linecolormap = typeof opts.line.color === 'function' ?
-            opts.line.color : function() { return opts.line.color; };
+            opts.line.color : function() {
+                return opts.line.color;
+            };
         var fillcolormap = typeof opts.fillcolor === 'function' ?
-            opts.fillcolor : function() { return opts.fillcolor; };
+            opts.fillcolor : function() {
+                return opts.fillcolor;
+            };
         var l;
         var i;
 
@@ -95,8 +99,7 @@ module.exports = function draw(gd, id) {
 
         if(opts.fillgradient) {
             filllevels = [0];
-        }
-        else if(typeof opts.fillcolor === 'function') {
+        } else if(typeof opts.fillcolor === 'function') {
             if(opts.filllevels) {
                 l0 = opts.filllevels.end + opts.filllevels.size / 100;
                 ls = opts.filllevels.size;
@@ -105,16 +108,14 @@ module.exports = function draw(gd, id) {
                     if(ls > 0 ? (l >= l0) : (l <= l0)) break;
                     if(l > zrange[0] && l < zrange[1]) filllevels.push(l);
                 }
-            }
-            else {
+            } else {
                 filllevels = linelevels.map(function(v) {
                     return v - opts.levels.size / 2;
                 });
                 filllevels.push(filllevels[filllevels.length - 1] +
                     opts.levels.size);
             }
-        }
-        else if(opts.fillcolor && typeof opts.fillcolor === 'string') {
+        } else if(opts.fillcolor && typeof opts.fillcolor === 'string') {
             // doesn't matter what this value is, with a single value
             // we'll make a single fill rect covering the whole bar
             filllevels = [0];
@@ -292,8 +293,7 @@ module.exports = function draw(gd, id) {
             if(opts.title.side === 'top') {
                 y = (1 - (yBottomFrac + lenFrac - ypadFrac)) * gs.h +
                     gs.t + 3 + fontSize * 0.75;
-            }
-            else {
+            } else {
                 y = (1 - (yBottomFrac + ypadFrac)) * gs.h +
                     gs.t - 3 - fontSize * 0.25;
             }
@@ -323,8 +323,7 @@ module.exports = function draw(gd, id) {
                         // vertical alignment, but this seems to work.
                         titleTrans[1] -= (titleHeight - lineSize) / 2;
                     }
-                }
-                else if(titleText.node() &&
+                } else if(titleText.node() &&
                         !titleText.classed(cn.jsPlaceholder)) {
                     titleHeight = Drawing.bBox(titleText.node()).height;
                 }
@@ -336,8 +335,7 @@ module.exports = function draw(gd, id) {
                     if(opts.title.side === 'top') {
                         cbAxisOut.domain[1] -= titleHeight / gs.h;
                         titleTrans[1] *= -1;
-                    }
-                    else {
+                    } else {
                         cbAxisOut.domain[0] += titleHeight / gs.h;
                         var nlines = svgTextUtils.lineCount(titleText);
                         titleTrans[1] += (1 - nlines) * lineSize;
@@ -367,7 +365,9 @@ module.exports = function draw(gd, id) {
             var zBounds = zrange
                 .map(cbAxisOut.c2p)
                 .map(Math.round)
-                .sort(function(a, b) { return a - b; });
+                .sort(function(a, b) {
+                    return a - b;
+                });
 
             fills.each(function(d, i) {
                 var z = [
@@ -395,8 +395,7 @@ module.exports = function draw(gd, id) {
                 if(opts.fillgradient) {
                     Drawing.gradient(fillEl, gd, id, 'vertical',
                         opts.fillgradient, 'fill');
-                }
-                else {
+                } else {
                     // Tinycolor can't handle exponents and
                     // at this scale, removing it makes no difference.
                     var colorString = fillcolormap(d).replace('e-', '');
@@ -514,8 +513,7 @@ module.exports = function draw(gd, id) {
                 if(mathJaxNode &&
                         ['top', 'bottom'].indexOf(opts.title.side) !== -1) {
                     titleWidth = Drawing.bBox(mathJaxNode).width;
-                }
-                else {
+                } else {
                     // note: the formula below works for all title sides,
                     // (except for top/bottom mathjax, above)
                     // but the weird gs.l is because the titleunshift
@@ -569,8 +567,7 @@ module.exports = function draw(gd, id) {
                 marginOpts.y = opts.y;
                 marginOpts.t = outerheight * tFrac;
                 marginOpts.b = outerheight * bFrac;
-            }
-            else {
+            } else {
                 marginOpts.t = marginOpts.b = 0;
                 marginOpts.yt = opts.y + opts.len * tFrac;
                 marginOpts.yb = opts.y - opts.len * bFrac;
@@ -582,8 +579,7 @@ module.exports = function draw(gd, id) {
                 marginOpts.x = opts.x;
                 marginOpts.l = outerwidth * lFrac;
                 marginOpts.r = outerwidth * rFrac;
-            }
-            else {
+            } else {
                 var extraThickness = outerwidth - thickPx;
                 marginOpts.l = extraThickness * lFrac;
                 marginOpts.r = extraThickness * rFrac;

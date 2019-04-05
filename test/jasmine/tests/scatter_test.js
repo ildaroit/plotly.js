@@ -17,9 +17,15 @@ var assertMultiNodeOrder = customAssertions.assertMultiNodeOrder;
 var checkEventData = require('../assets/check_event_data');
 var constants = require('@src/traces/scatter/constants');
 
-var getOpacity = function(node) { return Number(node.style.opacity); };
-var getFillOpacity = function(node) { return Number(node.style['fill-opacity']); };
-var getColor = function(node) { return node.style.fill; };
+var getOpacity = function(node) {
+    return Number(node.style.opacity);
+};
+var getFillOpacity = function(node) {
+    return Number(node.style['fill-opacity']);
+};
+var getColor = function(node) {
+    return node.style.fill;
+};
 var getMarkerSize = function(node) {
     // find path arc multiply by 2 to get the corresponding marker.size value
     // (works for circles only)
@@ -159,11 +165,12 @@ describe('Test scatter', function() {
         });
 
         describe('selected / unselected attribute containers', function() {
-            function _supply(patch) { traceIn = Lib.extendFlat({
-                mode: 'markers',
-                x: [1, 2, 3],
-                y: [2, 1, 2]
-            }, patch);
+            function _supply(patch) {
+                traceIn = Lib.extendFlat({
+                    mode: 'markers',
+                    x: [1, 2, 3],
+                    y: [2, 1, 2]
+                }, patch);
                 traceOut = {visible: true};
                 supplyDefaults(traceIn, traceOut, defaultColor, layout);
             }
@@ -480,9 +487,13 @@ describe('Test scatter', function() {
 
         // TODO: test coarser decimation outside plot, and removing very near duplicates from the four of a cluster
 
-        function reverseXY(v) { return [v[1], v[0]]; }
+        function reverseXY(v) {
+            return [v[1], v[0]];
+        }
 
-        function reverseXY2(v) { return v.map(reverseXY); }
+        function reverseXY2(v) {
+            return v.map(reverseXY);
+        }
 
         it('should clip extreme points without changing on-screen paths', function() {
             var ptsIn = [
@@ -729,50 +740,53 @@ describe('end-to-end scatter tests', function() {
             {y: [3, 4], text: 'c'}
         ]);
 
-        function setMode(i) { return function() {
-            return Plotly.restyle(gd, cases[indices[i]].edit);
-        }; }
+        function setMode(i) {
+            return function() {
+                return Plotly.restyle(gd, cases[indices[i]].edit);
+            };
+        }
 
-        function testOrdering(i) { return function() {
-            var name = cases[indices[i]].name;
-            var hasFills = name.indexOf('fill') !== -1;
-            var hasLines = name.indexOf('lines') !== -1;
-            var hasMarkers = name.indexOf('markers') !== -1;
-            var hasText = name.indexOf('text') !== -1;
-            var tracei, prefix;
+        function testOrdering(i) {
+            return function() {
+                var name = cases[indices[i]].name;
+                var hasFills = name.indexOf('fill') !== -1;
+                var hasLines = name.indexOf('lines') !== -1;
+                var hasMarkers = name.indexOf('markers') !== -1;
+                var hasText = name.indexOf('text') !== -1;
+                var tracei, prefix;
 
             // construct the expected ordering based on case name
-            var selectorArray = [];
-            for(tracei = 0; tracei < 3; tracei++) {
-                prefix = '.xy .trace:nth-child(' + (tracei + 1) + ') ';
+                var selectorArray = [];
+                for(tracei = 0; tracei < 3; tracei++) {
+                    prefix = '.xy .trace:nth-child(' + (tracei + 1) + ') ';
 
                 // two fills are attached to the first trace, one to the second
-                if(hasFills) {
-                    if(tracei === 0) {
-                        selectorArray.push(
+                    if(hasFills) {
+                        if(tracei === 0) {
+                            selectorArray.push(
                             prefix + 'g:first-child>.js-fill',
                             prefix + 'g:last-child>.js-fill');
+                        } else if(tracei === 1) selectorArray.push(prefix + 'g:last-child>.js-fill');
                     }
-                    else if(tracei === 1) selectorArray.push(prefix + 'g:last-child>.js-fill');
+                    if(hasLines) selectorArray.push(prefix + '.js-line');
+                    if(hasMarkers) selectorArray.push(prefix + '.point');
+                    if(hasText) selectorArray.push(prefix + '.textpoint');
                 }
-                if(hasLines) selectorArray.push(prefix + '.js-line');
-                if(hasMarkers) selectorArray.push(prefix + '.point');
-                if(hasText) selectorArray.push(prefix + '.textpoint');
-            }
 
             // ordering in the legend
-            for(tracei = 0; tracei < 3; tracei++) {
-                prefix = '.legend .traces:nth-child(' + (tracei + 1) + ') ';
-                if(hasFills) selectorArray.push(prefix + '.js-fill');
-                if(hasLines) selectorArray.push(prefix + '.js-line');
-                if(hasMarkers) selectorArray.push(prefix + '.scatterpts');
-                if(hasText) selectorArray.push(prefix + '.pointtext');
-            }
+                for(tracei = 0; tracei < 3; tracei++) {
+                    prefix = '.legend .traces:nth-child(' + (tracei + 1) + ') ';
+                    if(hasFills) selectorArray.push(prefix + '.js-fill');
+                    if(hasLines) selectorArray.push(prefix + '.js-line');
+                    if(hasMarkers) selectorArray.push(prefix + '.scatterpts');
+                    if(hasText) selectorArray.push(prefix + '.pointtext');
+                }
 
-            var msg = i ? ('from ' + cases[indices[i - 1]].name + ' to ') : 'from default to ';
-            msg += name;
-            assertMultiNodeOrder(selectorArray, msg);
-        }; }
+                var msg = i ? ('from ' + cases[indices[i - 1]].name + ' to ') : 'from default to ';
+                msg += name;
+                assertMultiNodeOrder(selectorArray, msg);
+            };
+        }
 
         for(i = 0; i < indices.length; i++) {
             p = p.then(setMode(i)).then(testOrdering(i));
@@ -1186,7 +1200,9 @@ describe('end-to-end scatter tests', function() {
 describe('stacked area', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
     afterEach(destroyGraphDiv);
     var mock = require('@mocks/stacked_area');
 
@@ -1319,7 +1335,9 @@ describe('stacked area', function() {
             {y: ['2016-01-01', '2017-01-01'], stackgroup: 'a'}
         ])
         .then(function() {
-            expect(gd.layout.yaxis.range.map(function(v) { return v.slice(0, 4); }))
+            expect(gd.layout.yaxis.range.map(function(v) {
+                return v.slice(0, 4);
+            }))
                 // if we had stacked, this would go into the 2060s since we'd be
                 // adding milliseconds since 1970
                 .toEqual(['2015', '2017']);

@@ -25,8 +25,12 @@ var Lib = require('../../lib');
  */
 module.exports = function fillHoverText(calcPt, trace, contOut) {
     var fill = Array.isArray(contOut) ?
-        function(v) { contOut.push(v); } :
-        function(v) { contOut.text = v; };
+        function(v) {
+            contOut.push(v);
+        } :
+        function(v) {
+            contOut.text = v;
+        };
 
     var htx = Lib.extractOption(calcPt, trace, 'htx', 'hovertext');
     if(isValid(htx)) return fill(htx);

@@ -297,7 +297,9 @@ module.exports = function(canvasGL, d) {
         sampleCount = initialDims[0] ? initialDims[0].values.length : 0;
 
         var lines = model.lines;
-        var color = pick ? lines.color.map(function(_, i) {return i / lines.color.length;}) : lines.color;
+        var color = pick ? lines.color.map(function(_, i) {
+            return i / lines.color.length;
+        }) : lines.color;
         var contextOpacity = Math.max(1 / 255, Math.pow(1 / color.length, 1 / 3));
 
         var points = makePoints(sampleCount, initialDims, color);
@@ -321,7 +323,11 @@ module.exports = function(canvasGL, d) {
         var loHi, abcd, d, index;
         var leftRight = [i, ii];
 
-        var dims = [0, 1].map(function() {return [0, 1, 2, 3].map(function() {return new Float32Array(16);});});
+        var dims = [0, 1].map(function() {
+            return [0, 1, 2, 3].map(function() {
+                return new Float32Array(16);
+            });
+        });
 
         for(loHi = 0; loHi < 2; loHi++) {
             index = leftRight[loHi];
@@ -373,7 +379,11 @@ module.exports = function(canvasGL, d) {
     function makeConstraints() {
         var loHi, abcd, d;
 
-        var lims = [0, 1].map(function() {return [0, 1, 2, 3].map(function() {return new Float32Array(16);});});
+        var lims = [0, 1].map(function() {
+            return [0, 1, 2, 3].map(function() {
+                return new Float32Array(16);
+            });
+        });
 
         for(loHi = 0; loHi < 2; loHi++) {
             for(abcd = 0; abcd < 4; abcd++) {
@@ -382,8 +392,7 @@ module.exports = function(canvasGL, d) {
                     var lim;
                     if(dimP < initialDims.length) {
                         lim = initialDims[dimP].brush.filter.getBounds()[loHi];
-                    }
-                    else lim = loHi;
+                    } else lim = loHi;
                     lims[loHi][abcd][d] = lim + (2 * loHi - 1) * filterEpsilon;
                 }
             }

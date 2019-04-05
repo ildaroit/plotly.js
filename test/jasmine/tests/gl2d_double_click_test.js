@@ -71,7 +71,9 @@ describe('Test gl2d lasso/select:', function() {
     function select(path) {
         return new Promise(function(resolve, reject) {
             gd.once('plotly_selected', resolve);
-            setTimeout(function() { reject('did not trigger *plotly_selected*');}, 200);
+            setTimeout(function() {
+                reject('did not trigger *plotly_selected*');
+            }, 200);
             drag(path);
         });
     }
@@ -187,7 +189,9 @@ describe('Test gl2d lasso/select:', function() {
 
         Plotly.plot(gd, fig)
         .then(delay(20))
-        .then(function() { return select([[100, 100], [250, 250]]); })
+        .then(function() {
+            return select([[100, 100], [250, 250]]);
+        })
         .then(function(eventData) {
             assertEventData(eventData, {
                 points: [
@@ -227,7 +231,9 @@ describe('Test gl2d lasso/select:', function() {
                 ]
             });
         })
-        .then(function() { return select([[100, 100], [250, 250]]); })
+        .then(function() {
+            return select([[100, 100], [250, 250]]);
+        })
         .then(function(eventData) {
             assertEventData(eventData, {
                 points: [{x: 1, y: 2}]
@@ -256,7 +262,9 @@ describe('Test gl2d lasso/select:', function() {
         .then(function() {
             return Plotly.restyle(gd, 'selected.textfont.color', 'red');
         })
-        .then(function() { return select([[100, 100], [250, 250]]); })
+        .then(function() {
+            return select([[100, 100], [250, 250]]);
+        })
         .then(function() {
             _assertGlTextOpts('after selection - with set selected.textfont.color', {
                 rgba: [
@@ -317,7 +325,9 @@ describe('Test gl2d lasso/select:', function() {
                 ]
             });
         })
-        .then(function() { return select([[100, 10], [250, 100]]); })
+        .then(function() {
+            return select([[100, 10], [250, 100]]);
+        })
         .then(function(eventData) {
             assertEventData(eventData, {
                 points: [{x: 1, y: 2}]
@@ -341,7 +351,9 @@ describe('Test gl2d lasso/select:', function() {
         .then(function() {
             return Plotly.restyle(gd, 'selected.textfont.color', 'red');
         })
-        .then(function() { return select([[100, 10], [250, 100]]); })
+        .then(function() {
+            return select([[100, 10], [250, 100]]);
+        })
         .then(function() {
             _assertGlTextOpts('after selection - with set selected.textfont.color', {
                 rgba: [
@@ -375,12 +387,18 @@ describe('Test gl2d lasso/select:', function() {
         function _read(query) {
             var canvas = gd.querySelector(query);
             return readPixel(canvas, 0, 0, gd.layout.width, gd.layout.height)
-                .reduce(function(acc, v) { return acc + v; }, 0);
+                .reduce(function(acc, v) {
+                    return acc + v;
+                }, 0);
         }
 
-        function readContext() { return _read('.gl-canvas-context'); }
+        function readContext() {
+            return _read('.gl-canvas-context');
+        }
 
-        function readFocus() { return _read('.gl-canvas-focus'); }
+        function readFocus() {
+            return _read('.gl-canvas-focus');
+        }
 
         Plotly.plot(gd, [{
             type: 'scattergl',
@@ -396,7 +414,9 @@ describe('Test gl2d lasso/select:', function() {
             expect(readContext()).toBeGreaterThan(1e4, 'base context');
             expect(readFocus()).toBe(0, 'base focus');
         })
-        .then(function() { return select([[pad, pad], [w - pad, h - pad]]); })
+        .then(function() {
+            return select([[pad, pad], [w - pad, h - pad]]);
+        })
         .then(function() {
             expect(readContext()).toBe(0, 'select context');
             expect(readFocus()).toBeGreaterThan(1e4, 'select focus');
@@ -411,7 +431,9 @@ describe('Test gl2d lasso/select:', function() {
             expect(readContext()).toBeGreaterThan(1e4, 'update context');
             expect(readFocus()).toBe(0, 'update focus');
         })
-        .then(function() { return select([[pad, pad], [w2 - pad, h2 - pad]]); })
+        .then(function() {
+            return select([[pad, pad], [w2 - pad, h2 - pad]]);
+        })
         .then(function() {
             // make sure full w2/h2 context canvas is cleared!
             // from https://github.com/plotly/plotly.js/issues/2731<Paste>
@@ -513,7 +535,9 @@ describe('Test gl2d lasso/select:', function() {
                 drawArgs: []
             });
         })
-        .then(function() { return select([[20, 20], [480, 250]]); })
+        .then(function() {
+            return select([[20, 20], [480, 250]]);
+        })
         .then(function() {
             var scene = grabScene();
             _assert('after select', {
@@ -528,7 +552,9 @@ describe('Test gl2d lasso/select:', function() {
                 ]
             });
         })
-        .then(function() { return doubleClick(250, 250); })
+        .then(function() {
+            return doubleClick(250, 250);
+        })
         .then(function() {
             var scene = grabScene();
             _assert('after doubleclick', {
@@ -543,7 +569,9 @@ describe('Test gl2d lasso/select:', function() {
                 ]
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'dragmode', 'pan'); })
+        .then(function() {
+            return Plotly.relayout(gd, 'dragmode', 'pan');
+        })
         .then(function() {
             _assert('after relayout to *pan*', {
                 selectBatch: [null],
@@ -557,7 +585,9 @@ describe('Test gl2d lasso/select:', function() {
             var scene = grabScene();
             unselectBatchOld = scene.unselectBatch;
         })
-        .then(function() { return drag([[200, 200], [250, 250]]); })
+        .then(function() {
+            return drag([[200, 200], [250, 250]]);
+        })
         .then(function() {
             var scene = grabScene();
             _assert('after pan', {
@@ -625,7 +655,9 @@ describe('Test gl2d lasso/select:', function() {
             spyOn(scene.scatter2d, 'draw');
             spyOn(scene2.scatter2d, 'draw');
         })
-        .then(function() { return select([[20, 20], [380, 250]]); })
+        .then(function() {
+            return select([[20, 20], [380, 250]]);
+        })
         .then(function() {
             expect(scene.scatter2d.draw).toHaveBeenCalledTimes(1);
             expect(scene2.scatter2d.draw).toHaveBeenCalledTimes(1);

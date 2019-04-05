@@ -67,7 +67,9 @@ module.exports = function calc(gd, trace) {
     var cdi;
     var ptFilterFn = (trace.boxpoints || trace.points) === 'all' ?
         Lib.identity :
-        function(pt) { return (pt.v < cdi.lf || pt.v > cdi.uf); };
+        function(pt) {
+            return (pt.v < cdi.lf || pt.v > cdi.uf);
+        };
 
     // build calcdata trace items, one item per distinct position
     for(i = 0; i < pLen; i++) {
@@ -187,7 +189,9 @@ function getPos(trace, posLetter, posAxis, val, num) {
         posAxis.r2c_just_indices(pos0) :
         posAxis.d2c(pos0, 0, trace[posLetter + 'calendar']);
 
-    return val.map(function() { return pos0c; });
+    return val.map(function() {
+        return pos0c;
+    });
 }
 
 function makeBins(x, dx) {
@@ -238,6 +242,10 @@ function calcSelection(cd, trace) {
     }
 }
 
-function sortByVal(a, b) { return a.v - b.v; }
+function sortByVal(a, b) {
+    return a.v - b.v;
+}
 
-function extractVal(o) { return o.v; }
+function extractVal(o) {
+    return o.v;
+}

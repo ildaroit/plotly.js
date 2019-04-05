@@ -241,8 +241,12 @@ describe('Click-to-select', function() {
 
     it('selects a single data point when being clicked', function(done) {
         plotMock14()
-          .then(function() { return _immediateClickPt(mock14Pts[7]); })
-          .then(function() { assertSelectedPoints(7); })
+          .then(function() {
+              return _immediateClickPt(mock14Pts[7]);
+          })
+          .then(function() {
+              assertSelectedPoints(7);
+          })
           .catch(failTest)
           .then(done);
     });
@@ -257,7 +261,9 @@ describe('Click-to-select', function() {
         }].forEach(function(testData) {
             it('@flaky ' + testData.desc, function(done) {
                 plotMock14()
-                  .then(function() { return _immediateClickPt(mock14Pts[7]); })
+                  .then(function() {
+                      return _immediateClickPt(mock14Pts[7]);
+                  })
                   .then(function() {
                       assertSelectedPoints(7);
                       _clickPt(mock14Pts[7], testData.clickOpts);
@@ -299,19 +305,25 @@ describe('Click-to-select', function() {
 
     it('@flaky supports adding to an existing selection', function(done) {
         plotMock14()
-          .then(function() { return _immediateClickPt(mock14Pts[7]); })
+          .then(function() {
+              return _immediateClickPt(mock14Pts[7]);
+          })
           .then(function() {
               assertSelectedPoints(7);
               return _clickPt(mock14Pts[35], { shiftKey: true });
           })
-          .then(function() { assertSelectedPoints([7, 35]); })
+          .then(function() {
+              assertSelectedPoints([7, 35]);
+          })
           .catch(failTest)
           .then(done);
     });
 
     it('@flaky supports subtracting from an existing selection', function(done) {
         plotMock14()
-          .then(function() { return _immediateClickPt(mock14Pts[7]); })
+          .then(function() {
+              return _immediateClickPt(mock14Pts[7]);
+          })
           .then(function() {
               assertSelectedPoints(7);
               return _clickPt(mock14Pts[35], { shiftKey: true });
@@ -320,7 +332,9 @@ describe('Click-to-select', function() {
               assertSelectedPoints([7, 35]);
               return _clickPt(mock14Pts[7], { shiftKey: true });
           })
-          .then(function() { assertSelectedPoints(35); })
+          .then(function() {
+              assertSelectedPoints(35);
+          })
           .catch(failTest)
           .then(done);
     });
@@ -405,7 +419,8 @@ describe('Click-to-select', function() {
             clickmode: 'event+select'
         })
           .then(function() {
-              return _click(136, 369, {}, true); })
+              return _click(136, 369, {}, true);
+          })
           .then(function() {
               assertSelectedPoints([[1], [], []]);
               return _click(245, 136, { shiftKey: true });
@@ -538,10 +553,18 @@ describe('Click-to-select', function() {
           .catch(failTest)
           .then(done);
 
-        function clickFirstBinImmediately() { return _immediateClickPt({ x: 141, y: 358 }); }
-        function clickFirstBin() { return _click(141, 358); }
-        function shiftClickSecondBin() { return _click(239, 330, { shiftKey: true }); }
-        function shiftClickThirdBin() { return _click(351, 347, { shiftKey: true }); }
+        function clickFirstBinImmediately() {
+            return _immediateClickPt({ x: 141, y: 358 });
+        }
+        function clickFirstBin() {
+            return _click(141, 358);
+        }
+        function shiftClickSecondBin() {
+            return _click(239, 330, { shiftKey: true });
+        }
+        function shiftClickThirdBin() {
+            return _click(351, 347, { shiftKey: true });
+        }
     });
 
     it('@flaky ignores clicks on boxes in a box trace type', function(done) {
@@ -571,9 +594,15 @@ describe('Click-to-select', function() {
           .catch(failTest)
           .then(done);
 
-        function clickPtImmediately() { return _immediateClickPt({ x: 610, y: 342 }); }
-        function clickPt() { return _clickPt({ x: 610, y: 342 }); }
-        function clickBox() { return _clickPt({ x: 565, y: 329 }); }
+        function clickPtImmediately() {
+            return _immediateClickPt({ x: 610, y: 342 });
+        }
+        function clickPt() {
+            return _clickPt({ x: 610, y: 342 });
+        }
+        function clickBox() {
+            return _clickPt({ x: 565, y: 329 });
+        }
     });
 
     describe('is disabled when clickmode does not include \'select\'', function() {
@@ -803,9 +832,13 @@ describe('Test select box and lasso in general:', function() {
         mockCopy.layout.dragmode = 'select';
         mockCopy.layout.hovermode = 'closest';
         mockCopy.data[0].ids = mockCopy.data[0].x
-            .map(function(v) { return 'id-' + v; });
+            .map(function(v) {
+                return 'id-' + v;
+            });
         mockCopy.data[0].customdata = mockCopy.data[0].y
-            .map(function(v) { return 'customdata-' + v; });
+            .map(function(v) {
+                return 'customdata-' + v;
+            });
         addInvisible(mockCopy);
 
         var gd;
@@ -1238,11 +1271,19 @@ describe('Test select box and lasso in general:', function() {
 
         Plotly.plot(gd, fig)
         .then(_drag)
-        .then(function() { assertSelectionNodes(0, 2, 'after drag 1'); })
-        .then(function() { return Plotly.relayout(gd, 'xaxis.range', [-5, 5]); })
-        .then(function() { assertSelectionNodes(0, 0, 'after axrange relayout'); })
+        .then(function() {
+            assertSelectionNodes(0, 2, 'after drag 1');
+        })
+        .then(function() {
+            return Plotly.relayout(gd, 'xaxis.range', [-5, 5]);
+        })
+        .then(function() {
+            assertSelectionNodes(0, 0, 'after axrange relayout');
+        })
         .then(_drag)
-        .then(function() { assertSelectionNodes(0, 2, 'after drag 2'); })
+        .then(function() {
+            assertSelectionNodes(0, 2, 'after drag 2');
+        })
         .catch(failTest)
         .then(done);
     });
@@ -1475,9 +1516,13 @@ describe('Test select box and lasso in general:', function() {
                 .filter(Boolean)
                 .map(function(s) {
                     return s.split('L')
-                        .map(function(s) { return s.split(',').map(Number); });
+                        .map(function(s) {
+                            return s.split(',').map(Number);
+                        });
                 })
-                .reduce(function(a, b) { return a.concat(b); });
+                .reduce(function(a, b) {
+                    return a.concat(b);
+                });
         }
 
         function _assert(msg, exp) {
@@ -1499,7 +1544,9 @@ describe('Test select box and lasso in general:', function() {
         }
 
         Plotly.plot(gd, fig)
-        .then(function() { _assert('base', {outline: false}); })
+        .then(function() {
+            _assert('base', {outline: false});
+        })
         .then(_drag(path1))
         .then(function() {
             _assert('select path1', {
@@ -2686,7 +2733,9 @@ describe('Test that selections persist:', function() {
 
     it('should persist for scatter', function(done) {
         function _assert(expected) {
-            var selected = gd.calcdata[0].map(function(d) { return d.selected; });
+            var selected = gd.calcdata[0].map(function(d) {
+                return d.selected;
+            });
             expect(selected).toBeCloseToArray(expected.selected, 'selected vals');
             assertPtOpacity('.point', expected);
         }
@@ -2726,7 +2775,9 @@ describe('Test that selections persist:', function() {
 
     it('should persist for box', function(done) {
         function _assert(expected) {
-            var selected = gd.calcdata[0][0].pts.map(function(d) { return d.selected; });
+            var selected = gd.calcdata[0][0].pts.map(function(d) {
+                return d.selected;
+            });
             expect(selected).toBeCloseToArray(expected.cd, 'selected calcdata vals');
             expect(gd.data[0].selectedpoints).toBeCloseToArray(expected.selectedpoints, 'selectedpoints array');
             assertPtOpacity('.point', expected);
@@ -2772,7 +2823,9 @@ describe('Test that selections persist:', function() {
 
     it('should persist for histogram', function(done) {
         function _assert(expected) {
-            var selected = gd.calcdata[0].map(function(d) { return d.selected; });
+            var selected = gd.calcdata[0].map(function(d) {
+                return d.selected;
+            });
             expect(selected).toBeCloseToArray(expected.selected, 'selected vals');
             assertPtOpacity('.point > path', expected);
         }

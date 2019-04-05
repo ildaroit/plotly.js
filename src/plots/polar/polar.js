@@ -123,7 +123,9 @@ proto.updateLayers = function(fullLayout, polarLayout) {
         .data(layerData, String);
 
     join.enter().append('g')
-        .attr('class', function(d) { return 'polarsublayer ' + d;})
+        .attr('class', function(d) {
+            return 'polarsublayer ' + d;
+        })
         .each(function(d) {
             var sel = layers[d] = d3.select(this);
 
@@ -331,8 +333,12 @@ proto.mockCartesianAxis = function(fullLayout, polarLayout, opts) {
     };
 
     ax.isPtWithinRange = axId === 'x' ?
-        function(d) { return _this.isPtInside(d); } :
-        function() { return true; };
+        function(d) {
+            return _this.isPtInside(d);
+        } :
+        function() {
+            return true;
+        };
 
     ax.setRange();
     ax.setScale();
@@ -522,7 +528,9 @@ proto.updateAngularAxis = function(fullLayout, polarLayout) {
     ax.setScale();
 
     // 't'ick to 'g'eometric radians is used all over the place here
-    var t2g = function(d) { return ax.t2g(d.x); };
+    var t2g = function(d) {
+        return ax.t2g(d.x);
+    };
 
     // run rad2deg on tick0 and ditck for thetaunit: 'radians' axes
     if(ax.type === 'linear' && ax.thetaunit === 'radians') {
@@ -1382,7 +1390,9 @@ function computeSectorBBox(sector) {
 }
 
 function snapToVertexAngle(a, vangles) {
-    var fn = function(v) { return Lib.angleDist(a, v); };
+    var fn = function(v) {
+        return Lib.angleDist(a, v);
+    };
     var ind = Lib.findIndexOfMin(vangles, fn);
     return vangles[ind];
 }

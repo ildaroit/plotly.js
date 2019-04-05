@@ -34,8 +34,7 @@ exports.findBin = function(val, bins, linelow) {
         return linelow ?
             Math.ceil((val - bins.start) / bins.size - roundingError) - 1 :
             Math.floor((val - bins.start) / bins.size + roundingError);
-    }
-    else {
+    } else {
         var n1 = 0;
         var n2 = bins.length;
         var c = 0;
@@ -58,13 +57,25 @@ exports.findBin = function(val, bins, linelow) {
     }
 };
 
-function lessThan(a, b) { return a < b; }
-function lessOrEqual(a, b) { return a <= b; }
-function greaterThan(a, b) { return a > b; }
-function greaterOrEqual(a, b) { return a >= b; }
+function lessThan(a, b) {
+    return a < b;
+}
+function lessOrEqual(a, b) {
+    return a <= b;
+}
+function greaterThan(a, b) {
+    return a > b;
+}
+function greaterOrEqual(a, b) {
+    return a >= b;
+}
 
-exports.sorterAsc = function(a, b) { return a - b; };
-exports.sorterDes = function(a, b) { return b - a; };
+exports.sorterAsc = function(a, b) {
+    return a - b;
+};
+exports.sorterDes = function(a, b) {
+    return b - a;
+};
 
 /**
  * find distinct values in an array, lumping together ones that appear to

@@ -365,7 +365,9 @@ describe('spikeline hover', function() {
             type: 'bar', y: [2, 1]
         }], spikeLayout())
         .then(_assertBarSpikes)
-        .then(function() { _setHovermode('closest'); })
+        .then(function() {
+            _setHovermode('closest');
+        })
         .then(_assertBarSpikes)
         .catch(failTest)
         .then(done);

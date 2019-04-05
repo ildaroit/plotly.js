@@ -81,13 +81,17 @@ describe('Plotly.downloadImage', function() {
 
     it('should produce the right SVG output in IE', function(done) {
         // mock up IE behavior
-        spyOn(Lib, 'isIE').and.callFake(function() { return true; });
+        spyOn(Lib, 'isIE').and.callFake(function() {
+            return true;
+        });
         spyOn(slzProto, 'serializeToString').and.callFake(function() {
             return serializeToString.apply(this, arguments)
                 .replace(/(\(#)([^")]*)(\))/gi, '(\"#$2\")');
         });
         var savedBlob;
-        navigator.msSaveBlob = function(blob) { savedBlob = blob; };
+        navigator.msSaveBlob = function(blob) {
+            savedBlob = blob;
+        };
 
         var expectedStart = '<svg class=\'main-svg\' xmlns=\'http://www.w3.org/2000/svg\' xmlns:xlink=\'http://www.w3.org/1999/xlink\'';
         var plotClip = /clip-path='url\("#clip[0-9a-f]{6}xyplot"\)/;
@@ -119,7 +123,9 @@ describe('Plotly.downloadImage', function() {
 
                     resolve();
                 };
-                reader.onerror = function(e) { reject(e); };
+                reader.onerror = function(e) {
+                    reject(e);
+                };
 
                 reader.readAsText(savedBlob);
             });

@@ -612,15 +612,33 @@ describe('Test colorscale restyle calls:', function() {
         // update via, assert then assert again (and again ;) after non-calc edits
         function _run(msg, restyleObj, exp) {
             return Plotly.restyle(gd, restyleObj)
-                .then(function() { _assert(msg, exp); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.range', [-1, 5]); })
-                .then(function() { _assert(msg + ' after axrange relayout', exp); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.autorange', true); })
-                .then(function() { _assert(msg + ' after autorange', exp); })
-                .then(function() { return Plotly.restyle(gd, 'contours.showlines', true); })
-                .then(function() { _assert(msg + ' after contours.showlines restyle', exp); })
-                .then(function() { return Plotly.restyle(gd, 'contours.showlines', false); })
-                .then(function() { _assert(msg + ' back to original contours.showlines', exp); });
+                .then(function() {
+                    _assert(msg, exp);
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.range', [-1, 5]);
+                })
+                .then(function() {
+                    _assert(msg + ' after axrange relayout', exp);
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.autorange', true);
+                })
+                .then(function() {
+                    _assert(msg + ' after autorange', exp);
+                })
+                .then(function() {
+                    return Plotly.restyle(gd, 'contours.showlines', true);
+                })
+                .then(function() {
+                    _assert(msg + ' after contours.showlines restyle', exp);
+                })
+                .then(function() {
+                    return Plotly.restyle(gd, 'contours.showlines', false);
+                })
+                .then(function() {
+                    _assert(msg + ' back to original contours.showlines', exp);
+                });
         }
 
         var rdbu = ['rgb(5, 10, 172)', 'rgb(190, 190, 190)', 'rgb(178, 10, 28)'];
@@ -721,15 +739,33 @@ describe('Test colorscale restyle calls:', function() {
         // update via, assert then assert again (and again ;) after non-calc edits
         function _run(msg, restyleObj, exp) {
             return Plotly.restyle(gd, restyleObj)
-                .then(function() { _assert(msg, exp); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.range', [-1, 5]); })
-                .then(function() { _assert(msg + ' after axrange relayout', exp); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.autorange', true); })
-                .then(function() { _assert(msg + ' after autorange', exp); })
-                .then(function() { return Plotly.restyle(gd, 'marker.symbol', 'square'); })
-                .then(function() { _assert(msg + ' after marker.symbol restyle', exp); })
-                .then(function() { return Plotly.restyle(gd, 'marker.symbol', null); })
-                .then(function() { _assert(msg + ' back to original marker.symbol', exp); });
+                .then(function() {
+                    _assert(msg, exp);
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.range', [-1, 5]);
+                })
+                .then(function() {
+                    _assert(msg + ' after axrange relayout', exp);
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.autorange', true);
+                })
+                .then(function() {
+                    _assert(msg + ' after autorange', exp);
+                })
+                .then(function() {
+                    return Plotly.restyle(gd, 'marker.symbol', 'square');
+                })
+                .then(function() {
+                    _assert(msg + ' after marker.symbol restyle', exp);
+                })
+                .then(function() {
+                    return Plotly.restyle(gd, 'marker.symbol', null);
+                })
+                .then(function() {
+                    _assert(msg + ' back to original marker.symbol', exp);
+                });
         }
 
         var rdbu = ['rgb(5, 10, 172)', 'rgb(77, 101, 226)', 'rgb(178, 10, 28)'];
@@ -800,15 +836,33 @@ describe('Test colorscale restyle calls:', function() {
         // update via, assert then assert again (and again ;) after non-calc edits
         function _run(msg, restyleObj, exp) {
             return Plotly.restyle(gd, restyleObj)
-                .then(function() { _assert(msg, exp); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.range', [-1, 5]); })
-                .then(function() { _assert(msg + ' after axrange relayout', exp); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.autorange', true); })
-                .then(function() { _assert(msg + ' after autorange', exp); })
-                .then(function() { return Plotly.restyle(gd, 'marker.line.width', 10); })
-                .then(function() { _assert(msg + ' after marker lw restyle', exp); })
-                .then(function() { return Plotly.restyle(gd, 'marker.line.width', mlw0); })
-                .then(function() { _assert(msg + ' back to original marker lw', exp); });
+                .then(function() {
+                    _assert(msg, exp);
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.range', [-1, 5]);
+                })
+                .then(function() {
+                    _assert(msg + ' after axrange relayout', exp);
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.autorange', true);
+                })
+                .then(function() {
+                    _assert(msg + ' after autorange', exp);
+                })
+                .then(function() {
+                    return Plotly.restyle(gd, 'marker.line.width', 10);
+                })
+                .then(function() {
+                    _assert(msg + ' after marker lw restyle', exp);
+                })
+                .then(function() {
+                    return Plotly.restyle(gd, 'marker.line.width', mlw0);
+                })
+                .then(function() {
+                    _assert(msg + ' back to original marker lw', exp);
+                });
         }
 
         var blues = ['rgb(220, 220, 220)', 'rgb(70, 100, 245)', 'rgb(5, 10, 172)'];

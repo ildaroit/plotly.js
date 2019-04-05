@@ -15,10 +15,14 @@ var repeat = require('../../lib/gup').repeat;
 var sortAsc = require('../../lib').sorterAsc;
 
 var snapRatio = c.bar.snapRatio;
-function snapOvershoot(v, vAdjacent) { return v * (1 - snapRatio) + vAdjacent * snapRatio; }
+function snapOvershoot(v, vAdjacent) {
+    return v * (1 - snapRatio) + vAdjacent * snapRatio;
+}
 
 var snapClose = c.bar.snapClose;
-function closeToCovering(v, vAdjacent) { return v * (1 - snapClose) + vAdjacent * snapClose; }
+function closeToCovering(v, vAdjacent) {
+    return v * (1 - snapClose) + vAdjacent * snapClose;
+}
 
 // snap for the low end of a range on an ordinal scale
 // on an ordinal scale, always show some overshoot from the exact value,
@@ -108,7 +112,9 @@ function setHighlight(d) {
 
 function unitToPx(unitRanges, height) {
     return unitRanges.map(function(pr) {
-        return pr.map(function(v) { return v * height; }).sort(sortAsc);
+        return pr.map(function(v) {
+            return v * height;
+        }).sort(sortAsc);
     });
 }
 
@@ -175,8 +181,7 @@ function getInterval(d, y) {
         if(isNaN(closestInterval)) {
             if(isNaN(previousInterval) || isNaN(nextInterval)) {
                 closestInterval = isNaN(previousInterval) ? nextInterval : previousInterval;
-            }
-            else {
+            } else {
                 closestInterval = (y - pixIntervals[previousInterval][1] < pixIntervals[nextInterval][0] - y) ?
                     previousInterval : nextInterval;
             }
@@ -306,13 +311,11 @@ function attachDragBehavior(selection) {
                     if(s.clickableOrdinalRange) {
                         if(brush.filterSpecified && d.multiselect) {
                             s.extent.push(s.clickableOrdinalRange);
-                        }
-                        else {
+                        } else {
                             s.extent = [s.clickableOrdinalRange];
                             brush.filterSpecified = true;
                         }
-                    }
-                    else if(grabbingBar) {
+                    } else if(grabbingBar) {
                         s.extent = s.stayingIntervals;
                         if(s.extent.length === 0) {
                             brushClear(brush);
@@ -348,8 +351,7 @@ function attachDragBehavior(selection) {
                     if(hasNewExtent) {
                         // merging intervals post the snap tween
                         renderHighlight(this.parentNode, mergeIntervals);
-                    }
-                    else {
+                    } else {
                         // if no new interval, don't animate, just redraw the highlight immediately
                         mergeIntervals();
                         renderHighlight(this.parentNode);
@@ -362,7 +364,9 @@ function attachDragBehavior(selection) {
         );
 }
 
-function startAsc(a, b) { return a[0] - b[0]; }
+function startAsc(a, b) {
+    return a[0] - b[0];
+}
 
 function renderAxisBrush(axisBrush) {
     var background = axisBrush.selectAll('.background').data(repeat);
@@ -393,7 +397,9 @@ function renderAxisBrush(axisBrush) {
         .attr('stroke-linecap', 'butt');
 
     highlightShadow
-        .attr('y1', function(d) { return d.height; })
+        .attr('y1', function(d) {
+            return d.height;
+        })
         .call(styleHighlight);
 
     var highlight = axisBrush.selectAll('.highlight').data(repeat); // we have a set here, can't call it `extent`
@@ -408,7 +414,9 @@ function renderAxisBrush(axisBrush) {
         .attr('stroke-linecap', 'butt');
 
     highlight
-        .attr('y1', function(d) { return d.height; })
+        .attr('y1', function(d) {
+            return d.height;
+        })
         .call(styleHighlight);
 }
 
@@ -424,7 +432,9 @@ function ensureAxisBrush(axisOverlays) {
 }
 
 function getBrushExtent(brush) {
-    return brush.svgBrush.extent.map(function(e) {return e.slice();});
+    return brush.svgBrush.extent.map(function(e) {
+        return e.slice();
+    });
 }
 
 function brushClear(brush) {
@@ -466,16 +476,24 @@ function makeFilter() {
     return {
         set: function(a) {
             filter = a
-                .map(function(d) { return d.slice().sort(sortAsc); })
+                .map(function(d) {
+                    return d.slice().sort(sortAsc);
+                })
                 .sort(startAsc);
             consolidated = dedupeRealRanges(filter);
             bounds = filter.reduce(function(p, n) {
                 return [Math.min(p[0], n[0]), Math.max(p[1], n[1])];
             }, [Infinity, -Infinity]);
         },
-        get: function() { return filter.slice(); },
-        getConsolidated: function() { return consolidated; },
-        getBounds: function() { return bounds; }
+        get: function() {
+            return filter.slice();
+        },
+        getConsolidated: function() {
+            return consolidated;
+        },
+        getBounds: function() {
+            return bounds;
+        }
     };
 }
 
@@ -498,12 +516,13 @@ function makeBrush(state, rangeSpecified, initialRange, brushStartCallback, brus
 // seemed to make more sense just to put the whole routine here
 function cleanRanges(ranges, dimension) {
     if(Array.isArray(ranges[0])) {
-        ranges = ranges.map(function(ri) { return ri.sort(sortAsc); });
+        ranges = ranges.map(function(ri) {
+            return ri.sort(sortAsc);
+        });
 
         if(!dimension.multiselect) ranges = [ranges[0]];
         else ranges = dedupeRealRanges(ranges.sort(startAsc));
-    }
-    else ranges = [ranges.sort(sortAsc)];
+    } else ranges = [ranges.sort(sortAsc)];
 
     // ordinal snapping
     if(dimension.tickvals) {
@@ -515,7 +534,9 @@ function cleanRanges(ranges, dimension) {
             ];
             if(rSnapped[1] > rSnapped[0]) return rSnapped;
         })
-        .filter(function(ri) { return ri; });
+        .filter(function(ri) {
+            return ri;
+        });
 
         if(!ranges.length) return;
     }

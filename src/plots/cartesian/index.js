@@ -108,8 +108,7 @@ exports.finalizeSubplots = function(layoutIn, layoutOut) {
                     if(!xi || (+ki.substr(5) < +xi.substr(5))) {
                         xi = ki;
                     }
-                }
-                else if(!yi || (+ki.substr(5) < +yi.substr(5))) {
+                } else if(!yi || (+ki.substr(5) < +yi.substr(5))) {
                     yi = ki;
                 }
             }
@@ -238,13 +237,19 @@ function plotOne(gd, plotinfo, cdSubplot, transitionOpts, makeOnCompleteCallback
         }
     }
 
-    layerData.sort(function(a, b) { return a.i - b.i; });
+    layerData.sort(function(a, b) {
+        return a.i - b.i;
+    });
 
     var layers = plotinfo.plot.selectAll('g.mlayer')
-        .data(layerData, function(d) { return d.className; });
+        .data(layerData, function(d) {
+            return d.className;
+        });
 
     layers.enter().append('g')
-        .attr('class', function(d) { return d.className; })
+        .attr('class', function(d) {
+            return d.className;
+        })
         .classed('mlayer', true);
 
     layers.exit().remove();
@@ -361,7 +366,9 @@ exports.drawFramework = function(gd) {
         .data(subplotData, String);
 
     subplotLayers.enter().append('g')
-        .attr('class', function(d) { return 'subplot ' + d[0]; });
+        .attr('class', function(d) {
+            return 'subplot ' + d[0];
+        });
 
     subplotLayers.order();
 
@@ -468,8 +475,7 @@ function makeSubplotLayer(gd, plotinfo) {
             plotinfo.ylines = ensureSingle(plotgroup, 'path', 'ylines-above');
             plotinfo.xaxislayer = ensureSingle(plotgroup, 'g', 'xaxislayer-above');
             plotinfo.yaxislayer = ensureSingle(plotgroup, 'g', 'yaxislayer-above');
-        }
-        else {
+        } else {
             var backLayer = ensureSingle(plotgroup, 'g', 'layer-subplot');
             plotinfo.shapelayer = ensureSingle(backLayer, 'g', 'shapelayer');
             plotinfo.imagelayer = ensureSingle(backLayer, 'g', 'imagelayer');
@@ -502,8 +508,7 @@ function makeSubplotLayer(gd, plotinfo) {
             plotinfo.xaxislayer = plotgroup.select('.xaxislayer-' + xLayer);
             plotinfo.yaxislayer = plotgroup.select('.yaxislayer-' + yLayer);
         }
-    }
-    else {
+    } else {
         var mainplotinfo = plotinfo.mainplotinfo;
         var mainplotgroup = mainplotinfo.plotgroup;
         var xId = id + '-x';
@@ -542,7 +547,9 @@ function makeSubplotLayer(gd, plotinfo) {
         ensureSingleAndAddDatum(plotinfo.gridlayer, 'g', plotinfo.xaxis._id);
         ensureSingleAndAddDatum(plotinfo.gridlayer, 'g', plotinfo.yaxis._id);
         plotinfo.gridlayer.selectAll('g')
-            .map(function(d) { return d[0]; })
+            .map(function(d) {
+                return d[0];
+            })
             .sort(axisIds.idSort);
     }
 
@@ -596,7 +603,9 @@ function removeSubplotExtras(subplotId, fullLayout) {
 exports.toSVG = function(gd) {
     var imageRoot = gd._fullLayout._glimages;
     var root = d3.select(gd).selectAll('.svg-container');
-    var canvases = root.filter(function(d, i) {return i === root.size() - 1;})
+    var canvases = root.filter(function(d, i) {
+        return i === root.size() - 1;
+    })
         .selectAll('.gl-canvas-context, .gl-canvas-focus');
 
     function canvasToImage() {

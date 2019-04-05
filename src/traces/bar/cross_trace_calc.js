@@ -130,7 +130,9 @@ function initBase(gd, pa, sa, calcTraces) {
 
         // 'base' on categorical axes makes no sense
         var d2c = sa.type === 'category' || sa.type === 'multicategory' ?
-            function() { return null; } :
+            function() {
+                return null;
+            } :
             sa.d2c;
 
         if(isArrayOrTypedArray(base)) {
@@ -139,8 +141,7 @@ function initBase(gd, pa, sa, calcTraces) {
                 if(isNumeric(b)) {
                     cd[j].b = +b;
                     cd[j].hasB = 1;
-                }
-                else cd[j].b = 0;
+                } else cd[j].b = 0;
             }
             for(; j < cd.length; j++) {
                 cd[j].b = 0;

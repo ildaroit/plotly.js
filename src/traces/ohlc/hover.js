@@ -44,7 +44,9 @@ function getClosestPoint(pointData, xval, yval, hovermode) {
 
     // potentially shift xval for grouped candlesticks
     var centerShift = t.bPos || 0;
-    var shiftPos = function(di) { return di.pos + centerShift - xval; };
+    var shiftPos = function(di) {
+        return di.pos + centerShift - xval;
+    };
 
     // ohlc and candlestick call displayHalfWidth different things...
     var displayHalfWidth = t.bdPos || t.tickLen;
@@ -66,7 +68,9 @@ function getClosestPoint(pointData, xval, yval, hovermode) {
         return min === max || Fx.inbox(min - yval, max - yval, hoverPseudoDistance);
     }
 
-    function dxy(di) { return (dx(di) + dy(di)) / 2; }
+    function dxy(di) {
+        return (dx(di) + dy(di)) / 2;
+    }
 
     var distfn = Fx.getDistanceFunction(hovermode, dx, dy, dxy);
     Fx.getClosest(cd, distfn, pointData);
@@ -133,8 +137,7 @@ function hoverSplit(pointData, xval, yval, hovermode) {
         if(val in usedVals) {
             pointData2 = usedVals[val];
             pointData2.yLabel += '<br>' + t.labels[attr] + Axes.hoverLabelText(ya, val);
-        }
-        else {
+        } else {
             // copy out to a new object for each new y-value to label
             pointData2 = Lib.extendFlat({}, closestPoint);
 

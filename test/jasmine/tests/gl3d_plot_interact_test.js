@@ -634,7 +634,9 @@ describe('Test gl3d plots', function() {
         })
         .then(function() {
             return Plotly.restyle(gd, 'hovertext', [
-                text.map(function(tx) { return tx + ' !!'; })
+                text.map(function(tx) {
+                    return tx + ' !!';
+                })
             ]);
         })
         .then(delay(20))
@@ -1876,7 +1878,9 @@ describe('Test gl3d annotations', function() {
         var mock = Lib.extendDeep({}, require('@mocks/gl3d_annotations'));
 
         // replace text with something easier to identify
-        mock.layout.scene.annotations.forEach(function(ann, i) { ann.text = String(i); });
+        mock.layout.scene.annotations.forEach(function(ann, i) {
+            ann.text = String(i);
+        });
 
         Plotly.plot(gd, mock).then(function() {
             assertAnnotationText(['0', '1', '2', '3', '4', '5', '6'], 'base');
@@ -1909,7 +1913,9 @@ describe('Test gl3d annotations', function() {
         var mock = Lib.extendDeep({}, require('@mocks/gl3d_annotations'));
 
         // replace text with something easier to identify
-        mock.layout.scene.annotations.forEach(function(ann, i) { ann.text = String(i); });
+        mock.layout.scene.annotations.forEach(function(ann, i) {
+            ann.text = String(i);
+        });
 
         var annNew = {
             x: '2017-03-01',

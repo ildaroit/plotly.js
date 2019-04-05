@@ -454,7 +454,9 @@ describe('axis zoom/pan and main plot zoom', function() {
             .then(doDrag('x2y', 'w', -50, 53))
             .then(checkRanges({yaxis: [-2, 2], yaxis2: [0, 4], xaxis2: [0.4922, 0.8751]}, 'drag x2w'))
             // reset all from the modebar
-            .then(function() { selectButton(gd._fullLayout._modeBar, 'resetScale2d').click(); })
+            .then(function() {
+                selectButton(gd._fullLayout._modeBar, 'resetScale2d').click();
+            })
             .then(checkRanges({}, 'final reset'))
             .catch(failTest)
             .then(done);
@@ -611,14 +613,18 @@ describe('axis zoom/pan and main plot zoom', function() {
         .then(function() {
             return _run('full-x', [30, 2], {cornerCnt: 2});
         })
-        .then(function() { return Plotly.relayout(gd, 'xaxis.fixedrange', true); })
+        .then(function() {
+            return Plotly.relayout(gd, 'xaxis.fixedrange', true);
+        })
         .then(function() {
             return _run('full-x full-y w/ fixed xaxis', [30, 30], {cornerCnt: 2});
         })
         .then(function() {
             return _run('full-x w/ fixed xaxis', [30, 5], {cornerCnt: 0});
         })
-        .then(function() { return Plotly.relayout(gd, {'xaxis.fixedrange': false, 'yaxis.fixedrange': true}); })
+        .then(function() {
+            return Plotly.relayout(gd, {'xaxis.fixedrange': false, 'yaxis.fixedrange': true});
+        })
         .then(function() {
             return _run('full-x full-y w/ fixed yaxis', [30, 30], {cornerCnt: 2});
         })
@@ -637,13 +643,19 @@ describe('axis zoom/pan and main plot zoom', function() {
 
         Plotly.plot(gd, [{ y: [1, 2, 1] }])
         .then(doDrag('xy', 'nsew', 50, 50))
-        .then(function() { _assert('after xy drag', [1, 1.208], [1.287, 1.5]); })
+        .then(function() {
+            _assert('after xy drag', [1, 1.208], [1.287, 1.5]);
+        })
         .then(doDblClick('xy', 'nsew'))
         .then(doDrag('xy', 'nsew', 50, 0))
-        .then(function() { _assert('after x-only drag', [1, 1.208], [0.926, 2.073]); })
+        .then(function() {
+            _assert('after x-only drag', [1, 1.208], [0.926, 2.073]);
+        })
         .then(doDblClick('xy', 'nsew'))
         .then(doDrag('xy', 'nsew', 0, 50))
-        .then(function() { _assert('after y-only drag', [-0.128, 2.128], [1.287, 1.5]); })
+        .then(function() {
+            _assert('after y-only drag', [-0.128, 2.128], [1.287, 1.5]);
+        })
         .catch(failTest)
         .then(done);
     });
@@ -674,7 +686,9 @@ describe('axis zoom/pan and main plot zoom', function() {
         function _run(msg, dp, exp) {
             var drag = makeDragFns('xy', 'e', dp[0], dp[1], 585, 390);
             return drag.start()
-                .then(function() { _assertLabels(msg, exp); })
+                .then(function() {
+                    _assertLabels(msg, exp);
+                })
                 .then(drag.end);
         }
 
@@ -783,7 +797,9 @@ describe('axis zoom/pan and main plot zoom', function() {
 
             var transExp = trans ? trans : trans0;
             var scaleExp = scale ? scale : scale1;
-            var msg1 = msg + ' [' + spIds.map(function(id) { return '..' + id; }).join(', ') + ']';
+            var msg1 = msg + ' [' + spIds.map(function(id) {
+                return '..' + id;
+            }).join(', ') + ']';
             expect(transActual).toBeWithinArray(transExp, 3, msg1 + ' clip translate');
             expect(scaleActual).toBeWithinArray(scaleExp, 3, msg1 + ' clip scale');
         }
@@ -809,7 +825,9 @@ describe('axis zoom/pan and main plot zoom', function() {
 
             return Plotly.plot(gd, fig).then(function() {
                 Axes.drawOne.calls.reset();
-                gd.on('plotly_relayout', function(d) { eventData = d; });
+                gd.on('plotly_relayout', function(d) {
+                    eventData = d;
+                });
             });
         }
 
@@ -1385,7 +1403,9 @@ describe('axis zoom/pan and main plot zoom', function() {
                 [['yaxis'], [1.036, 2.177], {dragged: true}],
                 [['xaxis2'], [-0.225, 3.222], {noChange: true}]
             ]))
-            .then(function() { return Plotly.relayout(gd, 'dragmode', 'zoom'); })
+            .then(function() {
+                return Plotly.relayout(gd, 'dragmode', 'zoom');
+            })
             .then(doDrag('xy', 'nsew', 30, 30))
             .then(_assert('after zoombox on xy subplot', [
                 [['yaxis2', 'yaxis3'], [2, 2.6417]],
@@ -1543,7 +1563,9 @@ describe('axis zoom/pan and main plot zoom', function() {
                 clipTranslate: [0, 0]
             }))
             .catch(failTest)
-            .then(function() { clearInterval(interval); })
+            .then(function() {
+                clearInterval(interval);
+            })
             .then(done);
         });
 
@@ -1721,8 +1743,12 @@ describe('axis zoom/pan and main plot zoom', function() {
                     selectingTracker.unshift(d);
 
                     if(d && d.points) {
-                        trace1.x = d.points.map(function(p) { return trace0.x[p.pointNumber]; });
-                        trace1.y = d.points.map(function(p) { return trace0.y[p.pointNumber]; });
+                        trace1.x = d.points.map(function(p) {
+                            return trace0.x[p.pointNumber];
+                        });
+                        trace1.y = d.points.map(function(p) {
+                            return trace0.y[p.pointNumber];
+                        });
                     } else {
                         trace1.x = [];
                         trace1.y = [];
@@ -1814,7 +1840,9 @@ describe('Event data:', function() {
             width: 500,
             height: 500
         })
-        .then(function() { return _hover(200, 200); })
+        .then(function() {
+            return _hover(200, 200);
+        })
         .then(function(d) {
             var pt = d.points[0];
 
@@ -1841,7 +1869,9 @@ describe('Event data:', function() {
             width: 500,
             height: 500
         })
-        .then(function() { return _hover(200, 200); })
+        .then(function() {
+            return _hover(200, 200);
+        })
         .then(function(d) {
             var pt = d.points[0];
 

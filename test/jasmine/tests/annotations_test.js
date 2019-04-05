@@ -837,7 +837,9 @@ describe('annotations autorange', function() {
 describe('annotation clicktoshow', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -906,9 +908,10 @@ describe('annotation clicktoshow', function() {
 
             var clickResult = Annotations.onClick(gd, hoverData(opts.newPts));
             if(clickResult && clickResult.then) {
-                return clickResult.then(function() { checkVisible(opts); });
-            }
-            else {
+                return clickResult.then(function() {
+                    checkVisible(opts);
+                });
+            } else {
                 checkVisible(opts);
             }
         };
@@ -922,7 +925,9 @@ describe('annotation clicktoshow', function() {
         };
     }
 
-    var allIndices = layout().annotations.map(function(v, i) { return i; });
+    var allIndices = layout().annotations.map(function(v, i) {
+        return i;
+    });
 
     it('should select only clicktoshow annotations matching x, y, and axes of any point', function(done) {
         // first try to select without adding clicktoshow, both visible and invisible
@@ -1022,9 +1027,15 @@ describe('annotation clicktoshow', function() {
 describe('annotation effects', function() {
     var gd;
 
-    function textDrag() { return gd.querySelector('.annotation-text-g>g'); }
-    function arrowDrag() { return gd.querySelector('.annotation-arrow-g>.anndrag'); }
-    function textBox() { return gd.querySelector('.annotation-text-g'); }
+    function textDrag() {
+        return gd.querySelector('.annotation-text-g>g');
+    }
+    function arrowDrag() {
+        return gd.querySelector('.annotation-arrow-g>.anndrag');
+    }
+    function textBox() {
+        return gd.querySelector('.annotation-text-g');
+    }
 
     function makePlot(annotations, config) {
         gd = createGraphDiv();
@@ -1430,8 +1441,12 @@ describe('annotation effects', function() {
             return assertHoverLabels([[pos0, ''], [pos1, ''], [pos2, '']]);
         })
         // not going to register any of these because captureevents is off
-        .then(function() { return _click(pos1); })
-        .then(function() { return _click(pos2Head); })
+        .then(function() {
+            return _click(pos1);
+        })
+        .then(function() {
+            return _click(pos2Head);
+        })
         .then(function() {
             assertClickData([]);
 
@@ -1442,8 +1457,12 @@ describe('annotation effects', function() {
         })
         // now we'll register the click on #1, but still not on #2
         // because we're clicking the head, not the text box
-        .then(function() { return _click(pos1); })
-        .then(function() { return _click(pos2Head); })
+        .then(function() {
+            return _click(pos1);
+        })
+        .then(function() {
+            return _click(pos2Head);
+        })
         .then(function() {
             assertClickData([{
                 index: 1,
@@ -1468,7 +1487,9 @@ describe('annotation effects', function() {
         })
         // click and hover work together?
         // this also tests that hover turns on annotation.captureevents
-        .then(function() { return _click(pos0); })
+        .then(function() {
+            return _click(pos0);
+        })
         .then(function() {
             assertClickData([{
                 index: 0,
@@ -1512,12 +1533,24 @@ describe('annotation effects', function() {
             {x: 80, y: 80, text: 'why?', ax: 0, ay: -40, captureevents: true}
         ], {}) // turn off the default editable: true
         .then(initClickTests)
-        .then(function() { return _click(pos1, rightClick); })
-        .then(function() { return _click(pos2Head, rightClick); })
-        .then(function() { return _click(pos1, ctrlClick); })
-        .then(function() { return _click(pos2Head, ctrlClick); })
-        .then(function() { return _click(pos0, rightClick); })
-        .then(function() { return _click(pos0, ctrlClick); })
+        .then(function() {
+            return _click(pos1, rightClick);
+        })
+        .then(function() {
+            return _click(pos2Head, rightClick);
+        })
+        .then(function() {
+            return _click(pos1, ctrlClick);
+        })
+        .then(function() {
+            return _click(pos2Head, ctrlClick);
+        })
+        .then(function() {
+            return _click(pos0, rightClick);
+        })
+        .then(function() {
+            return _click(pos0, ctrlClick);
+        })
         .then(function() {
             assertClickData([]);
 

@@ -1044,7 +1044,9 @@ describe('Test gl2d plots', function() {
         })
         .then(function() {
             var total = readPixel(gd.querySelector('.gl-canvas-context'), 0, 0, w, h)
-                .reduce(function(acc, v) { return acc + v; }, 0);
+                .reduce(function(acc, v) {
+                    return acc + v;
+                }, 0);
 
             // the total value was 3777134 before PR
             // https://github.com/plotly/plotly.js/pull/2377
@@ -1203,7 +1205,9 @@ describe('Test gl2d plots', function() {
     it('@gl should not cause infinite loops when coordinate arrays start/end with NaN', function(done) {
         function _assertPositions(msg, cont, exp) {
             var pos = gd._fullLayout._plots.xy._scene[cont]
-                .map(function(opt) { return opt.positions; });
+                .map(function(opt) {
+                    return opt.positions;
+                });
             expect(pos).toBeCloseTo2DArray(exp, 2, msg);
         }
 
@@ -1307,7 +1311,9 @@ describe('Test scattergl autorange:', function() {
                 Lib.extendDeep(glFig.layout, {yaxis: {autorange: true}});
 
                 var svgFig = Lib.extendDeep({}, glFig);
-                svgFig.data.forEach(function(t) { t.type = 'scatter'; });
+                svgFig.data.forEach(function(t) {
+                    t.type = 'scatter';
+                });
 
                 Plotly.newPlot(gd, glFig).then(function() {
                     glRangeX = gd._fullLayout.xaxis.range;

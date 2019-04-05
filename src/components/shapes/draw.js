@@ -74,17 +74,14 @@ function drawOne(gd, index) {
 
     if(options.layer !== 'below') {
         drawShape(gd._fullLayout._shapeUpperLayer);
-    }
-    else if(options.xref === 'paper' || options.yref === 'paper') {
+    } else if(options.xref === 'paper' || options.yref === 'paper') {
         drawShape(gd._fullLayout._shapeLowerLayer);
-    }
-    else {
+    } else {
         var plotinfo = gd._fullLayout._plots[options.xref + options.yref];
         if(plotinfo) {
             var mainPlot = plotinfo.mainplotinfo || plotinfo;
             drawShape(mainPlot.shapelayer);
-        }
-        else {
+        } else {
             // Fall back to _shapeLowerLayer in case the requested subplot doesn't exist.
             // This can happen if you reference the shape to an x / y axis combination
             // that doesn't have any data on it (and layer is below)
@@ -257,8 +254,7 @@ function setupDragElement(gd, shapePath, shapeOptions, index, shapeLayer) {
 
         if(shapeOptions.type === 'path') {
             pathIn = shapeOptions.path;
-        }
-        else {
+        } else {
             x0 = xPixelSized ? shapeOptions.x0 : x2p(shapeOptions.x0);
             y0 = yPixelSized ? shapeOptions.y0 : y2p(shapeOptions.y0);
             x1 = xPixelSized ? shapeOptions.x1 : x2p(shapeOptions.x1);
@@ -270,8 +266,7 @@ function setupDragElement(gd, shapePath, shapeOptions, index, shapeLayer) {
             optW = 'x0';
             e0 = x1;
             optE = 'x1';
-        }
-        else {
+        } else {
             w0 = x1;
             optW = 'x1';
             e0 = x0;
@@ -285,8 +280,7 @@ function setupDragElement(gd, shapePath, shapeOptions, index, shapeLayer) {
             optN = 'y0';
             s0 = y1;
             optS = 'y1';
-        }
-        else {
+        } else {
             n0 = y1;
             optN = 'y1';
             s0 = y0;
@@ -315,27 +309,32 @@ function setupDragElement(gd, shapePath, shapeOptions, index, shapeLayer) {
 
     function moveShape(dx, dy) {
         if(shapeOptions.type === 'path') {
-            var noOp = function(coord) { return coord; };
+            var noOp = function(coord) {
+                return coord;
+            };
             var moveX = noOp;
             var moveY = noOp;
 
             if(xPixelSized) {
                 modifyItem('xanchor', shapeOptions.xanchor = p2x(xAnchor + dx));
             } else {
-                moveX = function moveX(x) { return p2x(x2p(x) + dx); };
+                moveX = function moveX(x) {
+                    return p2x(x2p(x) + dx);
+                };
                 if(xa && xa.type === 'date') moveX = helpers.encodeDate(moveX);
             }
 
             if(yPixelSized) {
                 modifyItem('yanchor', shapeOptions.yanchor = p2y(yAnchor + dy));
             } else {
-                moveY = function moveY(y) { return p2y(y2p(y) + dy); };
+                moveY = function moveY(y) {
+                    return p2y(y2p(y) + dy);
+                };
                 if(ya && ya.type === 'date') moveY = helpers.encodeDate(moveY);
             }
 
             modifyItem('path', shapeOptions.path = movePath(pathIn, moveX, moveY));
-        }
-        else {
+        } else {
             if(xPixelSized) {
                 modifyItem('xanchor', shapeOptions.xanchor = p2x(xAnchor + dx));
             } else {
@@ -358,27 +357,32 @@ function setupDragElement(gd, shapePath, shapeOptions, index, shapeLayer) {
     function resizeShape(dx, dy) {
         if(isPath) {
             // TODO: implement path resize, don't forget to update dragMode code
-            var noOp = function(coord) { return coord; };
+            var noOp = function(coord) {
+                return coord;
+            };
             var moveX = noOp;
             var moveY = noOp;
 
             if(xPixelSized) {
                 modifyItem('xanchor', shapeOptions.xanchor = p2x(xAnchor + dx));
             } else {
-                moveX = function moveX(x) { return p2x(x2p(x) + dx); };
+                moveX = function moveX(x) {
+                    return p2x(x2p(x) + dx);
+                };
                 if(xa && xa.type === 'date') moveX = helpers.encodeDate(moveX);
             }
 
             if(yPixelSized) {
                 modifyItem('yanchor', shapeOptions.yanchor = p2y(yAnchor + dy));
             } else {
-                moveY = function moveY(y) { return p2y(y2p(y) + dy); };
+                moveY = function moveY(y) {
+                    return p2y(y2p(y) + dy);
+                };
                 if(ya && ya.type === 'date') moveY = helpers.encodeDate(moveY);
             }
 
             modifyItem('path', shapeOptions.path = movePath(pathIn, moveX, moveY));
-        }
-        else if(isLine) {
+        } else if(isLine) {
             if(dragMode === 'resize-over-start-point') {
                 var newX0 = x0 + dx;
                 var newY0 = yPixelSized ? y0 - dy : y0 + dy;
@@ -390,8 +394,7 @@ function setupDragElement(gd, shapePath, shapeOptions, index, shapeLayer) {
                 modifyItem('x1', shapeOptions.x1 = xPixelSized ? newX1 : p2x(newX1));
                 modifyItem('y1', shapeOptions.y1 = yPixelSized ? newY1 : p2y(newY1));
             }
-        }
-        else {
+        } else {
             var newN = (~dragMode.indexOf('n')) ? n0 + dy : n0;
             var newS = (~dragMode.indexOf('s')) ? s0 + dy : s0;
             var newW = (~dragMode.indexOf('w')) ? w0 + dx : w0;
@@ -511,18 +514,24 @@ function getPathString(gd, options) {
 
     if(xa) {
         x2r = helpers.shapePositionToRange(xa);
-        x2p = function(v) { return xa._offset + xa.r2p(x2r(v, true)); };
-    }
-    else {
-        x2p = function(v) { return gs.l + gs.w * v; };
+        x2p = function(v) {
+            return xa._offset + xa.r2p(x2r(v, true));
+        };
+    } else {
+        x2p = function(v) {
+            return gs.l + gs.w * v;
+        };
     }
 
     if(ya) {
         y2r = helpers.shapePositionToRange(ya);
-        y2p = function(v) { return ya._offset + ya.r2p(y2r(v, true)); };
-    }
-    else {
-        y2p = function(v) { return gs.t + gs.h * (1 - v); };
+        y2p = function(v) {
+            return ya._offset + ya.r2p(y2r(v, true));
+        };
+    } else {
+        y2p = function(v) {
+            return gs.t + gs.h * (1 - v);
+        };
     }
 
     if(type === 'path') {
@@ -535,8 +544,7 @@ function getPathString(gd, options) {
         var xAnchorPos = x2p(options.xanchor);
         x0 = xAnchorPos + options.x0;
         x1 = xAnchorPos + options.x1;
-    }
-    else {
+    } else {
         x0 = x2p(options.x0);
         x1 = x2p(options.x1);
     }
@@ -545,8 +553,7 @@ function getPathString(gd, options) {
         var yAnchorPos = y2p(options.yanchor);
         y0 = yAnchorPos - options.y0;
         y1 = yAnchorPos - options.y1;
-    }
-    else {
+    } else {
         y0 = y2p(options.y0);
         y1 = y2p(options.y1);
     }
@@ -585,8 +592,7 @@ function convertPath(options, x2p, y2p) {
             if(xParams[paramNumber]) {
                 if(xSizemode === 'pixel') param = x2p(xAnchor) + Number(param);
                 else param = x2p(param);
-            }
-            else if(yParams[paramNumber]) {
+            } else if(yParams[paramNumber]) {
                 if(ySizemode === 'pixel') param = y2p(yAnchor) - Number(param);
                 else param = y2p(param);
             }

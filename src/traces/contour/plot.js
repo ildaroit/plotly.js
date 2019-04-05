@@ -131,7 +131,9 @@ function initFullPath(pi, perimeter) {
 function joinAllPaths(pi, perimeter) {
     var fullpath = initFullPath(pi, perimeter);
     var i = 0;
-    var startsleft = pi.edgepaths.map(function(v, i) { return i; });
+    var startsleft = pi.edgepaths.map(function(v, i) {
+        return i;
+    });
     var newloop = true;
     var endpt;
     var newendpt;
@@ -140,10 +142,18 @@ function joinAllPaths(pi, perimeter) {
     var possiblei;
     var addpath;
 
-    function istop(pt) { return Math.abs(pt[1] - perimeter[0][1]) < 0.01; }
-    function isbottom(pt) { return Math.abs(pt[1] - perimeter[2][1]) < 0.01; }
-    function isleft(pt) { return Math.abs(pt[0] - perimeter[0][0]) < 0.01; }
-    function isright(pt) { return Math.abs(pt[0] - perimeter[2][0]) < 0.01; }
+    function istop(pt) {
+        return Math.abs(pt[1] - perimeter[0][1]) < 0.01;
+    }
+    function isbottom(pt) {
+        return Math.abs(pt[1] - perimeter[2][1]) < 0.01;
+    }
+    function isleft(pt) {
+        return Math.abs(pt[0] - perimeter[0][0]) < 0.01;
+    }
+    function isright(pt) {
+        return Math.abs(pt[0] - perimeter[2][0]) < 0.01;
+    }
 
     while(startsleft.length) {
         addpath = Drawing.smoothopen(pi.edgepaths[i], pi.smoothing);
@@ -173,15 +183,13 @@ function joinAllPaths(pi, perimeter) {
                         newendpt = ptNew;
                         nexti = possiblei;
                     }
-                }
-                else if(Math.abs(endpt[1] - newendpt[1]) < 0.01) {
+                } else if(Math.abs(endpt[1] - newendpt[1]) < 0.01) {
                     if(Math.abs(endpt[1] - ptNew[1]) < 0.01 &&
                             (ptNew[0] - endpt[0]) * (newendpt[0] - ptNew[0]) >= 0) {
                         newendpt = ptNew;
                         nexti = possiblei;
                     }
-                }
-                else {
+                } else {
                     Lib.log('endpt to newendpt is not vert. or horz.',
                         endpt, newendpt, ptNew);
                 }
@@ -346,7 +354,9 @@ exports.createLines = function(lineContainer, makeLines, pathinfo) {
         // pedgepaths / ppaths are used by contourcarpet, for the paths transformed from a/b to x/y
         // edgepaths / paths are used by contour since it's in x/y from the start
         var opencontourlines = linegroup.selectAll('path.openline')
-            .data(function(d) { return d.pedgepaths || d.edgepaths; });
+            .data(function(d) {
+                return d.pedgepaths || d.edgepaths;
+            });
 
         opencontourlines.exit().remove();
         opencontourlines.enter().append('path')
@@ -360,7 +370,9 @@ exports.createLines = function(lineContainer, makeLines, pathinfo) {
             .style('vector-effect', 'non-scaling-stroke');
 
         var closedcontourlines = linegroup.selectAll('path.closedline')
-            .data(function(d) { return d.ppaths || d.paths; });
+            .data(function(d) {
+                return d.ppaths || d.paths;
+            });
 
         closedcontourlines.exit().remove();
         closedcontourlines.enter().append('path')
@@ -397,13 +409,11 @@ exports.createLineClip = function(lineContainer, clipLinesForLabels, gd, uid) {
 exports.labelFormatter = function(contours, colorbar, fullLayout) {
     if(contours.labelformat) {
         return fullLayout._d3locale.numberFormat(contours.labelformat);
-    }
-    else {
+    } else {
         var formatAxis;
         if(colorbar) {
             formatAxis = colorbar.axis;
-        }
-        else {
+        } else {
             formatAxis = {
                 type: 'linear',
                 _id: 'ycontour',
@@ -415,10 +425,8 @@ exports.labelFormatter = function(contours, colorbar, fullLayout) {
                 var value = contours.value;
                 if(Array.isArray(value)) {
                     formatAxis.range = [value[0], value[value.length - 1]];
-                }
-                else formatAxis.range = [value, value];
-            }
-            else {
+                } else formatAxis.range = [value, value];
+            } else {
                 formatAxis.range = [contours.start, contours.end];
                 formatAxis.nticks = (contours.end - contours.start) / contours.size;
             }
@@ -462,8 +470,7 @@ exports.findBestTextLocation = function(path, pathBounds, textOpts, labelData, p
         dp = pathBounds.len / costConstants.INITIALSEARCHPOINTS;
         p0 = pathBounds.min + dp / 2;
         pMax = pathBounds.max;
-    }
-    else {
+    } else {
         dp = (pathBounds.len - textWidth) / (costConstants.INITIALSEARCHPOINTS + 1);
         p0 = pathBounds.min + dp + textWidth / 2;
         pMax = pathBounds.max - (dp + textWidth) / 2;
@@ -657,8 +664,7 @@ function clipGaps(plotGroup, plotinfo, gd, cd0, perimeter) {
 
         var path = Lib.ensureSingle(clipPath, 'path', '');
         path.attr('d', fullpath);
-    }
-    else clipId = null;
+    } else clipId = null;
 
     Drawing.setClipUrl(plotGroup, clipId, gd);
 }

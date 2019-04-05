@@ -45,7 +45,9 @@ function runTests(transitionDuration) {
             var beginTransitionCnt = 0;
             var traces = plotApiHelpers.coerceTraceIndices(gd, null);
 
-            gd.on('plotly_transitioning', function() { beginTransitionCnt++; });
+            gd.on('plotly_transitioning', function() {
+                beginTransitionCnt++;
+            });
 
             Plots.transition(gd, null, {'xaxis.range': [0.2, 0.3]}, traces, {redraw: true}, {duration: transitionDuration, easing: 'cubic-in-out'})
                 .then(delay(20))
@@ -58,7 +60,9 @@ function runTests(transitionDuration) {
             var trEndCnt = 0;
             var traces = plotApiHelpers.coerceTraceIndices(gd, null);
 
-            gd.on('plotly_transitioned', function() { trEndCnt++; });
+            gd.on('plotly_transitioned', function() {
+                trEndCnt++;
+            });
 
             Plots.transition(gd, null, {'xaxis.range': [0.2, 0.3]}, traces, {redraw: true}, {duration: transitionDuration, easing: 'cubic-in-out'})
                 .then(delay(20))
@@ -228,8 +232,12 @@ function runTests(transitionDuration) {
             var beginCnt = 0;
             var endCnt = 0;
 
-            gd.on('plotly_transitioning', function() { currentlyRunning++; beginCnt++; });
-            gd.on('plotly_transitioned', function() { currentlyRunning--; endCnt++; });
+            gd.on('plotly_transitioning', function() {
+                currentlyRunning++; beginCnt++;
+            });
+            gd.on('plotly_transitioned', function() {
+                currentlyRunning--; endCnt++;
+            });
 
             function doTransition() {
                 var traces = plotApiHelpers.coerceTraceIndices(gd, null);
@@ -877,7 +885,9 @@ describe('Plotly.react transitions:', function() {
             traceNodes = gd.querySelectorAll('.scatterlayer > .trace');
             _assertTraceNodes('base', traceNodes, [[360, 90], [120, 210]]);
         })
-        .then(function() { return Plotly.react(gd, data2, layout); })
+        .then(function() {
+            return Plotly.react(gd, data2, layout);
+        })
         .then(function() {
             var msg = 'transition into data2';
             assertSpies(msg, [
@@ -888,7 +898,9 @@ describe('Plotly.react transitions:', function() {
             // N.B. order is reversed, but the nodes are the *same*
             _assertTraceNodes(msg, [traceNodes[1], traceNodes[0]], [[120, 210], [360, 90]]);
         })
-        .then(function() { return Plotly.react(gd, data1, layout); })
+        .then(function() {
+            return Plotly.react(gd, data1, layout);
+        })
         .then(function() {
             var msg = 'transition back to data1';
             assertSpies(msg, [
@@ -956,7 +968,9 @@ describe('Plotly.react transitions:', function() {
             traceNodes = gd.querySelectorAll('.scatterlayer > .trace');
             _assertTraceNodes('base', traceNodes, [[360, 90], [120, 210]]);
         })
-        .then(function() { return Plotly.react(gd, data2, layout); })
+        .then(function() {
+            return Plotly.react(gd, data2, layout);
+        })
         .then(function() {
             var msg = 'transition into data2';
             assertSpies(msg, [
@@ -969,7 +983,9 @@ describe('Plotly.react transitions:', function() {
             // N.B. traceNodes[1] is gone, but traceNodes[0] is the same
             _assertTraceNodes(msg, [traceNodes[0]], [[120, 210]]);
         })
-        .then(function() { return Plotly.react(gd, data1, layout); })
+        .then(function() {
+            return Plotly.react(gd, data1, layout);
+        })
         .then(function() {
             var msg = 'transition back to data1';
             assertSpies(msg, [

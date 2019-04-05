@@ -412,7 +412,9 @@ describe('finance charts calc', function() {
     }
 
     function mapGet(array, attr) {
-        return array.map(function(di) { return di[attr]; });
+        return array.map(function(di) {
+            return di[attr];
+        });
     }
 
     it('should fill when *x* is not present', function() {
@@ -557,7 +559,9 @@ describe('finance charts calc', function() {
         var trace1 = Lib.extendDeep({}, mock1, {
             type: 'ohlc',
             // shift time coordinates by 10 hours
-            x: mock1.x.map(function(d) { return d + ' 10:00'; })
+            x: mock1.x.map(function(d) {
+                return d + ' 10:00';
+            })
         });
 
         var out = _calcRaw([trace0, trace1]);
@@ -648,7 +652,9 @@ describe('finance charts calc', function() {
 describe('finance charts auto-range', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -1049,7 +1055,9 @@ describe('finance charts updates:', function() {
             expect(countOHLCTraces()).toBe(1, '# of ohlc traces');
             expect(countBoxTraces()).toBe(1, '# of candlestick traces');
         })
-        .then(function() { return Plotly.react(gd, data0); })
+        .then(function() {
+            return Plotly.react(gd, data0);
+        })
         .then(function() {
             expect(countOHLCTraces()).toBe(1, '# of ohlc traces');
             expect(countBoxTraces()).toBe(1, '# of candlestick traces');
@@ -1069,7 +1077,9 @@ describe('finance charts *special* handlers:', function() {
 
         function editText(itemNumber, newText) {
             var textNode = d3.selectAll('text.legendtext')
-                .filter(function(_, i) { return i === itemNumber; }).node();
+                .filter(function(_, i) {
+                    return i === itemNumber;
+                }).node();
             textNode.dispatchEvent(new window.MouseEvent('click'));
 
             var editNode = d3.select('.plugin-editable.editable').node();
@@ -1085,7 +1095,9 @@ describe('finance charts *special* handlers:', function() {
         // of the rendering queue to make sure the edit <div> is properly
         // cleared after each mocked text edits.
         function delayedResolve(resolve) {
-            setTimeout(function() { return resolve(gd); }, 0);
+            setTimeout(function() {
+                return resolve(gd);
+            }, 0);
         }
 
         Plotly.plot(gd, [
@@ -1260,7 +1272,9 @@ describe('finance trace hover:', function() {
 describe('finance trace hover via Fx.hover():', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -1292,7 +1306,9 @@ describe('finance trace hover via Fx.hover():', function() {
                     ]);
                 });
             })
-            .then(function() { hover(281, 252); })
+            .then(function() {
+                hover(281, 252);
+            })
             .then(function() {
                 assertHoverLabelContent({
                     nums: [
@@ -1306,7 +1322,9 @@ describe('finance trace hover via Fx.hover():', function() {
                 Lib.clearThrottle();
                 return Plotly.react(gd, [gd.data[0]], gd.layout);
             })
-            .then(function() { hover(281, 252); })
+            .then(function() {
+                hover(281, 252);
+            })
             .then(function() {
                 assertHoverLabelContent({
                     nums: 'hover off by 1\nopen: 7\nhigh: 7\nlow: 7\nclose: 7  ▲',
@@ -1345,7 +1363,9 @@ describe('finance trace hover via Fx.hover():', function() {
                     ]);
                 });
             })
-            .then(function() { hover(281, 252); })
+            .then(function() {
+                hover(281, 252);
+            })
             .then(function() {
                 assertHoverLabelContent({
                     nums: '(time3, 3)',

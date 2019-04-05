@@ -603,7 +603,9 @@ describe('parcoords edge cases', function() {
 
 describe('parcoords Lifecycle methods', function() {
     var gd;
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
     afterEach(purgeGraphDiv);
 
     it('Plotly.deleteTraces with one trace removes the plot', function(done) {
@@ -914,8 +916,12 @@ describe('parcoords basic use', function() {
     it('@gl Calling `Plotly.plot` again should add the new parcoords', function(done) {
         var reversedMockCopy = Lib.extendDeep({}, mockCopy);
         reversedMockCopy.data[0].dimensions = reversedMockCopy.data[0].dimensions.slice().reverse();
-        reversedMockCopy.data[0].dimensions.forEach(function(d) {d.id = 'R_' + d.id;});
-        reversedMockCopy.data[0].dimensions.forEach(function(d) {d.label = 'R_' + d.label;});
+        reversedMockCopy.data[0].dimensions.forEach(function(d) {
+            d.id = 'R_' + d.id;
+        });
+        reversedMockCopy.data[0].dimensions.forEach(function(d) {
+            d.label = 'R_' + d.label;
+        });
 
         Plotly.plot(gd, reversedMockCopy.data, reversedMockCopy.layout).then(function() {
             expect(gd.data.length).toEqual(2);
@@ -1004,8 +1010,12 @@ describe('parcoords basic use', function() {
             var eventCalled = false;
 
             return {
-                set: function(d) {eventCalled = d;},
-                get: function() {return eventCalled;}
+                set: function(d) {
+                    eventCalled = d;
+                },
+                get: function() {
+                    return eventCalled;
+                }
             };
         })();
 
@@ -1026,8 +1036,12 @@ describe('parcoords basic use', function() {
         var hoverCalls = 0;
         var unhoverCalls = 0;
 
-        gd.on('plotly_hover', function() { hoverCalls++; });
-        gd.on('plotly_unhover', function() { unhoverCalls++; });
+        gd.on('plotly_hover', function() {
+            hoverCalls++;
+        });
+        gd.on('plotly_unhover', function() {
+            unhoverCalls++;
+        });
 
         expect(hoverCalls).toBe(0);
         expect(unhoverCalls).toBe(0);
@@ -1205,8 +1219,7 @@ describe('parcoords constraint interactions', function() {
             if(hasGD) {
                 expect(getDashArray(0)).toBeCloseToArray(initialDashArray0);
                 expect(getDashArray(1)).toBeCloseToArray(initialDashArray1);
-            }
-            else {
+            } else {
                 initialDashArray0 = getDashArray(0);
                 initialDashArray1 = getDashArray(1);
                 checkDashCount(initialDashArray0, 1);

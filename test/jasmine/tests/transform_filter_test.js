@@ -1203,7 +1203,9 @@ describe('filter transforms interactions', function() {
 
         var gd = createGraphDiv();
 
-        function getTx(p) { return p.tx; }
+        function getTx(p) {
+            return p.tx;
+        }
 
         Plotly.plot(gd, data).then(function() {
             expect(gd.calcdata[0].map(getTx)).toEqual(['e', 'f', 'g']);

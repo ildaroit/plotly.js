@@ -344,7 +344,9 @@ describe('Test box hover:', function() {
             fig.data.forEach(function(trace) {
                 trace.boxpoints = 'all';
                 trace.hoveron = 'points';
-                trace.text = trace.y.map(function(v) { return 'look:' + v; });
+                trace.text = trace.y.map(function(v) {
+                    return 'look:' + v;
+                });
             });
             fig.layout.hovermode = 'closest';
             fig.layout.xaxis = {range: [-0.565, 1.5]};
@@ -358,7 +360,9 @@ describe('Test box hover:', function() {
             fig.data.forEach(function(trace) {
                 trace.boxpoints = 'all';
                 trace.hoveron = 'points';
-                trace.text = trace.y.map(function(v) { return 'look:' + v; });
+                trace.text = trace.y.map(function(v) {
+                    return 'look:' + v;
+                });
                 trace.hoverinfo = 'text';
             });
             fig.layout.hovermode = 'closest';
@@ -373,8 +377,12 @@ describe('Test box hover:', function() {
             fig.data.forEach(function(trace) {
                 trace.boxpoints = 'all';
                 trace.hoveron = 'points';
-                trace.text = trace.y.map(function(v) { return 'NOT THIS:' + v; });
-                trace.hovertext = trace.y.map(function(v) { return 'look:' + v; });
+                trace.text = trace.y.map(function(v) {
+                    return 'NOT THIS:' + v;
+                });
+                trace.hovertext = trace.y.map(function(v) {
+                    return 'look:' + v;
+                });
                 trace.hoverinfo = 'text';
             });
             fig.layout.hovermode = 'closest';
@@ -505,19 +513,27 @@ describe('Test box restyle:', function() {
         .then(function() {
             _assert('base', {boxCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'boxmean', true); })
+        .then(function() {
+            return Plotly.restyle(gd, 'boxmean', true);
+        })
         .then(function() {
             _assert('with meanline', {boxCnt: 1, meanlineCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'boxmean', 'sd'); })
+        .then(function() {
+            return Plotly.restyle(gd, 'boxmean', 'sd');
+        })
         .then(function() {
             _assert('with mean+sd line', {boxCnt: 1, meanlineCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'boxpoints', 'all'); })
+        .then(function() {
+            return Plotly.restyle(gd, 'boxpoints', 'all');
+        })
         .then(function() {
             _assert('with mean+sd line + pts', {boxCnt: 1, meanlineCnt: 1, ptsCnt: 9});
         })
-        .then(function() { return Plotly.restyle(gd, 'boxmean', false); })
+        .then(function() {
+            return Plotly.restyle(gd, 'boxmean', false);
+        })
         .then(function() {
             _assert('with pts', {boxCnt: 1, ptsCnt: 9});
         })

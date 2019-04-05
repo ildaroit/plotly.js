@@ -81,7 +81,9 @@ describe('Pie traces', function() {
 
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -831,9 +833,13 @@ describe('Pie traces', function() {
 
         Plotly.plot(gd, mock)
         .then(_assert('base', 4))
-        .then(function() { return Plotly.restyle(gd, 'visible', false); })
+        .then(function() {
+            return Plotly.restyle(gd, 'visible', false);
+        })
         .then(_assert('both visible:false', 0))
-        .then(function() { return Plotly.restyle(gd, 'visible', true); })
+        .then(function() {
+            return Plotly.restyle(gd, 'visible', true);
+        })
         .then(_assert('back to visible:true', 4))
         .catch(failTest)
         .then(done);
@@ -1157,7 +1163,9 @@ describe('pie hovering', function() {
                     'hovertemplate %{label}'
                 );
             })
-            .then(function() { return Plotly.restyle(gd, 'hovertemplate', [['', '', '', '', 'ht 5 %{percent:0.2%}<extra></extra>']]); })
+            .then(function() {
+                return Plotly.restyle(gd, 'hovertemplate', [['', '', '', '', 'ht 5 %{percent:0.2%}<extra></extra>']]);
+            })
             .then(_hover)
             .then(function() {
                 assertLabel(
@@ -1174,7 +1182,9 @@ describe('pie hovering', function() {
     describe('should fit labels within graph div', function() {
         var gd;
 
-        beforeEach(function() { gd = createGraphDiv(); });
+        beforeEach(function() {
+            gd = createGraphDiv();
+        });
 
         afterEach(destroyGraphDiv);
 
@@ -1192,7 +1202,9 @@ describe('pie hovering', function() {
                 height: 220,
                 margin: {l: 0, r: 0, t: 0, b: 0}
             })
-            .then(function() { mouseEvent('mouseover', 50, 50); })
+            .then(function() {
+                mouseEvent('mouseover', 50, 50);
+            })
             .then(function() {
                 assertHoverLabelContent({
                     nums: 'label 3 - 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16\n$2,865.21\n9.58%'
@@ -1204,7 +1216,9 @@ describe('pie hovering', function() {
                 expect(bbox.left).toBeWithin(1, 10, 'bbox left bound');
                 expect(bbox.right).toBeWithin(275, 10, 'bbox right bound (beyond graph)');
             })
-            .then(function() { mouseEvent('mouseover', 150, 150); })
+            .then(function() {
+                mouseEvent('mouseover', 150, 150);
+            })
             .then(function() {
                 assertHoverLabelContent({
                     nums: 'label 1 - another long text label\n$22,238.58\n74.3%'
@@ -1417,7 +1431,9 @@ describe('Test event data of interactions on a pie plot:', function() {
 describe('pie relayout', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -1458,7 +1474,9 @@ describe('pie relayout', function() {
 describe('Test pie interactions edge cases:', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 

@@ -23,11 +23,15 @@ var Lib = require('../../lib');
 // removed entirely.
 
 exports.rangeToShapePosition = function(ax) {
-    return (ax.type === 'log') ? ax.r2d : function(v) { return v; };
+    return (ax.type === 'log') ? ax.r2d : function(v) {
+        return v;
+    };
 };
 
 exports.shapePositionToRange = function(ax) {
-    return (ax.type === 'log') ? ax.d2r : function(v) { return v; };
+    return (ax.type === 'log') ? ax.d2r : function(v) {
+        return v;
+    };
 };
 
 exports.decodeDate = function(convertToPx) {
@@ -38,7 +42,9 @@ exports.decodeDate = function(convertToPx) {
 };
 
 exports.encodeDate = function(convertToDate) {
-    return function(v) { return convertToDate(v).replace(' ', '_'); };
+    return function(v) {
+        return convertToDate(v).replace(' ', '_');
+    };
 };
 
 exports.extractPathCoords = function(path, paramsToUse) {
@@ -70,12 +76,14 @@ exports.getDataToPixel = function(gd, axis, isVertical) {
         };
 
         if(axis.type === 'date') dataToPixel = exports.decodeDate(dataToPixel);
-    }
-    else if(isVertical) {
-        dataToPixel = function(v) { return gs.t + gs.h * (1 - v); };
-    }
-    else {
-        dataToPixel = function(v) { return gs.l + gs.w * v; };
+    } else if(isVertical) {
+        dataToPixel = function(v) {
+            return gs.t + gs.h * (1 - v);
+        };
+    } else {
+        dataToPixel = function(v) {
+            return gs.l + gs.w * v;
+        };
     }
 
     return dataToPixel;
@@ -87,13 +95,17 @@ exports.getPixelToData = function(gd, axis, isVertical) {
 
     if(axis) {
         var r2d = exports.rangeToShapePosition(axis);
-        pixelToData = function(p) { return r2d(axis.p2r(p - axis._offset)); };
-    }
-    else if(isVertical) {
-        pixelToData = function(p) { return 1 - (p - gs.t) / gs.h; };
-    }
-    else {
-        pixelToData = function(p) { return (p - gs.l) / gs.w; };
+        pixelToData = function(p) {
+            return r2d(axis.p2r(p - axis._offset));
+        };
+    } else if(isVertical) {
+        pixelToData = function(p) {
+            return 1 - (p - gs.t) / gs.h;
+        };
+    } else {
+        pixelToData = function(p) {
+            return (p - gs.l) / gs.w;
+        };
     }
 
     return pixelToData;

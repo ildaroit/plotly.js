@@ -65,7 +65,9 @@ describe('localization', function() {
     function getLabels(axLetter) {
         var out = [];
         var s = d3.select(gd).selectAll('.' + axLetter + 'tick');
-        s.each(function() { out.push(d3.select(this).text()); });
+        s.each(function() {
+            out.push(d3.select(this).text());
+        });
         return out;
     }
 

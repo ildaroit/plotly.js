@@ -2143,7 +2143,9 @@ describe('bar hover', function() {
             gd = createGraphDiv();
 
             var mock = Lib.extendDeep({}, require('@mocks/text_chart_arrays'));
-            mock.data.forEach(function(t) { t.type = 'bar'; });
+            mock.data.forEach(function(t) {
+                t.type = 'bar';
+            });
 
             Plotly.plot(gd, mock).then(function() {
                 var out = _hover(gd, -0.25, 0.5, 'closest');

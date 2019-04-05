@@ -100,8 +100,7 @@ function plot(gd, cdpie) {
                             arc(pt.px0, pt.pxmid, false, hole) +
                             arc(pt.pxmid, pt.px0, false, hole) +
                             'Z' + outerCircle);
-                    }
-                    else slicePath.attr('d', outerCircle);
+                    } else slicePath.attr('d', outerCircle);
                 } else {
                     var outerArc = arc(pt.px0, pt.px1, true, 1);
 
@@ -631,8 +630,7 @@ function positionTitleOutside(cd0, plotSize) {
     if(trace.title.position.indexOf('top') !== -1) {
         topMiddle.y -= (1 + maxPull) * cd0.r;
         translate.ty -= cd0.titleBox.height;
-    }
-    else if(trace.title.position.indexOf('bottom') !== -1) {
+    } else if(trace.title.position.indexOf('bottom') !== -1) {
         topMiddle.y += (1 + maxPull) * cd0.r;
     }
 
@@ -683,8 +681,12 @@ function scootLabels(quadrants, trace) {
         xDiffSign, yDiffSign, thisQuad, oppositeQuad,
         wholeSide, i, thisQuadOutside, firstOppositeOutsidePt;
 
-    function topFirst(a, b) { return a.pxmid[1] - b.pxmid[1]; }
-    function bottomFirst(a, b) { return b.pxmid[1] - a.pxmid[1]; }
+    function topFirst(a, b) {
+        return a.pxmid[1] - b.pxmid[1];
+    }
+    function bottomFirst(a, b) {
+        return b.pxmid[1] - a.pxmid[1];
+    }
 
     function scootOneLabel(thisPt, prevPt) {
         if(!prevPt) prevPt = {};

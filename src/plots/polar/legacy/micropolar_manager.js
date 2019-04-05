@@ -41,12 +41,18 @@ manager.framework = function(_gd) {
         return config;
     }
     exports.isPolar = true;
-    exports.svg = function() { return plot.svg(); };
-    exports.getConfig = function() { return config; };
+    exports.svg = function() {
+        return plot.svg();
+    };
+    exports.getConfig = function() {
+        return config;
+    };
     exports.getLiveConfig = function() {
         return micropolar.adapter.plotly().convert(plot.getLiveConfig(), true);
     };
-    exports.getLiveScales = function() { return {t: plot.angularScale(), r: plot.radialScale()}; };
+    exports.getLiveScales = function() {
+        return {t: plot.angularScale(), r: plot.radialScale()};
+    };
     exports.setUndoPoint = function() {
         var that = this;
         var configClone = micropolar.util.cloneJson(config);
@@ -62,8 +68,12 @@ manager.framework = function(_gd) {
         })(configClone, previousConfigClone);
         previousConfigClone = micropolar.util.cloneJson(configClone);
     };
-    exports.undo = function() { undoManager.undo(); };
-    exports.redo = function() { undoManager.redo(); };
+    exports.undo = function() {
+        undoManager.undo();
+    };
+    exports.redo = function() {
+        undoManager.redo();
+    };
     return exports;
 };
 

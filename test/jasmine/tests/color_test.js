@@ -115,7 +115,9 @@ describe('Test color:', function() {
                 dcolor: 'rgb(0.1, 0.1, 0.1);'
             };
             var expectedContainer = {};
-            Object.keys(container).forEach(function(k) { expectedContainer[k] = container[k]; });
+            Object.keys(container).forEach(function(k) {
+                expectedContainer[k] = container[k];
+            });
 
             Color.clean(container);
             expect(container).toEqual(expectedContainer);

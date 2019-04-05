@@ -138,7 +138,9 @@ proto.updateLayers = function(ternaryLayout) {
     var grids = ['agrid', 'bgrid', 'cgrid'];
 
     toplevel.enter().append('g')
-        .attr('class', function(d) { return 'toplevel ' + d; })
+        .attr('class', function(d) {
+            return 'toplevel ' + d;
+        })
         .each(function(d) {
             var s = d3.select(this);
             layers[d] = s;
@@ -187,8 +189,7 @@ proto.adjustLayout = function(ternaryLayout, graphSize) {
     if(wmax > whRatio * hmax) {
         h = hmax;
         w = h * whRatio;
-    }
-    else {
+    } else {
         w = wmax;
         h = w / whRatio;
     }
@@ -239,7 +240,9 @@ proto.adjustLayout = function(ternaryLayout, graphSize) {
     };
     setConvert(_this.yaxis, _this.graphDiv._fullLayout);
     _this.yaxis.setScale();
-    _this.yaxis.isPtWithinRange = function() { return true; };
+    _this.yaxis.isPtWithinRange = function() {
+        return true;
+    };
 
     // set up the modified axes for tick drawing
     var yDomain0 = _this.yaxis.domain[0];
@@ -520,15 +523,13 @@ proto.initInteractions = function() {
                 dragOptions.clickFn = clickZoomPan;
                 dragOptions.doneFn = zoomDone;
                 zoomPrep(e, startX, startY);
-            }
-            else if(dragModeNow === 'pan') {
+            } else if(dragModeNow === 'pan') {
                 dragOptions.moveFn = plotDrag;
                 dragOptions.clickFn = clickZoomPan;
                 dragOptions.doneFn = dragDone;
                 panPrep();
                 clearSelect(gd);
-            }
-            else if(dragModeNow === 'select' || dragModeNow === 'lasso') {
+            } else if(dragModeNow === 'select' || dragModeNow === 'lasso') {
                 prepSelect(e, startX, startY, dragOptions, dragModeNow);
             }
         }
@@ -601,9 +602,15 @@ proto.initInteractions = function() {
         clearSelect(gd);
     }
 
-    function getAFrac(x, y) { return 1 - (y / _this.h); }
-    function getBFrac(x, y) { return 1 - ((x + (_this.h - y) / Math.sqrt(3)) / _this.w); }
-    function getCFrac(x, y) { return ((x - (_this.h - y) / Math.sqrt(3)) / _this.w); }
+    function getAFrac(x, y) {
+        return 1 - (y / _this.h);
+    }
+    function getBFrac(x, y) {
+        return 1 - ((x + (_this.h - y) / Math.sqrt(3)) / _this.w);
+    }
+    function getCFrac(x, y) {
+        return ((x - (_this.h - y) / Math.sqrt(3)) / _this.w);
+    }
 
     function zoomMove(dx0, dy0) {
         var x1 = x0 + dx0;
@@ -622,8 +629,7 @@ proto.initInteractions = function() {
             mins = mins0;
             zb.attr('d', path0);
             corners.attr('d', 'M0,0Z');
-        }
-        else {
+        } else {
             mins = {
                 a: mins0.a + afrac * span0,
                 b: mins0.b + bfrac * span0,
@@ -690,8 +696,7 @@ proto.initInteractions = function() {
             if(minsorted[1] + minsorted[0] / 2 < 0) {
                 minsorted[2] += minsorted[0] + minsorted[1];
                 minsorted[0] = minsorted[1] = 0;
-            }
-            else {
+            } else {
                 minsorted[2] += minsorted[0] / 2;
                 minsorted[1] += minsorted[0] / 2;
                 minsorted[0] = 0;

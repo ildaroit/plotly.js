@@ -607,7 +607,8 @@ describe('Test geo interactions', function() {
                 };
 
                 Plotly.restyle(gd, update).then(function() {
-                    setTimeout(function() { mouseEvent('mousemove', 300, 230);
+                    setTimeout(function() {
+                        mouseEvent('mousemove', 300, 230);
 
                         expect(cnt).toEqual(1);
 
@@ -1083,7 +1084,9 @@ describe('Test geo interactions', function() {
         var cnt = 0;
 
         Plotly.plot(gd, fig).then(function() {
-            gd.on('plotly_unhover', function() { cnt++; });
+            gd.on('plotly_unhover', function() {
+                cnt++;
+            });
 
             mouseEvent('mousemove', px, py);
             _assert('base state', 1);
@@ -1461,7 +1464,9 @@ describe('Test event property of interactions on a geo plot:', function() {
 describe('Test geo base layers', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -1553,21 +1558,27 @@ describe('Test geo base layers', function() {
                 latCnt: 18, lat0: [80, 355]
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'geo.lonaxis.tick0', 25); })
+        .then(function() {
+            return Plotly.relayout(gd, 'geo.lonaxis.tick0', 25);
+        })
         .then(function() {
             _assert('w/ lonaxis.tick0:25', {
                 lonCnt: 12, lon0: [117.49, 369.99],
                 latCnt: 18, lat0: [80, 355]
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'geo.lataxis.tick0', 41); })
+        .then(function() {
+            return Plotly.relayout(gd, 'geo.lataxis.tick0', 41);
+        })
         .then(function() {
             _assert('w/ lataxis.tick0:41', {
                 lonCnt: 12, lon0: [117.49, 369.99],
                 latCnt: 19, lat0: [80, 368.5]
             });
         })
-        .then(function() { return Plotly.relayout(gd, 'geo.lataxis.dtick', 45); })
+        .then(function() {
+            return Plotly.relayout(gd, 'geo.lataxis.dtick', 45);
+        })
         .then(function() {
             _assert('w/ lataxis.dtick0:45', {
                 lonCnt: 12, lon0: [117.49, 369.99],
@@ -1590,8 +1601,12 @@ describe('Test geo zoom/pan/drag interactions:', function() {
         gd = createGraphDiv();
 
         return Plotly.plot(gd, fig).then(function() {
-            gd.on('plotly_relayout', function(d) { eventData = d; });
-            gd.on('plotly_doubleclick', function() { dblClickCnt++; });
+            gd.on('plotly_relayout', function(d) {
+                eventData = d;
+            });
+            gd.on('plotly_doubleclick', function() {
+                dblClickCnt++;
+            });
         });
     }
 
@@ -2008,7 +2023,9 @@ describe('Test geo zoom/pan/drag interactions:', function() {
         fig.layout.height = 500;
 
         plot(fig)
-        .then(function() { return scroll([131, 159], [-200, 200]); })
+        .then(function() {
+            return scroll([131, 159], [-200, 200]);
+        })
         .then(function() {
             // scrolling outside subplot frame should log errors,
             // nor emit events
@@ -2042,20 +2059,30 @@ describe('Test geo zoom/pan/drag interactions:', function() {
         .then(function() {
             _assert('base', [1], [101.9], undefined);
         })
-        .then(function() { return scroll([200, 250], [-200, -200]); })
+        .then(function() {
+            return scroll([200, 250], [-200, -200]);
+        })
         .then(function() {
             _assert('with scroll enable (by default)',
                 [1.3], [134.4],
                 ['geo.projection.rotation.lon', 'geo.center.lon', 'geo.center.lat', 'geo.projection.scale']
             );
         })
-        .then(function() { return Plotly.plot(gd, [], {}, {scrollZoom: false}); })
-        .then(function() { return scroll([200, 250], [-200, -200]); })
+        .then(function() {
+            return Plotly.plot(gd, [], {}, {scrollZoom: false});
+        })
+        .then(function() {
+            return scroll([200, 250], [-200, -200]);
+        })
         .then(function() {
             _assert('with scrollZoom:false', [1.3], [134.4], undefined);
         })
-        .then(function() { return Plotly.plot(gd, [], {}, {scrollZoom: 'geo'}); })
-        .then(function() { return scroll([200, 250], [-200, -200]); })
+        .then(function() {
+            return Plotly.plot(gd, [], {}, {scrollZoom: 'geo'});
+        })
+        .then(function() {
+            return scroll([200, 250], [-200, -200]);
+        })
         .then(function() {
             _assert('with scrollZoom:geo',
                 [1.74], [177.34],

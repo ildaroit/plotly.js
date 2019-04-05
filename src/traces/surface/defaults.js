@@ -56,7 +56,9 @@ module.exports = function supplyDefaults(traceIn, traceOut, defaultColor, layout
         'hidesurface',
         'connectgaps',
         'opacity'
-    ].forEach(function(x) { coerce(x); });
+    ].forEach(function(x) {
+        coerce(x);
+    });
 
     var surfaceColor = coerce('surfacecolor');
 

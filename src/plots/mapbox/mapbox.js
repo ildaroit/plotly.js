@@ -167,10 +167,16 @@ proto.createMap = function(calcData, fullLayout, resolve, reject) {
         evt.clientX = evt.point.x + bb.left;
         evt.clientY = evt.point.y + bb.top;
 
-        evt.target.getBoundingClientRect = function() { return bb; };
+        evt.target.getBoundingClientRect = function() {
+            return bb;
+        };
 
-        self.xaxis.p2c = function() { return evt.lngLat.lng; };
-        self.yaxis.p2c = function() { return evt.lngLat.lat; };
+        self.xaxis.p2c = function() {
+            return evt.lngLat.lng;
+        };
+        self.yaxis.p2c = function() {
+            return evt.lngLat.lat;
+        };
 
         Fx.hover(gd, evt, self.id);
     });
@@ -353,11 +359,15 @@ proto.createFramework = function(fullLayout) {
     // create mock x/y axes for hover routine
     self.xaxis = {
         _id: 'x',
-        c2p: function(v) { return self.project(v).x; }
+        c2p: function(v) {
+            return self.project(v).x;
+        }
     };
     self.yaxis = {
         _id: 'y',
-        c2p: function(v) { return self.project(v).y; }
+        c2p: function(v) {
+            return self.project(v).y;
+        }
     };
 
     self.updateFramework(fullLayout);

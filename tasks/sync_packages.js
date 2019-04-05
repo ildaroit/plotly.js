@@ -167,7 +167,9 @@ function syncLocalesPkg(d) {
                 'LICENSE',
                 'README.md',
                 d.main
-            ].concat(localeFiles.map(function(f) { return path.basename(f); }))
+            ].concat(localeFiles.map(function(f) {
+                return path.basename(f);
+            }))
         };
 
         fs.writeFile(

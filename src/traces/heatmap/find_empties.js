@@ -60,8 +60,7 @@ module.exports = function findEmpties(z) {
                     }
 
                     empties.push([i, j, neighborCount]);
-                }
-                else noNeighborList.push([i, j]);
+                } else noNeighborList.push([i, j]);
             }
         }
     }
@@ -100,5 +99,7 @@ module.exports = function findEmpties(z) {
     }
 
     // sort the full list in descending order of neighbor count
-    return empties.sort(function(a, b) { return b[2] - a[2]; });
+    return empties.sort(function(a, b) {
+        return b[2] - a[2];
+    });
 };

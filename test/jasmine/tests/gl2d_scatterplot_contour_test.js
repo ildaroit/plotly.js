@@ -88,7 +88,11 @@ var plotData = {
 };
 
 function transpose(a) {
-    return a[0].map(function(ignore, columnIndex) {return a.map(function(row) {return row[columnIndex];});});
+    return a[0].map(function(ignore, columnIndex) {
+        return a.map(function(row) {
+            return row[columnIndex];
+        });
+    });
 }
 
 function jitter(maxJitterRatio, n) {

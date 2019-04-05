@@ -70,8 +70,12 @@ describe('polygon.tester', function() {
 
         polyPts.forEach(function(polyPt) {
             var poly = polygonTester(polyPt);
-            var xArray = polyPt.map(function(pt) { return pt[0]; });
-            var yArray = polyPt.map(function(pt) { return pt[1]; });
+            var xArray = polyPt.map(function(pt) {
+                return pt[0];
+            });
+            var yArray = polyPt.map(function(pt) {
+                return pt[1];
+            });
 
             expect(poly.pts.length).toEqual(polyPt.length + 1);
             polyPt.forEach(function(pt, i) {
@@ -107,8 +111,7 @@ describe('polygon.tester', function() {
                 for(j = 1; j < np; j++) {
                     if(pt0[0] === pt1[0]) {
                         testPts.push([pt0[0], pt0[1] + (pt1[1] - pt0[1]) * j / np]);
-                    }
-                    else {
+                    } else {
                         var x = pt0[0] + (pt1[0] - pt0[0]) * j / np;
                         // calculated the same way as in the pt_in_polygon source,
                         // so we know rounding errors will apply the same and this pt

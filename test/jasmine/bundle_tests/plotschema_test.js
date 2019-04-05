@@ -604,7 +604,9 @@ describe('component schemas', function() {
         // in principle either of these should be allowable, but we don't currently
         // support them so lets simply test that we haven't added them accidentally!
 
-        function delDescription(attr) { delete attr.description; }
+        function delDescription(attr) {
+            delete attr.description;
+        }
 
         for(var key in Registry.componentsRegistry) {
             var _module = Registry.componentsRegistry[key];

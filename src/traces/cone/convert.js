@@ -63,7 +63,9 @@ function convert(scene, trace) {
     function toDataCoords(arr, axisName) {
         var ax = sceneLayout[axisName];
         var scale = dataScale[axisName2scaleIndex[axisName]];
-        return simpleMap(arr, function(v) { return ax.d2l(v) * scale; });
+        return simpleMap(arr, function(v) {
+            return ax.d2l(v) * scale;
+        });
     }
 
     coneOpts.vectors = zip3(

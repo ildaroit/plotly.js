@@ -68,4 +68,6 @@ exports.getKdeValue = function(calcItem, trace, valueDist) {
     return kde(valueDist) / calcItem.posDensityScale;
 };
 
-exports.extractVal = function(o) { return o.v; };
+exports.extractVal = function(o) {
+    return o.v;
+};

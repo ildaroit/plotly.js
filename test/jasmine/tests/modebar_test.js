@@ -99,7 +99,9 @@ describe('ModeBar', function() {
         it('throws when button config does not have name', function() {
             expect(function() {
                 createModeBar(getMockGraphInfo(), [[
-                    { click: function() { console.log('not gonna work'); } }
+                    { click: function() {
+                        console.log('not gonna work');
+                    } }
                 ]]);
             }).toThrowError();
         });
@@ -107,8 +109,12 @@ describe('ModeBar', function() {
         it('throws when button name is not unique', function() {
             expect(function() {
                 createModeBar(getMockGraphInfo(), [[
-                    { name: 'A', click: function() { console.log('not gonna'); } },
-                    { name: 'A', click: function() { console.log('... work'); } }
+                    { name: 'A', click: function() {
+                        console.log('not gonna');
+                    } },
+                    { name: 'A', click: function() {
+                        console.log('... work');
+                    } }
                 ]]);
             }).toThrowError();
         });
@@ -329,7 +335,9 @@ describe('ModeBar', function() {
             });
 
             var actualButtons = modeBar.buttons.map(function(group) {
-                return group.map(function(button) { return button.name; }).join(', ');
+                return group.map(function(button) {
+                    return button.name;
+                }).join(', ');
             }).join(' - ');
 
             expect(modeBar.hasButtons(buttons)).toBe(true, 'modeBar.hasButtons: ' + actualButtons);
@@ -724,14 +732,18 @@ describe('ModeBar', function() {
             var gd = getMockGraphInfo();
             gd._context.modeBarButtonsToRemove = 'not gonna work';
 
-            expect(function() { manageModeBar(gd); }).toThrowError();
+            expect(function() {
+                manageModeBar(gd);
+            }).toThrowError();
         });
 
         it('throws an error if modeBarButtonsToAdd isn\'t an array', function() {
             var gd = getMockGraphInfo();
             gd._context.modeBarButtonsToAdd = 'not gonna work';
 
-            expect(function() { manageModeBar(gd); }).toThrowError();
+            expect(function() {
+                manageModeBar(gd);
+            }).toThrowError();
         });
 
         it('displays or not mode bar according to displayModeBar config arg', function() {
@@ -916,7 +928,9 @@ describe('ModeBar', function() {
                 'toImage', 'pan2d', 'no gonna work'
             ]];
 
-            expect(function() { manageModeBar(gd); }).toThrowError();
+            expect(function() {
+                manageModeBar(gd);
+            }).toThrowError();
         });
     });
 
@@ -932,10 +946,11 @@ describe('ModeBar', function() {
             var actual = ax.range;
 
             if(ax.type === 'date') {
-                var truncate = function(v) { return v.substr(0, 10); };
+                var truncate = function(v) {
+                    return v.substr(0, 10);
+                };
                 expect(actual.map(truncate)).toEqual(expected.map(truncate), axName);
-            }
-            else {
+            } else {
                 expect(actual).toBeCloseToArray(expected, PRECISION, axName);
             }
         }
@@ -1321,7 +1336,9 @@ describe('ModeBar', function() {
                 button = selectButton(gd._fullLayout._modeBar, targetBtn);
                 checkButtonColor(button, colors[0]);
             })
-            .then(function() { return Plotly.relayout(gd, 'modebar.color', colors[1]); })
+            .then(function() {
+                return Plotly.relayout(gd, 'modebar.color', colors[1]);
+            })
             .then(function() {
                 checkButtonColor(button, colors[1]);
             })
@@ -1336,7 +1353,9 @@ describe('ModeBar', function() {
                 button.click();
                 checkButtonColor(button, colors[0]);
             })
-            .then(function() {Plotly.relayout(gd, 'modebar.activecolor', colors[1]);})
+            .then(function() {
+                Plotly.relayout(gd, 'modebar.activecolor', colors[1]);
+            })
             .then(function() {
                 checkButtonColor(button, colors[1]);
             })
@@ -1351,7 +1370,9 @@ describe('ModeBar', function() {
                 expect(style.backgroundColor).toBe('rgba(0, 0, 0, 0)');
                 expect(getStyleRule().rules[3].style.backgroundColor).toBe(colors[0]);
             })
-            .then(function() { return Plotly.relayout(gd, 'modebar.bgcolor', colors[1]); })
+            .then(function() {
+                return Plotly.relayout(gd, 'modebar.bgcolor', colors[1]);
+            })
             .then(function() {
                 style = window.getComputedStyle(gd._fullLayout._modeBar.element.querySelector('.modebar-group'));
                 expect(style.backgroundColor).toBe('rgba(0, 0, 0, 0)');
@@ -1368,7 +1389,9 @@ describe('ModeBar', function() {
                 expect(style.backgroundColor).toBe(colors[0]);
                 expect(getStyleRule().rules[3].style.backgroundColor).toBe(colors[0]);
             })
-            .then(function() { return Plotly.relayout(gd, 'modebar.bgcolor', colors[1]); })
+            .then(function() {
+                return Plotly.relayout(gd, 'modebar.bgcolor', colors[1]);
+            })
             .then(function() {
                 style = window.getComputedStyle(gd._fullLayout._modeBar.element.querySelector('.modebar-group'));
                 expect(style.backgroundColor).toBe(colors[1]);
@@ -1387,7 +1410,9 @@ describe('ModeBar', function() {
                 size = modeBarEl.getBoundingClientRect();
                 expect(size.width < size.height).toBeTruthy();
             })
-            .then(function() { return Plotly.relayout(gd, 'modebar.orientation', 'h'); })
+            .then(function() {
+                return Plotly.relayout(gd, 'modebar.orientation', 'h');
+            })
             .catch(failTest)
             .then(function() {
                 size = modeBarEl.getBoundingClientRect();

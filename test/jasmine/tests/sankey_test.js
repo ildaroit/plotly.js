@@ -492,7 +492,9 @@ describe('sankey tests', function() {
                       }
                   });
                   // 2) have an element for each grouped node
-                  var L = sankeyNodes.filter(function(d) { return d.partOfGroup;}).size();
+                  var L = sankeyNodes.filter(function(d) {
+                      return d.partOfGroup;
+                  }).size();
                   expect(L).toBe(newGroup.flat().length, 'does not have the right number of ghost nodes');
               })
               .catch(failTest)
@@ -924,7 +926,9 @@ describe('sankey tests', function() {
             var fig = Lib.extendDeep({}, mock);
 
             Plotly.plot(gd, fig)
-            .then(function() { return _click('node'); })
+            .then(function() {
+                return _click('node');
+            })
             .then(function(d) {
                 _assert(d, {
                     curveNumber: 0,
@@ -932,7 +936,9 @@ describe('sankey tests', function() {
                     label: 'Solid'
                 });
             })
-            .then(function() { return _click('link'); })
+            .then(function() {
+                return _click('link');
+            })
             .then(function(d) {
                 _assert(d, {
                     curveNumber: 0,
@@ -948,8 +954,12 @@ describe('sankey tests', function() {
             var fig = Lib.extendDeep({}, mock);
 
             Plotly.plot(gd, fig)
-            .then(function() { return Plotly.restyle(gd, 'hoverinfo', 'none'); })
-            .then(function() { return _hover('node'); })
+            .then(function() {
+                return Plotly.restyle(gd, 'hoverinfo', 'none');
+            })
+            .then(function() {
+                return _hover('node');
+            })
             .then(function(d) {
                 _assert(d, {
                     curveNumber: 0,
@@ -961,7 +971,9 @@ describe('sankey tests', function() {
                 expect(pt.sourceLinks.length).toBe(3);
                 expect(pt.targetLinks.length).toBe(4);
             })
-            .then(function() { return _hover('link'); })
+            .then(function() {
+                return _hover('link');
+            })
             .then(function(d) {
                 _assert(d, {
                     curveNumber: 0,
@@ -978,7 +990,9 @@ describe('sankey tests', function() {
                 expect(pt.flow.hasOwnProperty('value')).toBeTruthy();
                 expect(pt.flow.hasOwnProperty('links')).toBeTruthy();
             })
-            .then(function() { return _unhover('node'); })
+            .then(function() {
+                return _unhover('node');
+            })
             .then(function(d) {
                 _assert(d, {
                     curveNumber: 0,
@@ -986,7 +1000,9 @@ describe('sankey tests', function() {
                     label: 'Solid'
                 });
             })
-            .then(function() { return _unhover('link'); })
+            .then(function() {
+                return _unhover('link');
+            })
             .then(function(d) {
                 _assert(d, {
                     curveNumber: 0,
@@ -1001,11 +1017,15 @@ describe('sankey tests', function() {
         function assertNoHoverEvents(type) {
             return function() {
                 return Promise.resolve()
-                .then(function() { return _hover(type); })
+                .then(function() {
+                    return _hover(type);
+                })
                 .then(failTest).catch(function(err) {
                     expect(err).toBe('plotly_hover did not get called!');
                 })
-                .then(function() { return _unhover(type); })
+                .then(function() {
+                    return _unhover(type);
+                })
                 .then(failTest).catch(function(err) {
                     expect(err).toBe('plotly_unhover did not get called!');
                 });
@@ -1016,7 +1036,9 @@ describe('sankey tests', function() {
             var fig = Lib.extendDeep({}, mock);
 
             Plotly.plot(gd, fig)
-            .then(function() { return Plotly.relayout(gd, 'hovermode', false); })
+            .then(function() {
+                return Plotly.relayout(gd, 'hovermode', false);
+            })
             .then(assertNoHoverEvents('node'))
             .then(assertNoHoverEvents('link'))
             .catch(failTest)
@@ -1027,7 +1049,9 @@ describe('sankey tests', function() {
             var fig = Lib.extendDeep({}, mock);
 
             Plotly.plot(gd, fig)
-            .then(function() { return Plotly.restyle(gd, 'hoverinfo', 'skip'); })
+            .then(function() {
+                return Plotly.restyle(gd, 'hoverinfo', 'skip');
+            })
             .then(assertNoHoverEvents('link'))
             .then(assertNoHoverEvents('node'))
             .catch(failTest)
@@ -1038,7 +1062,9 @@ describe('sankey tests', function() {
             var fig = Lib.extendDeep({}, mock);
 
             Plotly.plot(gd, fig)
-                  .then(function() { return Plotly.restyle(gd, 'link.hoverinfo', 'skip'); })
+                  .then(function() {
+                      return Plotly.restyle(gd, 'link.hoverinfo', 'skip');
+                  })
                   .then(assertNoHoverEvents('link'))
                   .catch(failTest)
                   .then(done);
@@ -1048,7 +1074,9 @@ describe('sankey tests', function() {
             var fig = Lib.extendDeep({}, mock);
 
             Plotly.plot(gd, fig)
-                  .then(function() { return Plotly.restyle(gd, 'node.hoverinfo', 'skip'); })
+                  .then(function() {
+                      return Plotly.restyle(gd, 'node.hoverinfo', 'skip');
+                  })
                   .then(assertNoHoverEvents('node'))
                   .catch(failTest)
                   .then(done);
@@ -1196,7 +1224,9 @@ describe('sankey tests', function() {
                       .then(function() {
                           // move a node around
                           nodes = document.getElementsByClassName('sankey-node');
-                          node = Array.prototype.slice.call(nodes).find(function(n) { return n.textContent === '0';});
+                          node = Array.prototype.slice.call(nodes).find(function(n) {
+                              return n.textContent === '0';
+                          });
                           positionBeforeDrag = getNodeCoords(node);
                           positionBeforeDrag = [positionBeforeDrag.x, positionBeforeDrag.y];
                           positionAfterDrag = [positionBeforeDrag[0] + move[0], positionBeforeDrag[1] + move[1]];
@@ -1205,7 +1235,9 @@ describe('sankey tests', function() {
                       .then(function() {
                           // Check that the node was really moved
                           nodes = document.getElementsByClassName('sankey-node');
-                          node = Array.prototype.slice.call(nodes).find(function(n) { return n.textContent === '0';});
+                          node = Array.prototype.slice.call(nodes).find(function(n) {
+                              return n.textContent === '0';
+                          });
                           var newPosition = getNodeCoords(node);
                           expect(newPosition.x).toBeCloseTo(positionAfterDrag[0], 2, 'final x position is off');
                           expect(newPosition.y).toBeCloseTo(positionAfterDrag[1], 2, 'final y position is off');
@@ -1219,7 +1251,9 @@ describe('sankey tests', function() {
                       .then(delay(1000))
                       .then(function() {
                           nodes = document.getElementsByClassName('sankey-node');
-                          node = Array.prototype.slice.call(nodes).find(function(n) { return n.textContent === '0';});
+                          node = Array.prototype.slice.call(nodes).find(function(n) {
+                              return n.textContent === '0';
+                          });
                           var newPosition = getNodeCoords(node);
 
                           var pos, msg;

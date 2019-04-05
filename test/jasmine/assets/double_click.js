@@ -22,7 +22,9 @@ module.exports = function doubleClick(x, y, clickOpts) {
 
         setTimeout(function() {
             click(x, y, clickOpts);
-            setTimeout(function() { resolve(); }, DBLCLICKDELAY / 2);
+            setTimeout(function() {
+                resolve();
+            }, DBLCLICKDELAY / 2);
         }, DBLCLICKDELAY / 2);
     });
 };

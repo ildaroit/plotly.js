@@ -174,8 +174,12 @@ describe('Test Register:', function() {
             moduleType: 'trace',
             name: 'newtype',
             categories: ['red', 'green'],
-            calc: function() { return 42; },
-            plot: function() { return 1000000; },
+            calc: function() {
+                return 42;
+            },
+            plot: function() {
+                return 1000000;
+            },
             basePlotModule: { name: 'newbaseplot' }
         };
 

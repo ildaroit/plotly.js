@@ -17,8 +17,12 @@ var Lib = require('../../lib');
 module.exports = function(pathinfo, operation) {
     var i, pi0, pi1;
 
-    var op0 = function(arr) { return arr.reverse(); };
-    var op1 = function(arr) { return arr; };
+    var op0 = function(arr) {
+        return arr.reverse();
+    };
+    var op1 = function(arr) {
+        return arr;
+    };
 
     switch(operation) {
         case '=':

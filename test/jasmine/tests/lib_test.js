@@ -90,7 +90,9 @@ describe('Test lib.js:', function() {
     describe('aggNums()', function() {
         var aggNums = Lib.aggNums;
 
-        function summation(a, b) { return a + b; }
+        function summation(a, b) {
+            return a + b;
+        }
 
         it('should work with 1D and 2D inputs and ignore non-numerics', function() {
             var in1D = [1, 2, 3, 4, 'goose!', 5, 6];
@@ -303,7 +305,9 @@ describe('Test lib.js:', function() {
             // we don't need this, it's better just to set the whole
             // array, ie np(obj, 'arr')
             var obj = {arr: [1, 2, 3]};
-            expect(function() { np(obj, 'arr[-1]'); }).toThrow('bad property string');
+            expect(function() {
+                np(obj, 'arr[-1]');
+            }).toThrow('bad property string');
         });
 
         it('should access properties of objects in an array with index -1', function() {
@@ -1632,7 +1636,9 @@ describe('Test lib.js:', function() {
                 d3.select(1),
                 // just showing what we actually do in this function: duck type
                 // using the `classed` method.
-                {classed: function(v) { return !!v; }}
+                {classed: function(v) {
+                    return !!v;
+                }}
             ];
 
             yesSelections.forEach(function(v) {
@@ -2248,16 +2254,30 @@ describe('Test lib.js:', function() {
         });
 
         it('fails on ascending too far', function() {
-            expect(function() { return Lib.relativeAttr('x', '^y'); }).toThrow();
-            expect(function() { return Lib.relativeAttr('marker.line.width', '^^^colorbar.x'); }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('x', '^y');
+            }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('marker.line.width', '^^^colorbar.x');
+            }).toThrow();
         });
 
         it('fails with malformed baseAttr', function() {
-            expect(function() { return Lib.relativeAttr('x[]', 'z'); }).toThrow();
-            expect(function() { return Lib.relativeAttr('x.a]', 'z'); }).toThrow();
-            expect(function() { return Lib.relativeAttr('x[a]', 'z'); }).toThrow();
-            expect(function() { return Lib.relativeAttr('x[3].', 'z'); }).toThrow();
-            expect(function() { return Lib.relativeAttr('x.y.', 'z'); }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('x[]', 'z');
+            }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('x.a]', 'z');
+            }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('x[a]', 'z');
+            }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('x[3].', 'z');
+            }).toThrow();
+            expect(function() {
+                return Lib.relativeAttr('x.y.', 'z');
+            }).toThrow();
         });
     });
 
@@ -2449,8 +2469,12 @@ describe('Test lib.js:', function() {
             var accesses = 0;
 
             var obj = {
-                get _x() { accesses++; return 1; },
-                set _x(v) { accesses++; }
+                get _x() {
+                    accesses++; return 1;
+                },
+                set _x(v) {
+                    accesses++;
+                }
             };
             var array = [obj];
             var array2 = [obj];
@@ -2478,8 +2502,12 @@ describe('Test lib.js:', function() {
         it('reinserts other private keys if they\'re not already there', function() {
             var obj1 = {a: 10, _a: 11};
             var obj2 = {a: 12, _a: 13};
-            function f1() { return 1; }
-            function f2() { return 2; }
+            function f1() {
+                return 1;
+            }
+            function f2() {
+                return 2;
+            }
 
             var fromContainer = {
                 a: 1,

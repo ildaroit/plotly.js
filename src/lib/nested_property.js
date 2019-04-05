@@ -181,8 +181,7 @@ function npSet(cont, parts, propStr) {
                     }
                 }
             }
-        }
-        else curCont[parts[i]] = val;
+        } else curCont[parts[i]] = val;
     };
 }
 
@@ -236,7 +235,9 @@ function checkNewContainer(container, part, nextPart, toDelete) {
 
 function badContainer(container, propStr, propParts) {
     return {
-        set: function() { throw 'bad container'; },
+        set: function() {
+            throw 'bad container';
+        },
         get: function() {},
         astr: propStr,
         parts: propParts,

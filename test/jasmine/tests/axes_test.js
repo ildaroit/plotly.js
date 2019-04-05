@@ -1216,13 +1216,17 @@ describe('Test axes', function() {
                 assertRangeDomain('xaxis2', rng, [0.256410, 0.487179], [0.256410, 0.487179], msg);
                 assertRangeDomain('xaxis3', rng, [0.512820, 0.743589], [0.512820, 0.743589], msg);
             })
-            .then(function() { return Plotly.react(gd, fig2()); })
+            .then(function() {
+                return Plotly.react(gd, fig2());
+            })
             .then(function() {
                 var msg = 'fig2';
                 assertRangeDomain('xaxis', rng, [0, 0.473684], [0, 0.473684], msg);
                 assertRangeDomain('xaxis2', rng, [0.526315, 1], [0.526315, 1], msg);
             })
-            .then(function() { return Plotly.react(gd, fig1()); })
+            .then(function() {
+                return Plotly.react(gd, fig1());
+            })
             .then(function() {
                 var msg = 'back to fig1';
                 assertRangeDomain('xaxis', rng, [0, 0.230769], [0, 0.230769], msg);
@@ -1275,14 +1279,18 @@ describe('Test axes', function() {
                     [['yaxis'], [-0.211, 3.211], true]
                 ]);
             })
-            .then(function() { return Plotly.relayout(gd, 'xaxis.range', [-1, 4]); })
+            .then(function() {
+                return Plotly.relayout(gd, 'xaxis.range', [-1, 4]);
+            })
             .then(function() {
                 assertRanges('set range', [
                     [['xaxis', 'xaxis2', 'xaxis3'], [-1, 4], false],
                     [['yaxis'], [-0.211, 3.211], true]
                 ]);
             })
-            .then(function() { return Plotly.relayout(gd, 'xaxis2.autorange', true); })
+            .then(function() {
+                return Plotly.relayout(gd, 'xaxis2.autorange', true);
+            })
             .then(function() {
                 assertRanges('back to autorange', [
                     [['xaxis', 'xaxis2', 'xaxis3'], [-0.245, 3.245], true],
@@ -2317,7 +2325,9 @@ describe('Test axes', function() {
 
         it('should fail if no data is given', function() {
             ax = getDefaultAx();
-            expect(function() { findExtremes(ax); }).toThrow();
+            expect(function() {
+                findExtremes(ax);
+            }).toThrow();
         });
 
         it('should return even if `autorange` is false', function() {
@@ -2341,7 +2351,9 @@ describe('Test axes', function() {
                 dayMonth: '%b %-d',
                 dayMonthYear: '%b %-d, %Y'
             }});
-            return Axes.calcTicks(ax).map(function(v) { return v.text; });
+            return Axes.calcTicks(ax).map(function(v) {
+                return v.text;
+            });
         }
 
         function mockHoverText(ax, x) {
@@ -3101,7 +3113,9 @@ describe('Test axes', function() {
 
             it('- on a date axis', function() {
                 var dates = [[2000, 0, 1], [2001, 0, 1], [2002, 0, 1]]
-                    .map(function(d) { return new Date(d[0], d[1], d[2]).getTime(); });
+                    .map(function(d) {
+                        return new Date(d[0], d[1], d[2]).getTime();
+                    });
 
                 // We could make this work down the road (in v2),
                 // when address our timezone problems.
@@ -3392,14 +3406,18 @@ describe('Test axes', function() {
                     totalHeight: 500
                 });
             })
-            .then(function() { return Plotly.relayout(gd, 'height', 100); })
+            .then(function() {
+                return Plotly.relayout(gd, 'height', 100);
+            })
             .then(function() {
                 _assert('after relayout to *small* height', {
                     bottomLowerBound: 30,
                     totalHeight: 100
                 });
             })
-            .then(function() { return Plotly.relayout(gd, 'height', 800); })
+            .then(function() {
+                return Plotly.relayout(gd, 'height', 800);
+            })
             .then(function() {
                 _assert('after relayout to *big* height', {
                     bottomLowerBound: 80,
@@ -3432,14 +3450,18 @@ describe('Test axes', function() {
                     totalWidth: 500
                 });
             })
-            .then(function() { return Plotly.relayout(gd, 'width', 100); })
+            .then(function() {
+                return Plotly.relayout(gd, 'width', 100);
+            })
             .then(function() {
                 _assert('after relayout to *small* width', {
                     leftLowerBound: 30,
                     totalWidth: 100
                 });
             })
-            .then(function() { return Plotly.relayout(gd, 'width', 1000); })
+            .then(function() {
+                return Plotly.relayout(gd, 'width', 1000);
+            })
             .then(function() {
                 _assert('after relayout to *big* width', {
                     leftLowerBound: 80,
@@ -3960,8 +3982,12 @@ describe('Test tickformatstops:', function() {
                 getZoomInButton(gd).click();
                 var xLabels = Axes.calcTicks(gd._fullLayout.xaxis);
                 var formatter = getFormatter(Axes.getTickFormat(gd._fullLayout.xaxis));
-                var expectedLabels = xLabels.map(function(d) {return formatter(new Date(d.x));});
-                var actualLabels = xLabels.map(function(d) {return d.text;});
+                var expectedLabels = xLabels.map(function(d) {
+                    return formatter(new Date(d.x));
+                });
+                var actualLabels = xLabels.map(function(d) {
+                    return d.text;
+                });
                 expect(expectedLabels).toEqual(actualLabels);
                 testCount++;
 
@@ -3987,8 +4013,12 @@ describe('Test tickformatstops:', function() {
                 getZoomOutButton(gd).click();
                 var xLabels = Axes.calcTicks(gd._fullLayout.xaxis);
                 var formatter = getFormatter(Axes.getTickFormat(gd._fullLayout.xaxis));
-                var expectedLabels = xLabels.map(function(d) {return formatter(new Date(d.x));});
-                var actualLabels = xLabels.map(function(d) {return d.text;});
+                var expectedLabels = xLabels.map(function(d) {
+                    return formatter(new Date(d.x));
+                });
+                var actualLabels = xLabels.map(function(d) {
+                    return d.text;
+                });
                 expect(expectedLabels).toEqual(actualLabels);
                 testCount++;
 

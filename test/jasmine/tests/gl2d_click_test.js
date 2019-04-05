@@ -141,7 +141,9 @@ describe('Test hover and click interactions', function() {
         var _click = makeClickFn(gd, pos[0], pos[1]);
 
         var _unhover = opts.noUnHover ?
-            function() { return 'emitted plotly_unhover'; } :
+            function() {
+                return 'emitted plotly_unhover';
+            } :
             makeUnhoverFn(gd, pos[0], pos[1]);
 
         return function() {
@@ -193,11 +195,15 @@ describe('Test hover and click interactions', function() {
                 color: 'yellow'
             }
         };
-        _mock.data[0].hoverinfo = _mock.data[0].x.map(function(_, i) { return i % 2 ? 'y' : 'x'; });
+        _mock.data[0].hoverinfo = _mock.data[0].x.map(function(_, i) {
+            return i % 2 ? 'y' : 'x';
+        });
 
         _mock.data[0].hoverlabel = {
             bgcolor: 'blue',
-            bordercolor: _mock.data[0].x.map(function(_, i) { return i % 2 ? 'red' : 'green'; })
+            bordercolor: _mock.data[0].x.map(function(_, i) {
+                return i % 2 ? 'red' : 'green';
+            })
         };
 
         var run = makeRunner([634, 321], {
@@ -232,11 +238,15 @@ describe('Test hover and click interactions', function() {
                 color: 'yellow'
             }
         };
-        _mock.data[0].hoverinfo = _mock.data[0].x.map(function(_, i) { return i % 2 ? 'y' : 'x'; });
+        _mock.data[0].hoverinfo = _mock.data[0].x.map(function(_, i) {
+            return i % 2 ? 'y' : 'x';
+        });
 
         _mock.data[0].hoverlabel = {
             bgcolor: 'blue',
-            bordercolor: _mock.data[0].x.map(function(_, i) { return i % 2 ? 'red' : 'green'; })
+            bordercolor: _mock.data[0].x.map(function(_, i) {
+                return i % 2 ? 'red' : 'green';
+            })
         };
 
         var run = makeRunner([634, 321], {
@@ -271,11 +281,15 @@ describe('Test hover and click interactions', function() {
                 color: 'yellow'
             }
         };
-        _mock.data[0].hoverinfo = _mock.data[0].x.map(function(_, i) { return i % 2 ? 'y' : 'x'; });
+        _mock.data[0].hoverinfo = _mock.data[0].x.map(function(_, i) {
+            return i % 2 ? 'y' : 'x';
+        });
 
         _mock.data[0].hoverlabel = {
             bgcolor: 'blue',
-            bordercolor: _mock.data[0].x.map(function(_, i) { return i % 2 ? 'red' : 'green'; })
+            bordercolor: _mock.data[0].x.map(function(_, i) {
+                return i % 2 ? 'red' : 'green';
+            })
         };
 
         var run = makeRunner([634, 321], {

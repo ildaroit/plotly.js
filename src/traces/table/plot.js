@@ -43,8 +43,12 @@ module.exports = function plot(gd, wrappedTraceHolders) {
         .style('pointer-events', 'all');
 
     table
-        .attr('width', function(d) {return d.width + d.size.l + d.size.r;})
-        .attr('height', function(d) {return d.height + d.size.t + d.size.b;})
+        .attr('width', function(d) {
+            return d.width + d.size.l + d.size.r;
+        })
+        .attr('height', function(d) {
+            return d.height + d.size.t + d.size.b;
+        })
         .attr('transform', function(d) {
             return 'translate(' + d.translateX + ',' + d.translateY + ')';
         });
@@ -60,7 +64,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
         cvEnter
             .on('mousemove', function(d) {
                 tableControlView
-                    .filter(function(dd) {return d === dd;})
+                    .filter(function(dd) {
+                        return d === dd;
+                    })
                     .call(renderScrollbarKit, gd);
             })
             .on('mousewheel', function(d) {
@@ -78,7 +84,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
     }
 
     tableControlView
-        .attr('transform', function(d) {return 'translate(' + d.size.l + ' ' + d.size.t + ')';});
+        .attr('transform', function(d) {
+            return 'translate(' + d.size.l + ' ' + d.size.t + ')';
+        });
 
     // scrollBackground merely ensures that mouse events are captured even on crazy fast scrollwheeling
     // otherwise rendering glitches may occur
@@ -91,15 +99,21 @@ module.exports = function plot(gd, wrappedTraceHolders) {
         .attr('fill', 'none');
 
     scrollBackground
-        .attr('width', function(d) {return d.width;})
-        .attr('height', function(d) {return d.height;});
+        .attr('width', function(d) {
+            return d.width;
+        })
+        .attr('height', function(d) {
+            return d.height;
+        });
 
     tableControlView.each(function(d) {
         Drawing.setClipUrl(d3.select(this), scrollAreaBottomClipKey(gd, d), gd);
     });
 
     var yColumn = tableControlView.selectAll('.' + c.cn.yColumn)
-        .data(function(vm) {return vm.columns;}, gup.keyFun);
+        .data(function(vm) {
+            return vm.columns;
+        }, gup.keyFun);
 
     yColumn.enter()
         .append('g')
@@ -107,7 +121,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
 
     yColumn.exit().remove();
 
-    yColumn.attr('transform', function(d) {return 'translate(' + d.x + ' 0)';});
+    yColumn.attr('transform', function(d) {
+        return 'translate(' + d.x + ' 0)';
+    });
 
     if(dynamic) {
         yColumn.call(d3.behavior.drag()
@@ -116,26 +132,38 @@ module.exports = function plot(gd, wrappedTraceHolders) {
                 easeColumn(movedColumn, d, -c.uplift);
                 raiseToTop(this);
                 d.calcdata.columnDragInProgress = true;
-                renderScrollbarKit(tableControlView.filter(function(dd) {return d.calcdata.key === dd.key;}), gd);
+                renderScrollbarKit(tableControlView.filter(function(dd) {
+                    return d.calcdata.key === dd.key;
+                }), gd);
                 return d;
             })
             .on('drag', function(d) {
                 var movedColumn = d3.select(this);
-                var getter = function(dd) {return (d === dd ? d3.event.x : dd.x) + dd.columnWidth / 2;};
+                var getter = function(dd) {
+                    return (d === dd ? d3.event.x : dd.x) + dd.columnWidth / 2;
+                };
                 d.x = Math.max(-c.overdrag, Math.min(d.calcdata.width + c.overdrag - d.columnWidth, d3.event.x));
 
-                var sortableColumns = flatData(yColumn).filter(function(dd) {return dd.calcdata.key === d.calcdata.key;});
-                var newOrder = sortableColumns.sort(function(a, b) {return getter(a) - getter(b);});
+                var sortableColumns = flatData(yColumn).filter(function(dd) {
+                    return dd.calcdata.key === d.calcdata.key;
+                });
+                var newOrder = sortableColumns.sort(function(a, b) {
+                    return getter(a) - getter(b);
+                });
                 newOrder.forEach(function(dd, i) {
                     dd.xIndex = i;
                     dd.x = d === dd ? dd.x : dd.xScale(dd);
                 });
 
-                yColumn.filter(function(dd) {return d !== dd;})
+                yColumn.filter(function(dd) {
+                    return d !== dd;
+                })
                     .transition()
                     .ease(c.transitionEase)
                     .duration(c.transitionDuration)
-                    .attr('transform', function(d) {return 'translate(' + d.x + ' 0)';});
+                    .attr('transform', function(d) {
+                        return 'translate(' + d.x + ' 0)';
+                    });
                 movedColumn
                     .call(cancelEeaseColumn)
                     .attr('transform', 'translate(' + d.x + ' -' + c.uplift + ' )');
@@ -146,7 +174,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
                 d.x = d.xScale(d);
                 d.calcdata.columnDragInProgress = false;
                 easeColumn(movedColumn, d, 0);
-                columnMoved(gd, p, p.columns.map(function(dd) {return dd.xIndex;}));
+                columnMoved(gd, p, p.columns.map(function(dd) {
+                    return dd.xIndex;
+                }));
             })
         );
     }
@@ -161,7 +191,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
     columnBlock.enter()
         .append('g')
         .classed(c.cn.columnBlock, true)
-        .attr('id', function(d) {return d.key;});
+        .attr('id', function(d) {
+            return d.key;
+        });
 
     columnBlock
         .style('cursor', function(d) {
@@ -195,7 +227,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
     scrollAreaClip.enter()
         .append('clipPath')
         .classed(c.cn.scrollAreaClip, true)
-        .attr('id', function(d) {return scrollAreaBottomClipKey(gd, d);});
+        .attr('id', function(d) {
+            return scrollAreaBottomClipKey(gd, d);
+        });
 
     var scrollAreaClipRect = scrollAreaClip.selectAll('.' + c.cn.scrollAreaClipRect)
         .data(gup.repeat, gup.keyFun);
@@ -208,8 +242,12 @@ module.exports = function plot(gd, wrappedTraceHolders) {
         .attr('fill', 'none');
 
     scrollAreaClipRect
-        .attr('width', function(d) {return d.width + 2 * c.overdrag;})
-        .attr('height', function(d) {return d.height + c.uplift;});
+        .attr('width', function(d) {
+            return d.width + 2 * c.overdrag;
+        })
+        .attr('height', function(d) {
+            return d.height + c.uplift;
+        });
 
     var columnBoundary = yColumn.selectAll('.' + c.cn.columnBoundary)
         .data(gup.repeat, gup.keyFun);
@@ -227,7 +265,9 @@ module.exports = function plot(gd, wrappedTraceHolders) {
         .classed(c.cn.columnBoundaryClippath, true);
 
     columnBoundaryClippath
-        .attr('id', function(d) {return columnBoundaryClipKey(gd, d);});
+        .attr('id', function(d) {
+            return columnBoundaryClipKey(gd, d);
+        });
 
     var columnBoundaryRect = columnBoundaryClippath.selectAll('.' + c.cn.columnBoundaryRect)
         .data(gup.repeat, gup.keyFun);
@@ -238,10 +278,18 @@ module.exports = function plot(gd, wrappedTraceHolders) {
         .attr('fill', 'none');
 
     columnBoundaryRect
-        .attr('width', function(d) { return d.columnWidth + 2 * roundHalfWidth(d); })
-        .attr('height', function(d) {return d.calcdata.height + 2 * roundHalfWidth(d) + c.uplift;})
-        .attr('x', function(d) { return -roundHalfWidth(d); })
-        .attr('y', function(d) { return -roundHalfWidth(d); });
+        .attr('width', function(d) {
+            return d.columnWidth + 2 * roundHalfWidth(d);
+        })
+        .attr('height', function(d) {
+            return d.calcdata.height + 2 * roundHalfWidth(d) + c.uplift;
+        })
+        .attr('x', function(d) {
+            return -roundHalfWidth(d);
+        })
+        .attr('y', function(d) {
+            return -roundHalfWidth(d);
+        });
 
     updateBlockYPosition(null, cellsColumnBlock, tableControlView);
 };
@@ -259,8 +307,12 @@ function columnBoundaryClipKey(gd, d) {
 }
 
 function flatData(selection) {
-    return [].concat.apply([], selection.map(function(g) {return g;}))
-        .map(function(g) {return g.__data__;});
+    return [].concat.apply([], selection.map(function(g) {
+        return g;
+    }))
+        .map(function(g) {
+            return g.__data__;
+        });
 }
 
 function renderScrollbarKit(tableControlView, gd, bypassVisibleBar) {
@@ -432,7 +484,9 @@ function renderColumnCells(columnBlock) {
 
 function renderColumnCell(columnCells) {
     var columnCell = columnCells.selectAll('.' + c.cn.columnCell)
-        .data(splitData.splitToCells, function(d) {return d.keyWithinBlock;});
+        .data(splitData.splitToCells, function(d) {
+            return d.keyWithinBlock;
+        });
 
     columnCell.enter()
         .append('g')
@@ -446,7 +500,9 @@ function renderColumnCell(columnCells) {
 
 function renderCellRect(columnCell) {
     var cellRect = columnCell.selectAll('.' + c.cn.cellRect)
-        .data(gup.repeat, function(d) {return d.keyWithinBlock;});
+        .data(gup.repeat, function(d) {
+            return d.keyWithinBlock;
+        });
 
     cellRect.enter()
         .append('rect')
@@ -457,20 +513,28 @@ function renderCellRect(columnCell) {
 
 function renderCellText(cellTextHolder) {
     var cellText = cellTextHolder.selectAll('.' + c.cn.cellText)
-        .data(gup.repeat, function(d) {return d.keyWithinBlock;});
+        .data(gup.repeat, function(d) {
+            return d.keyWithinBlock;
+        });
 
     cellText.enter()
         .append('text')
         .classed(c.cn.cellText, true)
-        .style('cursor', function() {return 'auto';})
-        .on('mousedown', function() {d3.event.stopPropagation();});
+        .style('cursor', function() {
+            return 'auto';
+        })
+        .on('mousedown', function() {
+            d3.event.stopPropagation();
+        });
 
     return cellText;
 }
 
 function renderCellTextHolder(columnCell) {
     var cellTextHolder = columnCell.selectAll('.' + c.cn.cellTextHolder)
-        .data(gup.repeat, function(d) {return d.keyWithinBlock;});
+        .data(gup.repeat, function(d) {
+            return d.keyWithinBlock;
+        });
 
     cellTextHolder.enter()
         .append('g')
@@ -506,8 +570,12 @@ function setFont(cellText) {
 
 function sizeAndStyleRect(cellRect) {
     cellRect
-        .attr('width', function(d) {return d.column.columnWidth;})
-        .attr('stroke-width', function(d) {return d.cellBorderWidth;})
+        .attr('width', function(d) {
+            return d.column.columnWidth;
+        })
+        .attr('stroke-width', function(d) {
+            return d.cellBorderWidth;
+        })
         .each(function(d) {
             var atomicSelection = d3.select(this);
             Color.stroke(atomicSelection, gridPick(d.calcdata.cells.line.color, d.column.specIndex, d.rowNumber));
@@ -545,8 +613,12 @@ function populateCellText(cellText, tableControlView, allColumnBlock, gd) {
             if(d.wrappingNeeded) {
                 var hrefPreservedText = c.wrapSplitCharacter === ' ' ? prefixSuffixedText.replace(/<a href=/ig, '<a_href=') : prefixSuffixedText;
                 var fragments = hrefPreservedText.split(c.wrapSplitCharacter);
-                var hrefRestoredFragments = c.wrapSplitCharacter === ' ' ? fragments.map(function(frag) {return frag.replace(/<a_href=/ig, '<a href=');}) : fragments;
-                d.fragments = hrefRestoredFragments.map(function(f) {return {text: f, width: null};});
+                var hrefRestoredFragments = c.wrapSplitCharacter === ' ' ? fragments.map(function(frag) {
+                    return frag.replace(/<a_href=/ig, '<a href=');
+                }) : fragments;
+                d.fragments = hrefRestoredFragments.map(function(f) {
+                    return {text: f, width: null};
+                });
                 d.fragments.push({fragment: c.wrapSpacer, width: null});
                 textToRender = hrefRestoredFragments.join(c.lineBreaker) + c.lineBreaker + c.wrapSpacer;
             } else {
@@ -571,7 +643,9 @@ function populateCellText(cellText, tableControlView, allColumnBlock, gd) {
             } else {
                 d3.select(element.parentNode)
                     // basic cell adjustment - compliance with `cellPad`
-                    .attr('transform', function(d) {return 'translate(' + xPosition(d) + ' ' + c.cellPad + ')';})
+                    .attr('transform', function(d) {
+                        return 'translate(' + xPosition(d) + ' ' + c.cellPad + ')';
+                    })
                     .attr('text-anchor', function(d) {
                         return ({
                             left: 'start',
@@ -587,7 +661,9 @@ function isLatex(content) {
     return typeof content === 'string' && content.match(c.latexCheck);
 }
 
-function hasWrapCharacter(text) {return text.indexOf(c.wrapSplitCharacter) !== -1;}
+function hasWrapCharacter(text) {
+    return text.indexOf(c.wrapSplitCharacter) !== -1;
+}
 
 function columnMoved(gd, calcdata, indices) {
     var o = calcdata.gdColumnsOriginalOrder;
@@ -624,8 +700,12 @@ function easeColumn(selection, d, y) {
         .attr('transform', 'translate(' + d.x + ' ' + y + ')');
 }
 
-function cellsBlock(d) {return d.type === 'cells';}
-function headerBlock(d) {return d.type === 'header';}
+function cellsBlock(d) {
+    return d.type === 'cells';
+}
+function headerBlock(d) {
+    return d.type === 'header';
+}
 
 /**
  * Revolver panel and cell contents layouting
@@ -633,7 +713,9 @@ function headerBlock(d) {return d.type === 'header';}
 
 function headerHeight(d) {
     var headerBlocks = d.rowBlocks.length ? d.rowBlocks[0].auxiliaryBlocks : [];
-    return headerBlocks.reduce(function(p, n) {return p + rowsHeight(n, Infinity);}, 0);
+    return headerBlocks.reduce(function(p, n) {
+        return p + rowsHeight(n, Infinity);
+    }, 0);
 }
 
 function findPagesAndCacheHeights(blocks, scrollY, scrollHeight) {
@@ -717,7 +799,9 @@ function makeDragRow(gd, allTableControlView, optionalMultiplier, optionalPositi
     return function dragRow(eventD) {
         // may come from whichever DOM event target: drag, wheel, bar... eventD corresponds to event target
         var d = eventD.calcdata ? eventD.calcdata : eventD;
-        var tableControlView = allTableControlView.filter(function(dd) {return d.key === dd.key;});
+        var tableControlView = allTableControlView.filter(function(dd) {
+            return d.key === dd.key;
+        });
         var multiplier = optionalMultiplier || d.scrollbarState.dragMultiplier;
 
         var initialScrollY = d.scrollY;
@@ -739,7 +823,9 @@ function conditionalPanelRerender(gd, tableControlView, cellsColumnBlock, pages,
         d.currentRepaint[revolverIndex] = setTimeout(function() {
             // setTimeout might lag rendering but yields a smoother scroll, because fast scrolling makes
             // some repaints invisible ie. wasteful (DOM work blocks the main thread)
-            var toRerender = cellsColumnBlock.filter(function(d, i) {return i === revolverIndex && pages[i] !== prevPages[i];});
+            var toRerender = cellsColumnBlock.filter(function(d, i) {
+                return i === revolverIndex && pages[i] !== prevPages[i];
+            });
             renderColumnCellTree(gd, tableControlView, toRerender, cellsColumnBlock);
             prevPages[revolverIndex] = pages[revolverIndex];
         });
@@ -847,14 +933,18 @@ function xPosition(d, optionalWidth) {
 function setCellHeightAndPositionY(columnCell) {
     columnCell
         .attr('transform', function(d) {
-            var headerHeight = d.rowBlocks[0].auxiliaryBlocks.reduce(function(p, n) {return p + rowsHeight(n, Infinity);}, 0);
+            var headerHeight = d.rowBlocks[0].auxiliaryBlocks.reduce(function(p, n) {
+                return p + rowsHeight(n, Infinity);
+            }, 0);
             var l = getBlock(d);
             var rowAnchor = rowsHeight(l, d.key);
             var yOffset = rowAnchor + headerHeight;
             return 'translate(0 ' + yOffset + ')';
         })
         .selectAll('.' + c.cn.cellRect)
-        .attr('height', function(d) {return getRow(getBlock(d), d.key).rowHeight;});
+        .attr('height', function(d) {
+            return getRow(getBlock(d), d.key).rowHeight;
+        });
 }
 
 function firstRowAnchor(blocks, page) {
@@ -889,5 +979,9 @@ function allRowsHeight(rowBlock) {
     return total;
 }
 
-function getBlock(d) {return d.rowBlocks[d.page];}
-function getRow(l, i) {return l.rows[i - l.firstRowIndex];}
+function getBlock(d) {
+    return d.rowBlocks[d.page];
+}
+function getRow(l, i) {
+    return l.rows[i - l.firstRowIndex];
+}

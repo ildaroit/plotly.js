@@ -25,10 +25,18 @@ module.exports = function calc(gd, trace) {
     var y = trace.y ? ya.makeCalcdata(trace, 'y') : [];
     var xcalendar = trace.xcalendar;
     var ycalendar = trace.ycalendar;
-    var xr2c = function(v) { return xa.r2c(v, 0, xcalendar); };
-    var yr2c = function(v) { return ya.r2c(v, 0, ycalendar); };
-    var xc2r = function(v) { return xa.c2r(v, 0, xcalendar); };
-    var yc2r = function(v) { return ya.c2r(v, 0, ycalendar); };
+    var xr2c = function(v) {
+        return xa.r2c(v, 0, xcalendar);
+    };
+    var yr2c = function(v) {
+        return ya.r2c(v, 0, ycalendar);
+    };
+    var xc2r = function(v) {
+        return xa.c2r(v, 0, xcalendar);
+    };
+    var yc2r = function(v) {
+        return ya.c2r(v, 0, ycalendar);
+    };
 
     var i, j, n, m;
 
@@ -232,8 +240,7 @@ function makeIncrements(len, bins, dv, nonuniform) {
     var i;
     if(nonuniform) {
         for(i = 0; i < len; i++) out[i] = 1 / (bins[i + 1] - bins[i]);
-    }
-    else {
+    } else {
         var inc = 1 / dv;
         for(i = 0; i < len; i++) out[i] = inc;
     }
@@ -254,8 +261,7 @@ function getRanges(edges, uniqueVals, gapLow, gapHigh, ax, calendar) {
     var out = new Array(len);
     if(uniqueVals) {
         for(i = 0; i < len; i++) out[i] = [uniqueVals[i], uniqueVals[i]];
-    }
-    else {
+    } else {
         var roundFn = getBinSpanLabelRound(gapLow, gapHigh, edges, ax, calendar);
         for(i = 0; i < len; i++) out[i] = [roundFn(edges[i]), roundFn(edges[i + 1], true)];
     }

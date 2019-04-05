@@ -19,7 +19,9 @@ selProto.attr = function() {
         if(typeof obj === 'string') {
             checkAttrVal(sel, obj, arguments[1]);
         } else {
-            Object.keys(obj).forEach(function(key) { checkAttrVal(sel, key, obj[key]); });
+            Object.keys(obj).forEach(function(key) {
+                checkAttrVal(sel, key, obj[key]);
+            });
         }
     }
 
@@ -39,7 +41,9 @@ selProto.style = function() {
             }
             checkStyleVal(sel, obj, arguments[1]);
         } else {
-            Object.keys(obj).forEach(function(key) { checkStyleVal(sel, key, obj[key]); });
+            Object.keys(obj).forEach(function(key) {
+                checkStyleVal(sel, key, obj[key]);
+            });
         }
     }
 

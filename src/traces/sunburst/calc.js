@@ -47,11 +47,17 @@ exports.calc = function(gd, trace) {
 
     if(hasIds) {
         len = Math.min(ids.length, parents.length);
-        isValid = function(i) { return ids[i] && isValidVal(i); };
-        getId = function(i) { return String(ids[i]); };
+        isValid = function(i) {
+            return ids[i] && isValidVal(i);
+        };
+        getId = function(i) {
+            return String(ids[i]);
+        };
     } else {
         len = Math.min(labels.length, parents.length);
-        isValid = function(i) { return labels[i] && isValidVal(i); };
+        isValid = function(i) {
+            return labels[i] && isValidVal(i);
+        };
         // TODO We could allow some label / parent duplication
         //
         // From AJ:
@@ -59,7 +65,9 @@ exports.calc = function(gd, trace) {
         //  (multiple rows with the same name and different parents -
         //  or even the same parent) but if that name is then used as a parent
         //  which one is it?
-        getId = function(i) { return String(labels[i]); };
+        getId = function(i) {
+            return String(labels[i]);
+        };
     }
 
     if(hasVals) len = Math.min(len, vals.length);
@@ -127,8 +135,12 @@ exports.calc = function(gd, trace) {
     var root;
     try {
         root = d3Hierarchy.stratify()
-            .id(function(d) { return d.id; })
-            .parentId(function(d) { return d.pid; })(cd);
+            .id(function(d) {
+                return d.id;
+            })
+            .parentId(function(d) {
+                return d.pid;
+            })(cd);
     } catch(e) {
         return Lib.warn('Failed to build sunburst hierarchy. Error: ' + e.message);
     }
@@ -139,7 +151,9 @@ exports.calc = function(gd, trace) {
     if(hasVals) {
         switch(trace.branchvalues) {
             case 'remainder':
-                hierarchy.sum(function(d) { return d.data.v; });
+                hierarchy.sum(function(d) {
+                    return d.data.v;
+                });
                 break;
             case 'total':
                 hierarchy.each(function(d) {
@@ -169,7 +183,9 @@ exports.calc = function(gd, trace) {
     if(failed) return;
 
     // TODO add way to sort by height also?
-    hierarchy.sort(function(a, b) { return b.value - a.value; });
+    hierarchy.sort(function(a, b) {
+        return b.value - a.value;
+    });
 
     var colors = trace.marker.colors || [];
     var pullColor = makePullColorFn(fullLayout._sunburstcolormap);

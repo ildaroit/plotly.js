@@ -277,7 +277,9 @@ proto.updateBaseLayers = function(fullLayout, geoLayout) {
     });
 
     join.enter().append('g')
-        .attr('class', function(d) { return 'layer ' + d; })
+        .attr('class', function(d) {
+            return 'layer ' + d;
+        })
         .each(function(d) {
             var layer = layers[d] = d3.select(this);
 
@@ -423,8 +425,7 @@ proto.updateFx = function(fullLayout, geoLayout) {
         if(!gd._context._scrollZoom.geo) {
             bgRect.on('wheel.zoom', null);
         }
-    }
-    else if(dragMode === 'select' || dragMode === 'lasso') {
+    } else if(dragMode === 'select' || dragMode === 'lasso') {
         bgRect.on('.zoom', null);
 
         dragOptions.prepFn = function(e, startX, startY) {
@@ -441,8 +442,12 @@ proto.updateFx = function(fullLayout, geoLayout) {
             return dragElement.unhover(gd, d3.event);
         }
 
-        _this.xaxis.p2c = function() { return lonlat[0]; };
-        _this.yaxis.p2c = function() { return lonlat[1]; };
+        _this.xaxis.p2c = function() {
+            return lonlat[0];
+        };
+        _this.yaxis.p2c = function() {
+            return lonlat[1];
+        };
 
         Fx.hover(gd, d3.event, _this.id);
     });
@@ -496,12 +501,16 @@ proto.makeFramework = function() {
 
     _this.xaxis = {
         _id: 'x',
-        c2p: function(v) { return _this.project(v)[0]; }
+        c2p: function(v) {
+            return _this.project(v)[0];
+        }
     };
 
     _this.yaxis = {
         _id: 'y',
-        c2p: function(v) { return _this.project(v)[1]; }
+        c2p: function(v) {
+            return _this.project(v)[1];
+        }
     };
 
     // mock axis for hover formatting
@@ -562,7 +571,9 @@ proto.render = function() {
     }
 
     for(k in this.dataPaths) {
-        this.dataPaths[k].attr('d', function(d) { return pathFn(d.geojson); });
+        this.dataPaths[k].attr('d', function(d) {
+            return pathFn(d.geojson);
+        });
     }
 
     for(k in this.dataPoints) {
@@ -594,7 +605,9 @@ function getProjection(geoLayout) {
         null;
 
     var methods = ['center', 'rotate', 'parallels', 'clipExtent'];
-    var dummyFn = function(_) { return _ ? projection : []; };
+    var dummyFn = function(_) {
+        return _ ? projection : [];
+    };
 
     for(var i = 0; i < methods.length; i++) {
         var m = methods[i];
@@ -675,11 +688,15 @@ function makeGraticule(axisName, geoLayout, fullLayout) {
     if(axisName === 'lonaxis') {
         rng = scopeDefaults.lonaxisRange;
         oppRng = scopeDefaults.lataxisRange;
-        coordFn = function(v, l) { return [v, l]; };
+        coordFn = function(v, l) {
+            return [v, l];
+        };
     } else if(axisName === 'lataxis') {
         rng = scopeDefaults.lataxisRange;
         oppRng = scopeDefaults.lonaxisRange;
-        coordFn = function(v, l) { return [l, v]; };
+        coordFn = function(v, l) {
+            return [l, v];
+        };
     }
 
     var dummyAx = {

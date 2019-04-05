@@ -26,7 +26,9 @@ function style(gd, cd) {
     var fullLayout = gd._fullLayout;
 
     // trace styling
-    s.style('opacity', function(d) { return d[0].trace.opacity; })
+    s.style('opacity', function(d) {
+        return d[0].trace.opacity;
+    })
 
     // for gapless (either stacked or neighboring grouped) bars use
     // crispEdges to turn off antialiasing so an artificial gap

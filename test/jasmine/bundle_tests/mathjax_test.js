@@ -57,19 +57,45 @@ describe('Test MathJax:', function() {
             var xCategories = opts.xCategories;
 
             return Plotly.plot(gd, fig)
-                .then(function() { assertNoIntersect('base'); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.titlefont.size', 40); })
-                .then(function() { assertNoIntersect('large title font size'); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.titlefont.size', null); })
-                .then(function() { assertNoIntersect('back to base'); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.tickfont.size', 40); })
-                .then(function() { assertNoIntersect('large title font size'); })
-                .then(function() { return Plotly.relayout(gd, 'xaxis.tickfont.size', null); })
-                .then(function() { assertNoIntersect('back to base 2'); })
-                .then(function() { return Plotly.update(gd, {x: [xCategories]}, {'xaxis.tickangle': 90}); })
-                .then(function() { assertNoIntersect('long tick labels'); })
-                .then(function() { return Plotly.update(gd, {x: [null]}, {'xaxis.tickangle': null}); })
-                .then(function() { assertNoIntersect('back to base 3'); });
+                .then(function() {
+                    assertNoIntersect('base');
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.titlefont.size', 40);
+                })
+                .then(function() {
+                    assertNoIntersect('large title font size');
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.titlefont.size', null);
+                })
+                .then(function() {
+                    assertNoIntersect('back to base');
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.tickfont.size', 40);
+                })
+                .then(function() {
+                    assertNoIntersect('large title font size');
+                })
+                .then(function() {
+                    return Plotly.relayout(gd, 'xaxis.tickfont.size', null);
+                })
+                .then(function() {
+                    assertNoIntersect('back to base 2');
+                })
+                .then(function() {
+                    return Plotly.update(gd, {x: [xCategories]}, {'xaxis.tickangle': 90});
+                })
+                .then(function() {
+                    assertNoIntersect('long tick labels');
+                })
+                .then(function() {
+                    return Plotly.update(gd, {x: [null]}, {'xaxis.tickangle': null});
+                })
+                .then(function() {
+                    assertNoIntersect('back to base 3');
+                });
         }
 
         var longCats = ['aaaaaaaaa', 'bbbbbbbbb', 'cccccccc'];

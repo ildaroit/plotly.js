@@ -311,7 +311,9 @@ describe('Plotly.Snapshot', function() {
                 var fillItemIndices = [0, 4, 5];
 
                 Plotly.plot(gd, fig)
-                .then(function() { return Plotly.Snapshot.toSVG(gd); })
+                .then(function() {
+                    return Plotly.Snapshot.toSVG(gd);
+                })
                 .then(function(svg) {
                     var svgDOM = parser.parseFromString(svg, 'image/svg+xml');
 
@@ -331,7 +333,9 @@ describe('Plotly.Snapshot', function() {
                 var fig = Lib.extendDeep({}, require('@mocks/16.json'));
 
                 Plotly.plot(gd, fig)
-                .then(function() { return Plotly.Snapshot.toSVG(gd); })
+                .then(function() {
+                    return Plotly.Snapshot.toSVG(gd);
+                })
                 .then(function(svg) {
                     var svgDOM = parser.parseFromString(svg, 'image/svg+xml');
 

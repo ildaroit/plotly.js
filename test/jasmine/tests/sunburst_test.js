@@ -154,7 +154,9 @@ describe('Test sunburst calc:', function() {
 
     function extract(k) {
         var out = gd.calcdata.map(function(cd) {
-            return cd.map(function(pt) { return pt[k]; });
+            return cd.map(function(pt) {
+                return pt[k];
+            });
         });
         return out.length > 1 ? out : out[0];
     }
@@ -300,7 +302,9 @@ describe('Test sunburst hover:', function() {
 
         return Plotly.plot(gd, data, layout)
             .then(function() {
-                gd.once('plotly_hover', function(d) { ptData = d.points[0]; });
+                gd.once('plotly_hover', function(d) {
+                    ptData = d.points[0];
+                });
             })
             .then(hover(gd, spec.pos))
             .then(function() {
@@ -457,7 +461,9 @@ describe('Test sunburst hover lifecycle:', function() {
     var hoverCnt;
     var unhoverCnt;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
@@ -720,12 +726,16 @@ describe('Test sunburst clicks:', function() {
 describe('Test sunburst restyle:', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 
     function _restyle(updateObj) {
-        return function() { return Plotly.restyle(gd, updateObj); };
+        return function() {
+            return Plotly.restyle(gd, updateObj);
+        };
     }
 
     it('should be able to toggle visibility', function(done) {
@@ -1057,7 +1067,9 @@ describe('Test sunburst tweening:', function() {
 describe('Test sunburst interactions edge cases', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 

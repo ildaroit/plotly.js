@@ -59,7 +59,9 @@ function hoverOnBoxes(pointData, xval, yval, hovermode) {
 
     var boxDelta = t.bdPos;
     var posAcceptance = t.wHover;
-    var shiftPos = function(di) { return di.pos + t.bPos - pVal; };
+    var shiftPos = function(di) {
+        return di.pos + t.bPos - pVal;
+    };
 
     if(isViolin && trace.side !== 'both') {
         if(trace.side === 'positive') {
@@ -118,7 +120,9 @@ function hoverOnBoxes(pointData, xval, yval, hovermode) {
     hoverPseudoDistance = pointData.maxHoverDistance - pseudoDistance;
     spikePseudoDistance = pointData.maxSpikeDistance - pseudoDistance;
 
-    function dxy(di) { return (dx(di) + dy(di)) / 2; }
+    function dxy(di) {
+        return (dx(di) + dy(di)) / 2;
+    }
     var distfn = Fx.getDistanceFunction(hovermode, dx, dy, dxy);
     Fx.getClosest(cd, distfn, pointData);
 

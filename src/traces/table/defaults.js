@@ -16,8 +16,12 @@ function defaultColumnOrder(traceOut, coerce) {
     var specifiedColumnOrder = traceOut.columnorder || [];
     var commonLength = traceOut.header.values.length;
     var truncated = specifiedColumnOrder.slice(0, commonLength);
-    var sorted = truncated.slice().sort(function(a, b) {return a - b;});
-    var oneStepped = truncated.map(function(d) {return sorted.indexOf(d);});
+    var sorted = truncated.slice().sort(function(a, b) {
+        return a - b;
+    });
+    var oneStepped = truncated.map(function(d) {
+        return sorted.indexOf(d);
+    });
     for(var i = oneStepped.length; i < commonLength; i++) {
         oneStepped.push(i);
     }

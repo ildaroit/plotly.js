@@ -34,11 +34,15 @@ glob(pathToJasmineBundleTests + '/*.js', function(err, files) {
     runSeries(tasks, function(err, results) {
         if(err) throw err;
 
-        var failed = results.filter(function(r) { return r; });
+        var failed = results.filter(function(r) {
+            return r;
+        });
 
         if(failed.length) {
             console.log('\ntest-bundle summary:');
-            failed.forEach(function(r) { console.warn('- ' + r.cmd + ' failed'); });
+            failed.forEach(function(r) {
+                console.warn('- ' + r.cmd + ' failed');
+            });
             console.log('');
             process.exit(1);
         }

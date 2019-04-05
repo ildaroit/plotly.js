@@ -18,7 +18,11 @@ exports.pointsAccessorFunction = function(transforms, opts) {
         prevIndexToPoints = tr._indexToPoints;
     }
     var originalPointsAccessor = prevIndexToPoints ?
-        function(i) {return prevIndexToPoints[i];} :
-        function(i) {return [i];};
+        function(i) {
+            return prevIndexToPoints[i];
+        } :
+        function(i) {
+            return [i];
+        };
     return originalPointsAccessor;
 };

@@ -45,7 +45,9 @@ module.exports = function supplyDefaults(traceIn, traceOut, defaultColor, layout
 
     var colors = layout.colorway;
 
-    var defaultNodePalette = function(i) {return colors[i % colors.length];};
+    var defaultNodePalette = function(i) {
+        return colors[i % colors.length];
+    };
 
     coerceNode('color', nodeOut.label.map(function(d, i) {
         return Color.addOpacity(defaultNodePalette(i), 0.8);

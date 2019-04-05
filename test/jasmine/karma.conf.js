@@ -70,7 +70,9 @@ if(argv.info) {
 }
 
 var SUFFIX = '_test.js';
-var basename = function(s) { return path.basename(s, SUFFIX); };
+var basename = function(s) {
+    return path.basename(s, SUFFIX);
+};
 var merge = function(_) {
     var list = [];
 

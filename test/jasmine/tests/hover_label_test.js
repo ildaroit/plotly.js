@@ -1025,7 +1025,9 @@ describe('hover info', function() {
             })
             .then(function() {
                 var pts = null;
-                gd.once('plotly_hover', function(e) { pts = e.points; });
+                gd.once('plotly_hover', function(e) {
+                    pts = e.points;
+                });
 
                 _hoverNatural(gd, 250, 200);
                 assertHoverLabelContent({nums: '3', axis: '3 - 5'});
@@ -1045,14 +1047,18 @@ describe('hover info', function() {
             })
             .then(function() {
                 var pts = null;
-                gd.once('plotly_hover', function(e) { pts = e.points; });
+                gd.once('plotly_hover', function(e) {
+                    pts = e.points;
+                });
 
                 _hoverNatural(gd, 250, 200);
                 expect(pts).toBe(null, 'should not emit hover event on same pt');
             })
             .then(function() {
                 var pts = null;
-                gd.once('plotly_hover', function(e) { pts = e.points; });
+                gd.once('plotly_hover', function(e) {
+                    pts = e.points;
+                });
 
                 _hoverNatural(gd, 350, 200);
                 assertHoverLabelContent({nums: '2', axis: '6 - 8'});
@@ -1094,7 +1100,9 @@ describe('hover info', function() {
                     axis: '3.3'
                 });
             })
-            .then(function() { return Plotly.restyle(gd, 'hovertext', 'LOOK'); })
+            .then(function() {
+                return Plotly.restyle(gd, 'hovertext', 'LOOK');
+            })
             .then(function() {
                 _hover(gd, 250, 200);
                 assertHoverLabelContent({
@@ -1217,7 +1225,9 @@ describe('hover info', function() {
                     customdata: [11, 22, 33]
                 }))
                 .then(function() {
-                    gd.on('plotly_hover', function(e) { pts = e.points; });
+                    gd.on('plotly_hover', function(e) {
+                        pts = e.points;
+                    });
 
                     _hoverNatural(gd, 150, 150);
                     assertHoverLabelContent({
@@ -1264,7 +1274,9 @@ describe('hover info', function() {
                     }
                 }))
                 .then(function() {
-                    gd.on('plotly_hover', function(e) { pts = e.points; });
+                    gd.on('plotly_hover', function(e) {
+                        pts = e.points;
+                    });
 
                     _hoverNatural(gd, 150, 150);
                     assertHoverLabelContent({
@@ -1516,7 +1528,9 @@ describe('hover info', function() {
     describe('alignment while avoiding overlaps:', function() {
         var gd;
 
-        beforeEach(function() { gd = createGraphDiv(); });
+        beforeEach(function() {
+            gd = createGraphDiv();
+        });
 
         function hoverInfoNodes(traceName) {
             var g = d3.selectAll('g.hoverlayer g.hovertext').filter(function() {
@@ -1582,7 +1596,9 @@ describe('hover info', function() {
             var layout = {width: 600, height: 300, barmode: 'stack'};
 
             Plotly.plot(gd, data, layout)
-            .then(function() { _hover(gd, 300, 150); })
+            .then(function() {
+                _hover(gd, 300, 150);
+            })
             .then(function() {
                 var nodes = ensureCentered(hoverInfoNodes('LA Zoo'));
                 assertLabelsInsideBoxes(nodes);
@@ -1618,7 +1634,9 @@ describe('hover info', function() {
             var layout = {width: 600, height: 300};
 
             Plotly.plot(gd, data, layout)
-            .then(function() { _hover(gd, 300, 150); })
+            .then(function() {
+                _hover(gd, 300, 150);
+            })
             .then(function() {
                 var nodesLA = ensureCentered(hoverInfoNodes('LA Zoo'));
                 var nodesSF = ensureCentered(hoverInfoNodes('SF Zoo'));
@@ -1659,7 +1677,9 @@ describe('hover info', function() {
                 width: 600,
                 height: 300
             })
-            .then(function() { _hoverNatural(gd, 209, 12); })
+            .then(function() {
+                _hoverNatural(gd, 209, 12);
+            })
             .then(function() {
                 var nodes = hoverInfoNodes(name);
                 var nodes2 = hoverInfoNodes(name2);
@@ -1696,7 +1716,9 @@ describe('hover info', function() {
                 width: 700,
                 height: 450
             })
-            .then(function() { _hover(gd, 67, 239); })
+            .then(function() {
+                _hover(gd, 67, 239);
+            })
             .then(function() {
                 var nodesA = hoverInfoNodes('A');
                 var nodesC = hoverInfoNodes('C');
@@ -1926,7 +1948,9 @@ describe('hover info', function() {
             width: 400,
             height: 400
         })
-        .then(function() { _hoverNatural(gd, 200, 200); })
+        .then(function() {
+            _hoverNatural(gd, 200, 200);
+        })
         .then(function() {
             assertHoverLabelContent({
                 nums: '1',
@@ -1952,14 +1976,18 @@ describe('hover info', function() {
         fig.layout.margin = {t: 0, b: 0, l: 0, r: 0};
 
         Plotly.plot(gd, fig)
-        .then(function() { _hoverNatural(gd, 180, 200); })
+        .then(function() {
+            _hoverNatural(gd, 180, 200);
+        })
         .then(function() {
             assertHoverLabelContent({
                 nums: 'trace 1',
                 name: ''
             }, 'hovering on a fill');
         })
-        .then(function() { _hoverNatural(gd, 50, 95); })
+        .then(function() {
+            _hoverNatural(gd, 50, 95);
+        })
         .then(function() {
             assertHoverLabelContent({
                 nums: '0 | 5',
@@ -2032,7 +2060,9 @@ describe('hover info on stacked subplots', function() {
             });
             expect(bBoxes.length).toBe(2);
             var disjointY = bBoxes[0].top >= bBoxes[1].bottom - 5 || bBoxes[1].top >= bBoxes[0].bottom - 5;
-            expect(disjointY).toBe(true, bBoxes.map(function(bb) { return {top: bb.top, bottom: bb.bottom}; }));
+            expect(disjointY).toBe(true, bBoxes.map(function(bb) {
+                return {top: bb.top, bottom: bb.bottom};
+            }));
         }
 
         it('responds to hover and keeps the labels from crossing', function() {
@@ -2244,7 +2274,9 @@ describe('hover on fill', function() {
 
     it('should always show one label in the right place', function(done) {
         var mock = Lib.extendDeep({}, require('@mocks/scatter_fill_self_next.json'));
-        mock.data.forEach(function(trace) { trace.hoveron = 'fills'; });
+        mock.data.forEach(function(trace) {
+            trace.hoveron = 'fills';
+        });
 
         Plotly.plot(createGraphDiv(), mock.data, mock.layout).then(function() {
             assertLabelsCorrect([242, 142], [252, 133.8], 'trace 2');
@@ -2377,7 +2409,9 @@ describe('Hover on multicategory axes', function() {
                 eventData = d.points[0];
             });
         })
-        .then(function() { _hover(200, 200); })
+        .then(function() {
+            _hover(200, 200);
+        })
         .then(function() {
             assertHoverLabelContent({ nums: '−1', axis: '2019 - a' });
             expect(eventData.x).toEqual(['2019', 'a']);
@@ -2388,7 +2422,9 @@ describe('Hover on multicategory axes', function() {
                 {hovermode: 'closest'}
             );
         })
-        .then(function() { _hover(140, 200); })
+        .then(function() {
+            _hover(140, 200);
+        })
         .then(function() {
             assertHoverLabelContent({ nums: 'Sample: b\nYear: 2018' });
             expect(eventData.x).toEqual(['2018', 'b']);
@@ -2409,7 +2445,9 @@ describe('Hover on multicategory axes', function() {
                 eventData = d.points[0];
             });
         })
-        .then(function() { _hover(200, 200); })
+        .then(function() {
+            _hover(200, 200);
+        })
         .then(function() {
             assertHoverLabelContent({
                 nums: 'x: 2017 - q3\ny: Group 3 - A\nz: 2.303'
@@ -2419,7 +2457,9 @@ describe('Hover on multicategory axes', function() {
         .then(function() {
             return Plotly.restyle(gd, 'hovertemplate', '%{z} @ %{x} | %{y}');
         })
-        .then(function() { _hover(200, 200); })
+        .then(function() {
+            _hover(200, 200);
+        })
         .then(function() {
             assertHoverLabelContent({
                 nums: '2.303 @ 2017 - q3 | Group 3 - A',
@@ -2722,7 +2762,9 @@ describe('Test hover label custom styling:', function() {
             return Plotly.restyle(gd, 'hoverinfo', [['none']]);
         })
         .then(function() {
-            expect(gd.calcdata[0].map(function(o) { return o.hi; })).toEqual(
+            expect(gd.calcdata[0].map(function(o) {
+                return o.hi;
+            })).toEqual(
                 ['none', 'x+y+z+text', 'x+y+z+text'],
                 'should fill calcdata item with correct default'
             );

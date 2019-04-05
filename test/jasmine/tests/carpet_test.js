@@ -541,7 +541,9 @@ describe('Test carpet interactions:', function() {
     it('preserves order of carpets on the same subplot after hide/show', function(done) {
         function getIndices() {
             var out = [];
-            d3.selectAll('.carpetlayer .trace').each(function(d) { out.push(d[0].trace.index); });
+            d3.selectAll('.carpetlayer .trace').each(function(d) {
+                out.push(d[0].trace.index);
+            });
             return out;
         }
 
@@ -725,7 +727,9 @@ describe('contourcarpet plotting & editing', function() {
     it('keeps the correct ordering after hide and show', function(done) {
         function getIndices() {
             var out = [];
-            d3.selectAll('.contour').each(function(d) { out.push(d[0].trace.index); });
+            d3.selectAll('.contour').each(function(d) {
+                out.push(d[0].trace.index);
+            });
             return out;
         }
 

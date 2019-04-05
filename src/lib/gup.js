@@ -10,7 +10,9 @@
 
 var identity = require('./identity');
 
-function wrap(d) {return [d];}
+function wrap(d) {
+    return [d];
+}
 
 module.exports = {
 
@@ -21,7 +23,9 @@ module.exports = {
     // of elements, e.g. points, lines, rows, requiring an array as input.
     // The role of the `keyFun` is to identify what elements are being entered/exited/updated,
     // otherwise D3 reverts to using a plain index which would screw up `transition`s.
-    keyFun: function(d) {return d.key;},
+    keyFun: function(d) {
+        return d.key;
+    },
     repeat: wrap,
     descend: identity,
 
@@ -30,5 +34,7 @@ module.exports = {
     // newcomer to the codebase may not know what the `[0]` is, and whether there can be further
     // elements (not atm).
     wrap: wrap,
-    unwrap: function(d) {return d[0];}
+    unwrap: function(d) {
+        return d[0];
+    }
 };

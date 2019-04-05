@@ -375,7 +375,9 @@ function drawRangePlot(rangeSlider, gd, axisOpts, opts) {
         .data(axisOpts._subplotsWith, Lib.identity);
 
     rangePlots.enter().append('g')
-        .attr('class', function(id) { return constants.rangePlotClassName + ' ' + id; })
+        .attr('class', function(id) {
+            return constants.rangePlotClassName + ' ' + id;
+        })
         .call(Drawing.setClipUrl, opts._clipId, gd);
 
     rangePlots.order();

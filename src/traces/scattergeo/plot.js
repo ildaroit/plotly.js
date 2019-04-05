@@ -59,7 +59,9 @@ module.exports = function plot(gd, geo, calcData) {
                 .data(Lib.identity)
              .enter().append('path')
                 .classed('point', true)
-                .each(function(calcPt) { removeBADNUM(calcPt, this); });
+                .each(function(calcPt) {
+                    removeBADNUM(calcPt, this);
+                });
         }
 
         if(subTypes.hasText(trace)) {
@@ -67,7 +69,9 @@ module.exports = function plot(gd, geo, calcData) {
                 .data(Lib.identity)
               .enter().append('g')
                 .append('text')
-                .each(function(calcPt) { removeBADNUM(calcPt, this); });
+                .each(function(calcPt) {
+                    removeBADNUM(calcPt, this);
+                });
         }
 
         // call style here within topojson request callback

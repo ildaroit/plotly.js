@@ -69,13 +69,17 @@ module.exports = {
      * default (all false) edit flags for restyle (traces)
      * creates a new object each call, so the caller can mutate freely
      */
-    traceFlags: function() { return falseObj(traceEditTypeFlags); },
+    traceFlags: function() {
+        return falseObj(traceEditTypeFlags);
+    },
 
     /*
      * default (all false) edit flags for relayout
      * creates a new object each call, so the caller can mutate freely
      */
-    layoutFlags: function() { return falseObj(layoutEditTypeFlags); },
+    layoutFlags: function() {
+        return falseObj(layoutEditTypeFlags);
+    },
 
     /*
      * update `flags` with the `editType` values found in `attr`
@@ -139,8 +143,7 @@ function overrideOne(attr, editTypeOverride, overrideContainers, key) {
             }
         }
         return out;
-    }
-    else {
+    } else {
         // don't provide an editType for the _deprecated container
         return overrideAll(attr, editTypeOverride,
             (key.charAt(0) === '_') ? 'nested' : 'from-root');

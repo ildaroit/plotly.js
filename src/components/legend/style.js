@@ -83,16 +83,14 @@ module.exports = function style(s, gd) {
 
             if(coloring === 'lines') {
                 showGradientLine = true;
-            }
-            else {
+            } else {
                 showLine = coloring === 'none' || coloring === 'heatmap' ||
                     contours.showlines;
             }
 
             if(contours.type === 'constraint') {
                 showFill = contours._operation !== '=';
-            }
-            else if(coloring === 'fill' || coloring === 'heatmap') {
+            } else if(coloring === 'fill' || coloring === 'heatmap') {
                 showGradientFill = true;
             }
         }
@@ -172,7 +170,9 @@ module.exports = function style(s, gd) {
             return valToBound;
         }
 
-        function pickFirst(array) { return array[0]; }
+        function pickFirst(array) {
+            return array[0];
+        }
 
         // constrain text, markers, etc so they'll fit on the legend
         if(showMarkers || showText || showLines) {

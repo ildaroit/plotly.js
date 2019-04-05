@@ -38,7 +38,9 @@ module.exports = function(gd, cdmodule, transitionOpts, makeOnCompleteCallback) 
     var hasTransition = transitionOpts && transitionOpts.duration > 0;
 
     join = layer.selectAll('g.trace.sunburst')
-        .data(cdmodule, function(cd) { return cd[0].trace.uid; });
+        .data(cdmodule, function(cd) {
+            return cd[0].trace.uid;
+        });
 
     // using same 'stroke-linejoin' as pie traces
     join.enter().append('g')
@@ -59,8 +61,12 @@ module.exports = function(gd, cdmodule, transitionOpts, makeOnCompleteCallback) 
         var transition = d3.transition()
             .duration(transitionOpts.duration)
             .ease(transitionOpts.easing)
-            .each('end', function() { onComplete && onComplete(); })
-            .each('interrupt', function() { onComplete && onComplete(); });
+            .each('end', function() {
+                onComplete && onComplete();
+            })
+            .each('interrupt', function() {
+                onComplete && onComplete();
+            });
 
         transition.each(function() {
             // Must run the selection again since otherwise enters/updates get grouped together
@@ -145,20 +151,34 @@ function plotOne(gd, cd, element, transitionOpts) {
     }
 
     // filter out slices that won't show up on graph
-    sliceData = sliceData.filter(function(pt) { return pt.y1 <= cutoff; });
+    sliceData = sliceData.filter(function(pt) {
+        return pt.y1 <= cutoff;
+    });
 
     // partition span ('y') to sector radial px value
     var maxY = Math.min(maxHeight, maxDepth);
-    var y2rpx = function(y) { return (y - yOffset) / maxY * rMax; };
+    var y2rpx = function(y) {
+        return (y - yOffset) / maxY * rMax;
+    };
     // (radial px value, partition angle ('x'))  to px [x,y]
-    var rx2px = function(r, x) { return [r * Math.cos(x), -r * Math.sin(x)]; };
+    var rx2px = function(r, x) {
+        return [r * Math.cos(x), -r * Math.sin(x)];
+    };
     // slice path generation fn
-    var pathSlice = function(d) { return Lib.pathAnnulus(d.rpx0, d.rpx1, d.x0, d.x1, cx, cy); };
+    var pathSlice = function(d) {
+        return Lib.pathAnnulus(d.rpx0, d.rpx1, d.x0, d.x1, cx, cy);
+    };
     // slice text translate x/y
-    var transTextX = function(d) { return cx + d.pxmid[0] * d.transform.rCenter + (d.transform.x || 0); };
-    var transTextY = function(d) { return cy + d.pxmid[1] * d.transform.rCenter + (d.transform.y || 0); };
+    var transTextX = function(d) {
+        return cx + d.pxmid[0] * d.transform.rCenter + (d.transform.x || 0);
+    };
+    var transTextY = function(d) {
+        return cy + d.pxmid[1] * d.transform.rCenter + (d.transform.y || 0);
+    };
 
-    slices = slices.data(sliceData, function(pt) { return getPtId(pt); });
+    slices = slices.data(sliceData, function(pt) {
+        return getPtId(pt);
+    });
 
     slices.enter().append('g')
         .classed('slice', true);
@@ -171,7 +191,9 @@ function plotOne(gd, cd, element, transitionOpts) {
                 var slicePath = sliceTop.select('path.surface');
                 slicePath.transition().attrTween('d', function(pt2) {
                     var interp = makeExitSliceInterpolator(pt2);
-                    return function(t) { return pathSlice(interp(t)); };
+                    return function(t) {
+                        return pathSlice(interp(t));
+                    };
                 });
 
                 var sliceTextGroup = sliceTop.select('g.slicetext');
@@ -224,7 +246,9 @@ function plotOne(gd, cd, element, transitionOpts) {
         if(hasTransition) {
             slicePath.transition().attrTween('d', function(pt2) {
                 var interp = makeUpdateSliceIntepolator(pt2);
-                return function(t) { return pathSlice(interp(t)); };
+                return function(t) {
+                    return pathSlice(interp(t));
+                };
             });
         } else {
             slicePath.attr('d', pathSlice);
@@ -270,7 +294,9 @@ function plotOne(gd, cd, element, transitionOpts) {
         if(hasTransition) {
             sliceText.transition().attrTween('transform', function(pt2) {
                 var interp = makeUpdateTextInterpolar(pt2);
-                return function(t) { return strTransform(interp(t), textBB); };
+                return function(t) {
+                    return strTransform(interp(t), textBB);
+                };
             });
         } else {
             sliceText.attr('transform', strTransform(pt, textBB));
@@ -411,7 +437,9 @@ function plotOne(gd, cd, element, transitionOpts) {
             prev.transform.rCenter === 0 ? 1 / 3 :
             1;
         var _rCenterFn = d3.interpolate(prev.transform.rCenter, transform.rCenter);
-        var rCenterFn = function(t) { return _rCenterFn(Math.pow(t, pow)); };
+        var rCenterFn = function(t) {
+            return _rCenterFn(Math.pow(t, pow));
+        };
 
         return function(t) {
             var rpx1 = rpx1Fn(t);
@@ -560,7 +588,9 @@ function attachFxHandlers(sliceTop, gd, cd) {
             var hoverPt = {};
             var parts = [];
             var thisText = [];
-            var hasFlag = function(flag) { return parts.indexOf(flag) !== -1; };
+            var hasFlag = function(flag) {
+                return parts.indexOf(flag) !== -1;
+            };
 
             if(hoverinfo) {
                 parts = hoverinfo === 'all' ?
@@ -723,7 +753,9 @@ function formatSliceLabel(pt, trace, fullLayout) {
     var cdi = pt.data.data;
     var separators = fullLayout.separators;
     var parts = textinfo.split('+');
-    var hasFlag = function(flag) { return parts.indexOf(flag) !== -1; };
+    var hasFlag = function(flag) {
+        return parts.indexOf(flag) !== -1;
+    };
     var thisText = [];
 
     if(hasFlag('label') && cdi.label) thisText.push(cdi.label);

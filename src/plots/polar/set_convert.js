@@ -72,8 +72,12 @@ function setConvertRadial(ax, polarLayout) {
         var b2 = b / m;
 
         var rFilter = rl0 > rl1 ?
-            function(v) { return v <= 0; } :
-            function(v) { return v >= 0; };
+            function(v) {
+                return v <= 0;
+            } :
+            function(v) {
+                return v >= 0;
+            };
 
         ax.c2g = function(v) {
             var r = ax.c2l(v) - rl0;
@@ -84,8 +88,12 @@ function setConvertRadial(ax, polarLayout) {
             return ax.l2c(v + rl0 - b2);
         };
 
-        ax.g2p = function(v) { return v * m; };
-        ax.c2p = function(v) { return ax.g2p(ax.c2g(v)); };
+        ax.g2p = function(v) {
+            return v * m;
+        };
+        ax.c2p = function(v) {
+            return ax.g2p(ax.c2g(v));
+        };
     };
 }
 
@@ -104,8 +112,12 @@ function setConvertAngular(ax, polarLayout) {
         var _d2c = ax.d2c;
         var _c2d = ax.c2d;
 
-        ax.d2c = function(v, unit) { return toRadians(_d2c(v), unit); };
-        ax.c2d = function(v, unit) { return _c2d(fromRadians(v, unit)); };
+        ax.d2c = function(v, unit) {
+            return toRadians(_d2c(v), unit);
+        };
+        ax.c2d = function(v, unit) {
+            return _c2d(fromRadians(v, unit));
+        };
     }
 
     // override makeCalcdata to handle thetaunit and special theta0/dtheta logic
@@ -114,7 +126,9 @@ function setConvertAngular(ax, polarLayout) {
         var len = trace._length;
         var arrayOut, i;
 
-        var _d2c = function(v) { return ax.d2c(v, trace.thetaunit); };
+        var _d2c = function(v) {
+            return ax.d2c(v, trace.thetaunit);
+        };
 
         if(arrayIn) {
             if(Lib.isTypedArray(arrayIn) && axType === 'linear') {
@@ -151,8 +165,12 @@ function setConvertAngular(ax, polarLayout) {
         var dir = {clockwise: -1, counterclockwise: 1}[ax.direction];
         var rot = deg2rad(ax.rotation);
 
-        var rad2g = function(v) { return dir * v + rot; };
-        var g2rad = function(v) { return (v - rot) / dir; };
+        var rad2g = function(v) {
+            return dir * v + rot;
+        };
+        var g2rad = function(v) {
+            return (v - rot) / dir;
+        };
 
         var rad2c, c2rad;
         var rad2t, t2rad;
@@ -174,17 +192,29 @@ function setConvertAngular(ax, polarLayout) {
                 var catLen = ax._categories.length;
                 var _period = ax.period ? Math.max(ax.period, catLen) : catLen;
 
-                c2rad = t2rad = function(v) { return v * 2 * Math.PI / _period; };
-                rad2c = rad2t = function(v) { return v * _period / Math.PI / 2; };
+                c2rad = t2rad = function(v) {
+                    return v * 2 * Math.PI / _period;
+                };
+                rad2c = rad2t = function(v) {
+                    return v * _period / Math.PI / 2;
+                };
 
                 ax.range = [0, _period];
                 break;
         }
 
-        ax.c2g = function(v) { return rad2g(c2rad(v)); };
-        ax.g2c = function(v) { return rad2c(g2rad(v)); };
+        ax.c2g = function(v) {
+            return rad2g(c2rad(v));
+        };
+        ax.g2c = function(v) {
+            return rad2c(g2rad(v));
+        };
 
-        ax.t2g = function(v) { return rad2g(t2rad(v)); };
-        ax.g2t = function(v) { return rad2t(g2rad(v)); };
+        ax.t2g = function(v) {
+            return rad2g(t2rad(v));
+        };
+        ax.g2t = function(v) {
+            return rad2t(g2rad(v));
+        };
     };
 }

@@ -219,8 +219,7 @@ exports.calcTransform = function(gd, trace, opts) {
         if(passed) {
             forAllAttrs(fillFn, i);
             indexToPoints[index++] = originalPointsAccessor(i);
-        }
-        else if(preservegaps) index++;
+        } else if(preservegaps) index++;
     }
 
     opts._indexToPoints = indexToPoints;
@@ -236,41 +235,55 @@ function getFilterFunc(opts, d2c, targetCalendar) {
         return array.indexOf(operation) !== -1;
     }
 
-    var d2cValue = function(v) { return d2c(v, 0, opts.valuecalendar); };
-    var d2cTarget = function(v) { return d2c(v, 0, targetCalendar); };
+    var d2cValue = function(v) {
+        return d2c(v, 0, opts.valuecalendar);
+    };
+    var d2cTarget = function(v) {
+        return d2c(v, 0, targetCalendar);
+    };
 
     var coercedValue;
 
     if(isOperationIn(COMPARISON_OPS)) {
         coercedValue = hasArrayValue ? d2cValue(value[0]) : d2cValue(value);
-    }
-    else if(isOperationIn(INTERVAL_OPS)) {
+    } else if(isOperationIn(INTERVAL_OPS)) {
         coercedValue = hasArrayValue ?
             [d2cValue(value[0]), d2cValue(value[1])] :
             [d2cValue(value), d2cValue(value)];
-    }
-    else if(isOperationIn(SET_OPS)) {
+    } else if(isOperationIn(SET_OPS)) {
         coercedValue = hasArrayValue ? value.map(d2cValue) : [d2cValue(value)];
     }
 
     switch(operation) {
         case '=':
-            return function(v) { return d2cTarget(v) === coercedValue; };
+            return function(v) {
+                return d2cTarget(v) === coercedValue;
+            };
 
         case '!=':
-            return function(v) { return d2cTarget(v) !== coercedValue; };
+            return function(v) {
+                return d2cTarget(v) !== coercedValue;
+            };
 
         case '<':
-            return function(v) { return d2cTarget(v) < coercedValue; };
+            return function(v) {
+                return d2cTarget(v) < coercedValue;
+            };
 
         case '<=':
-            return function(v) { return d2cTarget(v) <= coercedValue; };
+            return function(v) {
+                return d2cTarget(v) <= coercedValue;
+            };
 
         case '>':
-            return function(v) { return d2cTarget(v) > coercedValue; };
+            return function(v) {
+                return d2cTarget(v) > coercedValue;
+            };
 
         case '>=':
-            return function(v) { return d2cTarget(v) >= coercedValue; };
+            return function(v) {
+                return d2cTarget(v) >= coercedValue;
+            };
 
         case '[]':
             return function(v) {

@@ -387,7 +387,9 @@ describe('scattergeo drawing', function() {
     it('preserves order after hide/show', function(done) {
         function getIndices() {
             var out = [];
-            d3.selectAll('.scattergeo').each(function(d) { out.push(d[0].trace.index); });
+            d3.selectAll('.scattergeo').each(function(d) {
+                out.push(d[0].trace.index);
+            });
             return out;
         }
 

@@ -4,7 +4,9 @@ var falafel = require('falafel');
 
 exports.execCmd = function(cmd, cb, errorCb) {
     cb = cb ? cb : function() {};
-    errorCb = errorCb ? errorCb : function(err) { if(err) throw err; };
+    errorCb = errorCb ? errorCb : function(err) {
+        if(err) throw err;
+    };
 
     exec(cmd, function(err) {
         errorCb(err);
@@ -23,8 +25,7 @@ exports.writeFile = function(filePath, content, cb) {
 exports.doesDirExist = function(dirPath) {
     try {
         if(fs.statSync(dirPath).isDirectory()) return true;
-    }
-    catch(e) {
+    } catch(e) {
         return false;
     }
 
@@ -34,8 +35,7 @@ exports.doesDirExist = function(dirPath) {
 exports.doesFileExist = function(filePath) {
     try {
         if(fs.statSync(filePath).isFile()) return true;
-    }
-    catch(e) {
+    } catch(e) {
         return false;
     }
 

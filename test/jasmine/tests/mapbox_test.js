@@ -978,7 +978,9 @@ describe('@noCI, mapbox plots', function() {
 
     it('should respect scrollZoom config option', function(done) {
         var relayoutCnt = 0;
-        gd.on('plotly_relayout', function() { relayoutCnt++; });
+        gd.on('plotly_relayout', function() {
+            relayoutCnt++;
+        });
 
         function _scroll() {
             relayoutCnt = 0;
@@ -999,7 +1001,9 @@ describe('@noCI, mapbox plots', function() {
             expect(zoomNew).toBeGreaterThan(zoom);
             zoom = zoomNew;
         })
-        .then(function() { return Plotly.plot(gd, [], {}, {scrollZoom: false}); })
+        .then(function() {
+            return Plotly.plot(gd, [], {}, {scrollZoom: false});
+        })
         .then(_scroll)
         .then(function() {
             expect(relayoutCnt).toBe(0, 'no additional relayout call');
@@ -1008,7 +1012,9 @@ describe('@noCI, mapbox plots', function() {
             expect(zoomNew).toBe(zoom);
             zoom = zoomNew;
         })
-        .then(function() { return Plotly.plot(gd, [], {}, {scrollZoom: true}); })
+        .then(function() {
+            return Plotly.plot(gd, [], {}, {scrollZoom: true});
+        })
         .then(_scroll)
         .then(function() {
             expect(relayoutCnt).toBe(1, 'scroll relayout cnt');

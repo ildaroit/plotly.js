@@ -74,7 +74,9 @@ module.exports = function supplyDefaults(traceIn, traceOut, defaultColor, layout
         'alphahull',
         'delaunayaxis',
         'opacity'
-    ].forEach(function(x) { coerce(x); });
+    ].forEach(function(x) {
+        coerce(x);
+    });
 
     if('intensity' in traceIn) {
         coerce('intensity');

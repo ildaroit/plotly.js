@@ -344,7 +344,9 @@ describe('Drawing', function() {
 
         it('should not break when <text> is not present', function() {
             text.remove();
-            expect(function() { Drawing.setTextPointsScale(g, 4, 5); }).not.toThrow();
+            expect(function() {
+                Drawing.setTextPointsScale(g, 4, 5);
+            }).not.toThrow();
         });
     });
 

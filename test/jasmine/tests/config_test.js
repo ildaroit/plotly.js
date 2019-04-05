@@ -632,7 +632,9 @@ describe('config argument', function() {
             it('@flaky should still be responsive if the plot is edited', function(done) {
                 fillParent(1, 1);
                 Plotly.plot(gd, data, {}, {responsive: true})
-                .then(function() {return Plotly.restyle(gd, 'y[0]', data[0].y[0] + 2);})
+                .then(function() {
+                    return Plotly.restyle(gd, 'y[0]', data[0].y[0] + 2);
+                })
                 .then(testResponsive)
                 .then(done);
             });
@@ -640,7 +642,9 @@ describe('config argument', function() {
             it('@flaky should still be responsive if the plot is purged and replotted', function(done) {
                 fillParent(1, 1);
                 Plotly.plot(gd, data, {}, {responsive: true})
-                .then(function() {return Plotly.newPlot(gd, data, {}, {responsive: true});})
+                .then(function() {
+                    return Plotly.newPlot(gd, data, {}, {responsive: true});
+                })
                 .then(testResponsive)
                 .then(done);
             });
@@ -648,12 +652,18 @@ describe('config argument', function() {
             it('@flaky should only have one resize handler when plotted more than once', function(done) {
                 fillParent(1, 1);
                 var cntWindowResize = 0;
-                window.addEventListener('resize', function() {cntWindowResize++;});
+                window.addEventListener('resize', function() {
+                    cntWindowResize++;
+                });
                 spyOn(Plotly.Plots, 'resize').and.callThrough();
 
                 Plotly.plot(gd, data, {}, {responsive: true})
-                .then(function() {return Plotly.restyle(gd, 'y[0]', data[0].y[0] + 2);})
-                .then(function() {viewport.set(width / 2, width / 2);})
+                .then(function() {
+                    return Plotly.restyle(gd, 'y[0]', data[0].y[0] + 2);
+                })
+                .then(function() {
+                    viewport.set(width / 2, width / 2);
+                })
                 .then(delay(RESIZE_DELAY))
                 // .then(function() {viewport.set(newWidth, 2 * newHeight);}).then(delay(200))
                 .then(function() {
@@ -667,7 +677,9 @@ describe('config argument', function() {
             it('@flaky should become responsive if configured as such via Plotly.react', function(done) {
                 fillParent(1, 1);
                 Plotly.plot(gd, data, {}, {responsive: false})
-                .then(function() {return Plotly.react(gd, data, {}, {responsive: true});})
+                .then(function() {
+                    return Plotly.react(gd, data, {}, {responsive: true});
+                })
                 .then(testResponsive)
                 .then(done);
             });
@@ -676,15 +688,23 @@ describe('config argument', function() {
                 fillParent(1, 1);
                 Plotly.plot(gd, data, {}, {responsive: true})
                 // Check initial size
-                .then(function() {checkLayoutSize(width, height);})
+                .then(function() {
+                    checkLayoutSize(width, height);
+                })
                 // Turn off responsiveness
-                .then(function() {return Plotly.react(gd, data, {}, {responsive: false});})
+                .then(function() {
+                    return Plotly.react(gd, data, {}, {responsive: false});
+                })
                 // Resize viewport
-                .then(function() {viewport.set(width / 2, height / 2);})
+                .then(function() {
+                    viewport.set(width / 2, height / 2);
+                })
                 // Wait for resize to happen (Plotly.resize has an internal timeout)
                 .then(delay(RESIZE_DELAY))
                 // Check that final figure's size hasn't changed
-                .then(function() {checkLayoutSize(width, height);})
+                .then(function() {
+                    checkLayoutSize(width, height);
+                })
                 .catch(failTest)
                 .then(done);
             });
@@ -777,7 +797,9 @@ describe('config argument', function() {
     describe('scrollZoom:', function() {
         var gd;
 
-        beforeEach(function() { gd = createGraphDiv(); });
+        beforeEach(function() {
+            gd = createGraphDiv();
+        });
 
         afterEach(destroyGraphDiv);
 

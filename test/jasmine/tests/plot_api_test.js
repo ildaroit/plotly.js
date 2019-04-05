@@ -1205,7 +1205,9 @@ describe('Test plot api', function() {
             }
 
             function _restyle(arg) {
-                return function() { return Plotly.restyle(gd, arg); };
+                return function() {
+                    return Plotly.restyle(gd, arg);
+                };
             }
 
             Plotly.plot(gd, [{
@@ -1280,8 +1282,7 @@ describe('Test plot api', function() {
                     expect(gd.data[0].xbins).toBeUndefined(msg);
                     expect(gd.data[1].xbins).toBeUndefined(msg);
                     expect(gd.data[1].ybins).toBeUndefined(msg);
-                }
-                else {
+                } else {
                     // we can have - and use - partial autobin now
                     expect(gd.data[0].xbins).toEqual({start: start0});
                     expect(gd.data[1].xbins).toEqual({end: end1});

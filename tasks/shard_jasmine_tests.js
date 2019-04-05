@@ -56,7 +56,9 @@ glob(path.join(pathToJasmineTests, '*.js'), function(err, files) {
     });
 
     // sort ranking in decreasing order
-    ranking.sort(function(a, b) { return file2cnt[b] - file2cnt[a]; });
+    ranking.sort(function(a, b) {
+        return file2cnt[b] - file2cnt[a];
+    });
 
     var runi;
     var cnt;

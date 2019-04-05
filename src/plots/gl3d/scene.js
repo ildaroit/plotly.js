@@ -183,8 +183,7 @@ function render(scene) {
         }
 
         oldEventData = eventData;
-    }
-    else {
+    } else {
         Fx.loneUnhover(svgContainer);
         scene.graphDiv.emit('plotly_unhover', oldEventData);
     }
@@ -229,8 +228,7 @@ function tryCreatePlot(scene, cameraObject, pixelRatio, canvas, gl) {
 
     try {
         scene.glplot = createPlot(glplotOptions);
-    }
-    catch(e) {
+    } catch(e) {
         return false;
     }
 
@@ -575,8 +573,7 @@ proto.plot = function(sceneData, fullLayout, layout) {
         if(axisType in axisTypeRatios) {
             axisTypeRatios[axisType].acc *= dataScale[i];
             axisTypeRatios[axisType].count += 1;
-        }
-        else {
+        } else {
             axisTypeRatios[axisType] = {
                 acc: dataScale[i],
                 count: 1

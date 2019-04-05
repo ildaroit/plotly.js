@@ -89,8 +89,7 @@ module.exports = function drawArrowHead(el3, ends, options) {
             start.y -= startbackOffY;
             el3.attr({x1: start.x, y1: start.y});
         }
-    }
-    else if(el.nodeName === 'path') {
+    } else if(el.nodeName === 'path') {
         var pathlen = el.getTotalLength();
         // using dash to hide the backOff region of the path.
         // if we ever allow dash for the arrow we'll have to
@@ -124,7 +123,9 @@ module.exports = function drawArrowHead(el3, ends, options) {
         el3.style('stroke-dasharray', dashArray);
     }
 
-    function hideLine() { el3.style('stroke-dasharray', '0px,100px'); }
+    function hideLine() {
+        el3.style('stroke-dasharray', '0px,100px');
+    }
 
     function drawhead(arrowHeadStyle, p, rot, arrowScale) {
         if(!arrowHeadStyle.path) return;

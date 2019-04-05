@@ -111,8 +111,7 @@ function getAutoRange(gd, ax) {
                         maxbest = maxpt;
                         mbest = dv / dp;
                     }
-                }
-                else if(dv / axLen > mbest) {
+                } else if(dv / axLen > mbest) {
                     // in case of padding longer than the axis
                     // at least include the unpadded data values.
                     minbest = {val: minpt.val, pad: 0};
@@ -137,8 +136,7 @@ function getAutoRange(gd, ax) {
                 // In principle this could be [0, 1] or [-1, 0] but usually
                 // 'tozero' pins 0 to the low end, so follow that.
                 newRange = [0, 1];
-            }
-            else {
+            } else {
                 var maxPad = (minmin > 0 ? maxArray : minArray).reduce(getMaxPad, 0);
                 // we're pushing a single value away from the edge due to its
                 // padding, with the other end clamped at zero
@@ -151,8 +149,7 @@ function getAutoRange(gd, ax) {
         } else {
             newRange = [lower, upper];
         }
-    }
-    else {
+    } else {
         if(toZero) {
             if(minbest.val >= 0) {
                 minbest = {val: 0, pad: 0};
@@ -160,8 +157,7 @@ function getAutoRange(gd, ax) {
             if(maxbest.val <= 0) {
                 maxbest = {val: 0, pad: 0};
             }
-        }
-        else if(nonNegative) {
+        } else if(nonNegative) {
             if(minbest.val - mbest * getPad(minbest) < 0) {
                 minbest = {val: 0, pad: 0};
             }
@@ -201,7 +197,9 @@ function makePadFn(ax) {
             (ax.domain[1] - ax.domain[0]);
     }
 
-    return function getPad(pt) { return pt.pad + (pt.extrapad ? extrappad : 0); };
+    return function getPad(pt) {
+        return pt.pad + (pt.extrapad ? extrappad : 0);
+    };
 }
 
 function concatExtremes(gd, ax) {
@@ -329,11 +327,14 @@ function findExtremes(ax, data, opts) {
     function makePadAccessor(item) {
         if(Array.isArray(item)) {
             hasArrayOption = true;
-            return function(i) { return Math.max(Number(item[i]||0), 0); };
-        }
-        else {
+            return function(i) {
+                return Math.max(Number(item[i]||0), 0);
+            };
+        } else {
             var v = Math.max(Number(item||0), 0);
-            return function() { return v; };
+            return function() {
+                return v;
+            };
         }
     }
 
@@ -489,5 +490,9 @@ function goodNumber(v) {
     return isNumeric(v) && Math.abs(v) < FP_SAFE;
 }
 
-function lessOrEqual(v0, v1) { return v0 <= v1; }
-function greaterOrEqual(v0, v1) { return v0 >= v1; }
+function lessOrEqual(v0, v1) {
+    return v0 <= v1;
+}
+function greaterOrEqual(v0, v1) {
+    return v0 >= v1;
+}

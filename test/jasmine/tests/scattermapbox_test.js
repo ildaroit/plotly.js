@@ -390,7 +390,9 @@ describe('scattermapbox convert', function() {
             var features = opts.circle.geojson.features;
 
             function _assert(kProp, kExp) {
-                var actual = features.map(function(f) { return f.properties[kProp]; });
+                var actual = features.map(function(f) {
+                    return f.properties[kProp];
+                });
                 var expected = s.expected[kExp];
                 var msg = msg0 + ' marker.' + kExp;
 

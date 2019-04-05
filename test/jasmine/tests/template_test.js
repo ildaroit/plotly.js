@@ -303,8 +303,7 @@ describe('validateTemplate', function() {
         if(expected) {
             expect(countToCheck ? out1.slice(0, countToCheck) : out1)
                 .toEqual(expected);
-        }
-        else {
+        } else {
             expect(out1).toBeUndefined();
         }
     }
@@ -323,10 +322,18 @@ describe('validateTemplate', function() {
         // Test with DOM elements as argument
         var gd = createGraphDiv();
         return Plotly.newPlot(gd, mock)
-        .then(function() {out1 = Plotly.validateTemplate(gd);})
-        .then(function() {return Plotly.newPlot(gd, mockNoTemplate);})
-        .then(function() {out2 = Plotly.validateTemplate(gd, template);})
-        .then(function() {compareOutputs(out1, out2, expected, countToCheck);})
+        .then(function() {
+            out1 = Plotly.validateTemplate(gd);
+        })
+        .then(function() {
+            return Plotly.newPlot(gd, mockNoTemplate);
+        })
+        .then(function() {
+            out2 = Plotly.validateTemplate(gd, template);
+        })
+        .then(function() {
+            compareOutputs(out1, out2, expected, countToCheck);
+        })
         .catch(failTest)
         .then(destroyGraphDiv);
     }

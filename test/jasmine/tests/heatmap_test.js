@@ -532,7 +532,9 @@ describe('heatmap plot', function() {
     it('keeps the correct ordering after hide and show', function(done) {
         function getIndices() {
             var out = [];
-            d3.selectAll('.hm image').each(function(d) { out.push(d.trace.index); });
+            d3.selectAll('.hm image').each(function(d) {
+                out.push(d.trace.index);
+            });
             return out;
         }
 

@@ -235,7 +235,9 @@ describe('calculated data and points', function() {
                 // The below test case reifies this current behavior, and checks proper order of categories kept.
 
                 var domTickTexts = Array.prototype.slice.call(document.querySelectorAll('g.xtick'))
-                    .map(function(e) {return e.__data__.text;});
+                    .map(function(e) {
+                        return e.__data__.text;
+                    });
 
                 expect(domTickTexts).toEqual(['b', 'x', 'a', 'd', 'z', 'e', 'c']);  // y, q and k has no data points
             });
@@ -258,7 +260,9 @@ describe('calculated data and points', function() {
                 expect(gd.calcdata[0][4]).toEqual(jasmine.objectContaining({x: 4, y: 14}));
 
                 var domTickTexts = Array.prototype.slice.call(document.querySelectorAll('g.xtick'))
-                    .map(function(e) {return e.__data__.text;});
+                    .map(function(e) {
+                        return e.__data__.text;
+                    });
 
                 expect(domTickTexts).toEqual(['y', 'b', 'x', 'a', 'd', 'z', 'e', 'c']);  // q, k has no data; y is null
             });
@@ -304,9 +308,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ]);
 
                 expect(gd.calcdata[0][0]).toEqual(jasmine.objectContaining({x: 0, y: 10}));
@@ -330,9 +340,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'trace',
@@ -360,9 +376,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'category ascending',
@@ -391,9 +413,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'category descending',
@@ -422,9 +450,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'array',
@@ -454,9 +488,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Bearing', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ]);
 
                 expect(gd.calcdata[0][0]).toEqual(jasmine.objectContaining({x: 0, y: 10}));
@@ -481,9 +521,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Bearing', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'trace',
@@ -512,9 +558,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Bearing', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'category ascending',
@@ -544,9 +596,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Bearing', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'category descending',
@@ -576,9 +634,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Bearing', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'array',
@@ -609,9 +673,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ]);
 
                 expect(gd.calcdata[0][0]).toEqual(jasmine.objectContaining({x: 0, y: 10}));
@@ -633,9 +703,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'trace',
@@ -661,9 +737,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'category ascending',
@@ -690,9 +772,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], { xaxis: {
                     // type: 'category', // commented out to rely on autotyping for added realism
                     categoryorder: 'category descending',
@@ -719,9 +807,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], {
                     xaxis: {
                         // type: 'category', // commented out to rely on autotyping for added realism
@@ -749,9 +843,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;})},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;})},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;})}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    })},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    })},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    })}
                 ], {
                     xaxis: {
                         // type: 'category', // commented out to rely on autotyping for added realism
@@ -781,9 +881,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Pump', 'Leak', 'Bearing', 'Seals'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;}), type: 'bar'},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;}), type: 'bar'},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;}), type: 'bar'}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    }), type: 'bar'},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    }), type: 'bar'},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    }), type: 'bar'}
                 ], {
                     barmode: 'stack',
                     xaxis: {
@@ -815,9 +921,15 @@ describe('calculated data and points', function() {
                 var x3 = ['Motor', 'Gear', 'Bearing'];
 
                 Plotly.plot(gd, [
-                    {x: x1, y: x1.map(function(d, i) {return i + 10;}), type: 'bar'},
-                    {x: x2, y: x2.map(function(d, i) {return i + 20;}), type: 'bar'},
-                    {x: x3, y: x3.map(function(d, i) {return i + 30;}), type: 'bar'}
+                    {x: x1, y: x1.map(function(d, i) {
+                        return i + 10;
+                    }), type: 'bar'},
+                    {x: x2, y: x2.map(function(d, i) {
+                        return i + 20;
+                    }), type: 'bar'},
+                    {x: x3, y: x3.map(function(d, i) {
+                        return i + 30;
+                    }), type: 'bar'}
                 ], {
                     barmode: 'stack',
                     xaxis: {

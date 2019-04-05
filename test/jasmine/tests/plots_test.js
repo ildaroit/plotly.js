@@ -36,7 +36,9 @@ describe('Test Plots', function() {
                 type: 'contour',
                 _empties: [1, 2, 3]
             }];
-            oldFullData.forEach(function(trace) { trace._fullInput = trace; });
+            oldFullData.forEach(function(trace) {
+                trace._fullInput = trace;
+            });
 
             var oldFullLayout = {
                 _plots: { xy: { plot: {} } },
@@ -383,9 +385,15 @@ describe('Test Plots', function() {
                 }
 
                 Plotly.plot(gd, [], {})
-                    .then(function() { _assert({l: 74, r: 74, t: 82, b: 66}); })
-                    .then(function() { return Plotly.Plots.resize(gd); })
-                    .then(function() { _assert({l: 74, r: 74, t: 82, b: 66}); })
+                    .then(function() {
+                        _assert({l: 74, r: 74, t: 82, b: 66});
+                    })
+                    .then(function() {
+                        return Plotly.Plots.resize(gd);
+                    })
+                    .then(function() {
+                        _assert({l: 74, r: 74, t: 82, b: 66});
+                    })
                     .catch(failTest)
                     .then(done);
             });
@@ -810,7 +818,9 @@ describe('Test Plots', function() {
     describe('subplot cleaning logic', function() {
         var gd;
 
-        beforeEach(function() { gd = createGraphDiv(); });
+        beforeEach(function() {
+            gd = createGraphDiv();
+        });
 
         afterEach(destroyGraphDiv);
 

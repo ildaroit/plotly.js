@@ -504,7 +504,9 @@ describe('Test relayout on polar subplots:', function() {
         var gd = createGraphDiv();
         var fig = Lib.extendDeep({}, require('@mocks/polar_scatter.json'));
         var traces = Lib.extendDeep([], fig.data);
-        var inds = traces.map(function(_, i) { return i; });
+        var inds = traces.map(function(_, i) {
+            return i;
+        });
 
         function _assert(exp) {
             expect(d3.selectAll('g.polar').size()).toBe(exp.subplot, '# subplot layer');
@@ -652,11 +654,21 @@ describe('Test relayout on polar subplots:', function() {
             type: 'scatterpolar',
             r: ['a', 'b', 'c']
         }])
-        .then(function() { _assert('base', true); })
-        .then(function() { return Plotly.relayout(gd, 'polar.hole', 1); })
-        .then(function() { _assert('hole=1', false); })
-        .then(function() { return Plotly.relayout(gd, 'polar.hole', 0.2); })
-        .then(function() { _assert('hole=0.2', true); })
+        .then(function() {
+            _assert('base', true);
+        })
+        .then(function() {
+            return Plotly.relayout(gd, 'polar.hole', 1);
+        })
+        .then(function() {
+            _assert('hole=1', false);
+        })
+        .then(function() {
+            return Plotly.relayout(gd, 'polar.hole', 0.2);
+        })
+        .then(function() {
+            _assert('hole=0.2', true);
+        })
         .catch(failTest)
         .then(done);
     });
@@ -779,7 +791,9 @@ describe('Test polar interactions:', function() {
         }
 
         _plot(fig)
-        .then(function() { _hover(ptPos); })
+        .then(function() {
+            _hover(ptPos);
+        })
         .then(function() {
             _assert([{
                 r: 3.26,
@@ -788,7 +802,9 @@ describe('Test polar interactions:', function() {
                 plotly_hover: 1
             }, 'after hover on pt');
         })
-        .then(function() { _unhover(blankPos);})
+        .then(function() {
+            _unhover(blankPos);
+        })
         .then(function() {
             _assert([{
                 r: 3.26,
@@ -798,14 +814,18 @@ describe('Test polar interactions:', function() {
                 plotly_unhover: 1
             }, 'after unhover off pt');
         })
-        .then(function() { _hover(marginPos);})
+        .then(function() {
+            _hover(marginPos);
+        })
         .then(function() {
             _assert('', {
                 plotly_hover: 1,
                 plotly_unhover: 1,
             }, 'after hovering in margin');
         })
-        .then(function() { _click(ptPos); })
+        .then(function() {
+            _click(ptPos);
+        })
         .then(function() {
             _assert([{
                 r: 3.26,
@@ -816,7 +836,9 @@ describe('Test polar interactions:', function() {
                 plotly_click: 1
             }, 'after click');
         })
-        .then(function() { return _doubleClick(ptPos); })
+        .then(function() {
+            return _doubleClick(ptPos);
+        })
         .then(function() {
             assertEventCnt({
                 plotly_hover: 2,
@@ -826,7 +848,9 @@ describe('Test polar interactions:', function() {
                 plotly_relayout: 1
             }, 'after doubleclick');
         })
-        .then(function() { _click(ptPos, modClickOpts); })
+        .then(function() {
+            _click(ptPos, modClickOpts);
+        })
         .then(function() {
             _assert([{
                 r: 3.26,
@@ -839,7 +863,9 @@ describe('Test polar interactions:', function() {
                 plotly_relayout: 1
             }, 'after modified click');
         })
-        .then(function() { _click(ptPos, rightClickOpts); })
+        .then(function() {
+            _click(ptPos, rightClickOpts);
+        })
         .then(function() {
             _assert([{
                 r: 3.26,
@@ -909,55 +935,91 @@ describe('Test polar interactions:', function() {
 
         _plot(fig)
         .then(_assertBase)
-        .then(function() { return _drag(mid, [50, 50]); })
+        .then(function() {
+            return _drag(mid, [50, 50]);
+        })
         .then(function() {
             _assertDrag([0, 5.24], 'from center move toward bottom-right');
         })
         .then(delay(20))
-        .then(function() { return _doubleClick(mid); })
+        .then(function() {
+            return _doubleClick(mid);
+        })
         .then(delay(20))
         .then(_reset)
-        .then(function() { return _drag(mid, [-50, -50]); })
+        .then(function() {
+            return _drag(mid, [-50, -50]);
+        })
         .then(function() {
             _assertDrag([0, 5.24], 'from center move toward top-left');
         })
         .then(delay(20))
-        .then(function() { return _doubleClick(mid); })
+        .then(function() {
+            return _doubleClick(mid);
+        })
         .then(delay(20))
         .then(_reset)
-        .then(function() { return _drag([mid[0] + 30, mid[0] - 30], [50, -50]); })
+        .then(function() {
+            return _drag([mid[0] + 30, mid[0] - 30], [50, -50]);
+        })
         .then(function() {
             _assertDrag([3.1, 8.4], 'from quadrant #1 move top-right');
         })
         .then(delay(20))
-        .then(function() { return _doubleClick(mid); })
+        .then(function() {
+            return _doubleClick(mid);
+        })
         .then(delay(20))
         .then(_reset)
-        .then(function() { return _drag([345, 200], [-50, 0]); })
+        .then(function() {
+            return _drag([345, 200], [-50, 0]);
+        })
         .then(function() {
             _assertDrag([7.0, 11.1], 'from right edge move left');
         })
         .then(delay(20))
-        .then(function() { return _doubleClick(mid); })
+        .then(function() {
+            return _doubleClick(mid);
+        })
         .then(delay(20))
         .then(_reset)
-        .then(function() { return _drag(mid, [10, 10]);})
-        .then(function() { _assertBase('from center to not far enough'); })
-        .then(function() { return _drag([mid[0] + 30, mid[0] - 30], [-10, 0]);})
-        .then(function() { _assertBase('from quadrant #1 to not far enough'); })
-        .then(function() { return _drag([345, 200], [-10, 0]);})
-        .then(function() { _assertBase('from right edge to not far enough'); })
+        .then(function() {
+            return _drag(mid, [10, 10]);
+        })
+        .then(function() {
+            _assertBase('from center to not far enough');
+        })
+        .then(function() {
+            return _drag([mid[0] + 30, mid[0] - 30], [-10, 0]);
+        })
+        .then(function() {
+            _assertBase('from quadrant #1 to not far enough');
+        })
+        .then(function() {
+            return _drag([345, 200], [-10, 0]);
+        })
+        .then(function() {
+            _assertBase('from right edge to not far enough');
+        })
         .then(function() {
             expect(eventCnts.plotly_relayout)
                 .toBe(relayoutNumber, 'no new relayout events after *not far enough* cases');
         })
         .then(delay(20))
-        .then(function() { return _doubleClick(mid); })
+        .then(function() {
+            return _doubleClick(mid);
+        })
         .then(delay(20))
         .then(_reset)
-        .then(function() { return Plotly.relayout(gd, 'polar.hole', 0.2); })
-        .then(function() { relayoutNumber++; })
-        .then(function() { return _drag([mid[0] + 30, mid[0] - 30], [50, -50]); })
+        .then(function() {
+            return Plotly.relayout(gd, 'polar.hole', 0.2);
+        })
+        .then(function() {
+            relayoutNumber++;
+        })
+        .then(function() {
+            return _drag([mid[0] + 30, mid[0] - 30], [50, -50]);
+        })
         .then(function() {
             _assertDrag([1.15, 7.70], 'with polar.hole>0, from quadrant #1 move top-right');
         })
@@ -1010,7 +1072,9 @@ describe('Test polar interactions:', function() {
 
         function _reset() {
             return delay(100)()
-                .then(function() { return _doubleClick([200, 200]); })
+                .then(function() {
+                    return _doubleClick([200, 200]);
+                })
                 .then(function() {
                     resetNumber++;
 
@@ -1022,22 +1086,30 @@ describe('Test polar interactions:', function() {
 
         _plot(fig)
         .then(_assertBase)
-        .then(function() { return _drag(dragPos0, [-50, 0]); })
+        .then(function() {
+            return _drag(dragPos0, [-50, 0]);
+        })
         .then(function() {
             _assert([0, 13.9], 0, 13.9, null, 'move inward');
         })
         .then(_reset)
-        .then(function() { return _drag(dragPos0, [50, 0]); })
+        .then(function() {
+            return _drag(dragPos0, [50, 0]);
+        })
         .then(function() {
             _assert([0, 8.33], 0, 8.33, null, 'move outward');
         })
         .then(_reset)
-        .then(function() { return _drag(dragPos0, [0, -50]); })
+        .then(function() {
+            return _drag(dragPos0, [0, -50]);
+        })
         .then(function() {
             _assert([0, 11.1], 15.94, null, 15.94, 'move counterclockwise');
         })
         .then(_reset)
-        .then(function() { return _drag(dragPos0, [0, 50]); })
+        .then(function() {
+            return _drag(dragPos0, [0, 50]);
+        })
         .then(function() {
             _assert([0, 11.1], -15.94, null, -15.94, 'move clockwise');
         })
@@ -1075,12 +1147,18 @@ describe('Test polar interactions:', function() {
         }
 
         _plot(fig)
-        .then(function() { return _drag(dragPos0, [-50, 0]); })
+        .then(function() {
+            return _drag(dragPos0, [-50, 0]);
+        })
         .then(function() {
             _assert([3.55, 11.36], 'move inward');
         })
-        .then(function() { return Plotly.relayout(gd, 'polar.radialaxis.autorange', true); })
-        .then(function() { return _drag(dragPos0, [50, 0]); })
+        .then(function() {
+            return Plotly.relayout(gd, 'polar.radialaxis.autorange', true);
+        })
+        .then(function() {
+            return _drag(dragPos0, [50, 0]);
+        })
         .then(function() {
             _assert([-3.55, 11.36], 'move outward');
         })
@@ -1124,7 +1202,9 @@ describe('Test polar interactions:', function() {
 
         function _reset() {
             return delay(100)()
-                .then(function() { return _doubleClick([200, 200]); })
+                .then(function() {
+                    return _doubleClick([200, 200]);
+                })
                 .then(function() {
                     resetNumber++;
 
@@ -1136,12 +1216,16 @@ describe('Test polar interactions:', function() {
 
         _plot(fig)
         .then(_assertBase)
-        .then(function() { return _drag(dragPos0, [-20, -20]); })
+        .then(function() {
+            return _drag(dragPos0, [-20, -20]);
+        })
         .then(function() {
             _assert(9.9, 'move counterclockwise');
         })
         .then(_reset)
-        .then(function() { return _drag(dragPos0, [20, 20]); })
+        .then(function() {
+            return _drag(dragPos0, [20, 20]);
+        })
         .then(function() {
             _assert(-8.4, 'move clockwise');
         })
@@ -1191,12 +1275,16 @@ describe('Test polar interactions:', function() {
             desc: 'line case',
             // start with lines to lock down fix for #2888
             patch: function(fig) {
-                fig.data.forEach(function(trace) { trace.mode = 'lines'; });
+                fig.data.forEach(function(trace) {
+                    trace.mode = 'lines';
+                });
             }
         }, {
             desc: 'line & markers case',
             patch: function(fig) {
-                fig.data.forEach(function(trace) { trace.mode = 'markers+lines'; });
+                fig.data.forEach(function(trace) {
+                    trace.mode = 'markers+lines';
+                });
             }
         }, {
             desc: 'gl and non-gl on same subplot case',
@@ -1220,7 +1308,9 @@ describe('Test polar interactions:', function() {
 
                 if(s.patch) s.patch(fig);
                 nTraces = fig.data
-                    .filter(function(trace) { return trace.type === 'scatterpolargl'; })
+                    .filter(function(trace) {
+                        return trace.type === 'scatterpolargl';
+                    })
                     .length;
 
                 Plotly.newPlot(gd, fig).then(function() {
@@ -1238,9 +1328,13 @@ describe('Test polar interactions:', function() {
                         }
                     });
                 })
-                .then(function() { return _dragRadial(); })
+                .then(function() {
+                    return _dragRadial();
+                })
                 .then(_assert)
-                .then(function() { return _dragAngular(); })
+                .then(function() {
+                    return _dragAngular();
+                })
                 .then(_assert)
                 .catch(failTest)
                 .then(done);
@@ -1294,16 +1388,34 @@ describe('Test polar *gridshape linear* interactions', function() {
             hovermode: false
         })
         .then(function() {
-            gd.on('plotly_relayout', function() { evtCnt++; });
+            gd.on('plotly_relayout', function() {
+                evtCnt++;
+            });
         })
-        .then(function() { _assert('base', 90); })
-        .then(function() { return _drag(dragPos0, [100, 50]); })
-        .then(function() { _assert('rotate right', 45); })
-        .then(function() { return _drag(dragPos1, [20, 20]); })
-        .then(function() { _assert('rotate right, snapped back', 45); })
-        .then(function() { return _drag(dragPos1, [-100, -50]); })
-        .then(function() { _assert('rotate left', 90); })
-        .then(function() { expect(evtCnt).toBe(3); })
+        .then(function() {
+            _assert('base', 90);
+        })
+        .then(function() {
+            return _drag(dragPos0, [100, 50]);
+        })
+        .then(function() {
+            _assert('rotate right', 45);
+        })
+        .then(function() {
+            return _drag(dragPos1, [20, 20]);
+        })
+        .then(function() {
+            _assert('rotate right, snapped back', 45);
+        })
+        .then(function() {
+            return _drag(dragPos1, [-100, -50]);
+        })
+        .then(function() {
+            _assert('rotate left', 90);
+        })
+        .then(function() {
+            expect(evtCnt).toBe(3);
+        })
         .catch(failTest)
         .then(done);
     });
@@ -1397,9 +1509,13 @@ describe('Test polar *gridshape linear* interactions', function() {
                 .filter(Boolean)
                 .map(function(s) {
                     return s.split('L')
-                        .map(function(s) { return s.split(',').map(Number); });
+                        .map(function(s) {
+                            return s.split(',').map(Number);
+                        });
                 })
-                .reduce(function(a, b) { return a.concat(b); });
+                .reduce(function(a, b) {
+                    return a.concat(b);
+                });
         }
 
         function _run(msg, p0, dp, exp) {

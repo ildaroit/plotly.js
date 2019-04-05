@@ -15,7 +15,9 @@ var Drawing = require('../../components/drawing');
 function style(gd, cd) {
     var s = cd ? cd[0].node3 : d3.select(gd).selectAll('g.trace.boxes');
 
-    s.style('opacity', function(d) { return d[0].trace.opacity; });
+    s.style('opacity', function(d) {
+        return d[0].trace.opacity;
+    });
 
     s.each(function(d) {
         var el = d3.select(this);

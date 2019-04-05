@@ -22,7 +22,9 @@
  */
 module.exports = function makeTraceGroups(traceLayer, cdModule, cls) {
     var traces = traceLayer.selectAll('g.' + cls.replace(/\s/g, '.'))
-        .data(cdModule, function(cd) { return cd[0].trace.uid; });
+        .data(cdModule, function(cd) {
+            return cd[0].trace.uid;
+        });
 
     traces.exit().remove();
 

@@ -46,8 +46,7 @@ function calc(gd, trace) {
             if(!isNumeric(v)) continue;
             v = +v;
             if(v < 0) continue;
-        }
-        else v = 1;
+        } else v = 1;
 
         label = labels[i];
         if(label === undefined || label === '') label = i;
@@ -69,8 +68,7 @@ function calc(gd, trace) {
                 pts: [i],
                 hidden: hidden
             });
-        }
-        else {
+        } else {
             pt = cd[thisLabelIndex];
             pt.v += v;
             pt.pts.push(i);
@@ -82,7 +80,11 @@ function calc(gd, trace) {
         }
     }
 
-    if(trace.sort) cd.sort(function(a, b) { return b.v - a.v; });
+    if(trace.sort) {
+        cd.sort(function(a, b) {
+            return b.v - a.v;
+        });
+    }
 
     // include the sum of all values in the first point
     if(cd[0]) cd[0].vTotal = vTotal;

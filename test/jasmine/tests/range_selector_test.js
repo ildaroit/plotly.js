@@ -206,7 +206,9 @@ describe('range selector defaults:', function() {
             }
         };
         var containerOut;
-        function getStepmode(button) { return button.stepmode; }
+        function getStepmode(button) {
+            return button.stepmode;
+        }
 
         containerOut = {};
         supply(containerIn, containerOut);

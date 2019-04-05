@@ -1264,7 +1264,9 @@ describe('waterfall hover', function() {
             gd = createGraphDiv();
 
             var mock = Lib.extendDeep({}, require('@mocks/text_chart_arrays'));
-            mock.data.forEach(function(t) { t.type = 'waterfall'; });
+            mock.data.forEach(function(t) {
+                t.type = 'waterfall';
+            });
 
             Plotly.plot(gd, mock).then(function() {
                 var out = _hover(gd, -0.25, 0.5, 'closest');

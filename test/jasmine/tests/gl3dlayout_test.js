@@ -277,7 +277,9 @@ describe('Test Gl3d layout defaults', function() {
 describe('Gl3d layout edge cases', function() {
     var gd;
 
-    beforeEach(function() {gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
     afterEach(destroyGraphDiv);
 
     it('should handle auto aspect ratio correctly on data changes', function(done) {

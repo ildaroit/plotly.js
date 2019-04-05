@@ -493,7 +493,9 @@ describe('Plotly.___ methods', function() {
         });
 
         it('errors before even generating a promise if gd is not defined', function() {
-            expect(function() { Plotly.Plots.resize(); })
+            expect(function() {
+                Plotly.Plots.resize();
+            })
                 .toThrow(new Error('DOM element provided is null or undefined'));
         });
     });

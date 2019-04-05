@@ -353,33 +353,45 @@ describe('Test sort transform interactions:', function() {
             margin: {l: 0, t: 0, r: 0, b: 0},
             hovermode: 'closest'
         })
-        .then(function() { return hover(gd, 'D'); })
+        .then(function() {
+            return hover(gd, 'D');
+        })
         .then(function(eventData) {
             assertPt(eventData, 0, 1, 3, 'D');
         })
-        .then(function() { return hover(gd, 'G'); })
+        .then(function() {
+            return hover(gd, 'G');
+        })
         .then(function(eventData) {
             assertPt(eventData, 1, 1, 6, 'G');
         })
         .then(function() {
             return Plotly.restyle(gd, 'transforms[0].enabled', true);
         })
-        .then(function() { return hover(gd, 'D'); })
+        .then(function() {
+            return hover(gd, 'D');
+        })
         .then(function(eventData) {
             assertPt(eventData, 0, 1, 1, 'D');
         })
-        .then(function() { return hover(gd, 'G'); })
+        .then(function() {
+            return hover(gd, 'G');
+        })
         .then(function(eventData) {
             assertPt(eventData, 1, 1, 5, 'G');
         })
         .then(function() {
             return Plotly.relayout(gd, 'xaxis.range', [-5, 5]);
         })
-        .then(function() { return hover(gd, 'D'); })
+        .then(function() {
+            return hover(gd, 'D');
+        })
         .then(function(eventData) {
             assertPt(eventData, 0, 1, 1, 'D');
         })
-        .then(function() { return hover(gd, 'G'); })
+        .then(function() {
+            return hover(gd, 'G');
+        })
         .then(function(eventData) {
             assertPt(eventData, 1, 1, 5, 'G');
         })

@@ -150,9 +150,13 @@ function makeCircleOpts(calcTrace) {
     var arrayOpacity = Lib.isArrayOrTypedArray(marker.opacity);
     var i;
 
-    function addTraceOpacity(o) { return trace.opacity * o; }
+    function addTraceOpacity(o) {
+        return trace.opacity * o;
+    }
 
-    function size2radius(s) { return s / 2; }
+    function size2radius(s) {
+        return s / 2;
+    }
 
     var colorFn;
     if(arrayColor) {
@@ -274,17 +278,21 @@ function makeSymbolGeoJSON(calcTrace) {
 
 function getFillFunc(attr) {
     if(Lib.isArrayOrTypedArray(attr)) {
-        return function(v) { return v; };
-    }
-    else if(attr) {
-        return function() { return attr; };
-    }
-    else {
+        return function(v) {
+            return v;
+        };
+    } else if(attr) {
+        return function() {
+            return attr;
+        };
+    } else {
         return blankFillFunc;
     }
 }
 
-function blankFillFunc() { return ''; }
+function blankFillFunc() {
+    return '';
+}
 
 // only need to check lon (OR lat)
 function isBADNUM(lonlat) {

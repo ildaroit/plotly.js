@@ -7,7 +7,9 @@ var failTest = require('../assets/fail_test');
 describe('aggregate', function() {
     var gd;
 
-    beforeEach(function() { gd = createGraphDiv(); });
+    beforeEach(function() {
+        gd = createGraphDiv();
+    });
 
     afterEach(destroyGraphDiv);
 

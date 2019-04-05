@@ -418,7 +418,9 @@ describe('Test histogram', function() {
         });
 
         function calcPositions(opts, extraTraces, prepend) {
-            return _calc(opts, extraTraces, {}, prepend).map(function(v) { return v.p; });
+            return _calc(opts, extraTraces, {}, prepend).map(function(v) {
+                return v.p;
+            });
         }
 
         it('harmonizes autobins when all traces are autobinned', function() {
@@ -823,7 +825,9 @@ describe('Test histogram', function() {
         it('autobins all histograms (on the same subplot) together except `visible: false`', function(done) {
             function _assertBinCenters(expectedCenters) {
                 var centers = gd.calcdata.map(function(cd) {
-                    return cd.map(function(cdi) { return cdi.p; });
+                    return cd.map(function(cdi) {
+                        return cdi.p;
+                    });
                 });
 
                 expect(centers).toBeCloseTo2DArray(expectedCenters);

@@ -15,9 +15,13 @@ var modHalf = modModule.modHalf;
 var PI = Math.PI;
 var twoPI = 2 * PI;
 
-function deg2rad(deg) { return deg / 180 * PI; }
+function deg2rad(deg) {
+    return deg / 180 * PI;
+}
 
-function rad2deg(rad) { return rad / PI * 180; }
+function rad2deg(rad) {
+    return rad / PI * 180;
+}
 
 /**
  * is sector a full circle?

@@ -30,9 +30,13 @@ color.tinyRGB = function(tc) {
         Math.round(c.g) + ', ' + Math.round(c.b) + ')';
 };
 
-color.rgb = function(cstr) { return color.tinyRGB(tinycolor(cstr)); };
+color.rgb = function(cstr) {
+    return color.tinyRGB(tinycolor(cstr));
+};
 
-color.opacity = function(cstr) { return cstr ? tinycolor(cstr).getAlpha() : 0; };
+color.opacity = function(cstr) {
+    return cstr ? tinycolor(cstr).getAlpha() : 0;
+};
 
 color.addOpacity = function(cstr, op) {
     var c = tinycolor(cstr).toRgb();
@@ -110,10 +114,8 @@ color.clean = function(container) {
         if(key.substr(key.length - 5) === 'color') {
             if(Array.isArray(val)) {
                 for(j = 0; j < val.length; j++) val[j] = cleanOne(val[j]);
-            }
-            else container[key] = cleanOne(val);
-        }
-        else if(key.substr(key.length - 10) === 'colorscale' && Array.isArray(val)) {
+            } else container[key] = cleanOne(val);
+        } else if(key.substr(key.length - 10) === 'colorscale' && Array.isArray(val)) {
             // colorscales have the format [[0, color1], [frac, color2], ... [1, colorN]]
             for(j = 0; j < val.length; j++) {
                 if(Array.isArray(val[j])) val[j][1] = cleanOne(val[j][1]);
@@ -125,8 +127,7 @@ color.clean = function(container) {
             if(!Array.isArray(el0) && el0 && typeof el0 === 'object') {
                 for(j = 0; j < val.length; j++) color.clean(val[j]);
             }
-        }
-        else if(val && typeof val === 'object') color.clean(val);
+        } else if(val && typeof val === 'object') color.clean(val);
     }
 };
 

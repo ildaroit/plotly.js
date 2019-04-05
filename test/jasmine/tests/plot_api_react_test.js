@@ -59,7 +59,9 @@ describe('@noCIdep Plotly.react', function() {
         images.draw.calls.reset();
 
         afterPlotCnt = 0;
-        gd.on('plotly_afterplot', function() { afterPlotCnt++; });
+        gd.on('plotly_afterplot', function() {
+            afterPlotCnt++;
+        });
     }
 
     function countCalls(counts) {
@@ -74,7 +76,9 @@ describe('@noCIdep Plotly.react', function() {
         // calls to Plotly.plot via plot_api.js or Registry.call('plot')
         var plotCalls = plotApi.plot.calls.count() +
             Registry.call.calls.all()
-                .filter(function(d) { return d.args[0] === 'plot'; })
+                .filter(function(d) {
+                    return d.args[0] === 'plot';
+                })
                 .length;
         expect(plotCalls).toBe(counts.plot || 0, 'Plotly.plot calls');
         plotApi.plot.calls.reset();
@@ -671,7 +675,9 @@ describe('@noCIdep Plotly.react', function() {
     }
 
     function reactTo(fig) {
-        return function() { return Plotly.react(gd, fig); };
+        return function() {
+            return Plotly.react(gd, fig);
+        };
     }
 
     it('can change pie aggregations', function(done) {
@@ -773,8 +779,12 @@ describe('@noCIdep Plotly.react', function() {
     // make sure we've included every trace type in this suite
     var typesTested = {};
     var itemType;
-    for(itemType in Registry.modules) { typesTested[itemType] = 0; }
-    for(itemType in Registry.transformsRegistry) { typesTested[itemType] = 0; }
+    for(itemType in Registry.modules) {
+        typesTested[itemType] = 0;
+    }
+    for(itemType in Registry.transformsRegistry) {
+        typesTested[itemType] = 0;
+    }
 
     // Not really being supported... This isn't part of the main bundle, and it's pretty broken,
     // but it gets registered and used by a couple of the gl2d tests.
@@ -786,7 +796,9 @@ describe('@noCIdep Plotly.react', function() {
 
         function fullJson() {
             var out = JSON.parse(Plotly.Plots.graphJson({
-                data: gd._fullData.map(function(trace) { return trace._fullInput; }),
+                data: gd._fullData.map(function(trace) {
+                    return trace._fullInput;
+                }),
                 layout: gd._fullLayout
             }));
 
@@ -950,12 +962,10 @@ describe('Plotly.react and uirevision attributes', function() {
         if(Array.isArray(val1) && Array.isArray(val2)) {
             if(Array.isArray(val1[0]) && Array.isArray(val2[0])) {
                 expect(val1).toBeCloseTo2DArray(val2, 2, msg);
-            }
-            else {
+            } else {
                 expect(val1).toBeCloseToArray(val2, 2, msg);
             }
-        }
-        else {
+        } else {
             expect(val1).toBe(val2, msg);
         }
     }
@@ -1978,10 +1988,16 @@ describe('Test Plotly.react + interactions under uirevision:', function() {
 
             expect(gd._fullLayout._preGUI).toEqual({});
         })
-        .then(function() { return _mouseup(); })
-        .then(function() { _assertGUI('before'); })
+        .then(function() {
+            return _mouseup();
+        })
+        .then(function() {
+            _assertGUI('before');
+        })
         .then(_react)
-        .then(function() { _assertGUI('after'); })
+        .then(function() {
+            _assertGUI('after');
+        })
         .catch(failTest)
         .then(done);
     });
@@ -2038,10 +2054,16 @@ describe('Test Plotly.react + interactions under uirevision:', function() {
 
             expect(gd._fullLayout._preGUI).toEqual({});
         })
-        .then(function() { return _drag(200, 200, 50, 50); })
-        .then(function() { _assertGUI('before'); })
+        .then(function() {
+            return _drag(200, 200, 50, 50);
+        })
+        .then(function() {
+            _assertGUI('before');
+        })
         .then(_react)
-        .then(function() { _assertGUI('after'); })
+        .then(function() {
+            _assertGUI('after');
+        })
         .catch(failTest)
         .then(done);
     });
@@ -2074,11 +2096,21 @@ describe('Test Plotly.react + interactions under uirevision:', function() {
         // see mapbox_test.js for rationale
         function _drag(p0, p1) {
             return _mouseEvent('mousemove', p0)
-                .then(function() { return _mouseEvent('mousedown', p0); })
-                .then(function() { return _mouseEvent('mousemove', p1); })
-                .then(function() { return _mouseEvent('mousemove', p1); })
-                .then(function() { return _mouseEvent('mouseup', p1); })
-                .then(function() { return _mouseEvent('mouseup', p1); });
+                .then(function() {
+                    return _mouseEvent('mousedown', p0);
+                })
+                .then(function() {
+                    return _mouseEvent('mousemove', p1);
+                })
+                .then(function() {
+                    return _mouseEvent('mousemove', p1);
+                })
+                .then(function() {
+                    return _mouseEvent('mouseup', p1);
+                })
+                .then(function() {
+                    return _mouseEvent('mouseup', p1);
+                });
         }
 
         // should be same before & after 2nd react()
@@ -2112,10 +2144,16 @@ describe('Test Plotly.react + interactions under uirevision:', function() {
 
             expect(gd._fullLayout._preGUI).toEqual({});
         })
-        .then(function() { return _drag([200, 200], [250, 250]); })
-        .then(function() { _assertGUI('before'); })
+        .then(function() {
+            return _drag([200, 200], [250, 250]);
+        })
+        .then(function() {
+            _assertGUI('before');
+        })
         .then(_react)
-        .then(function() { _assertGUI('after'); })
+        .then(function() {
+            _assertGUI('after');
+        })
         .catch(failTest)
         .then(done);
     });

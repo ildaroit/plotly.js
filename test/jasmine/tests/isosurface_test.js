@@ -358,7 +358,9 @@ describe('Test isosurface', function() {
             })
             .then(function() {
                 return Plotly.restyle(gd, 'hovertext', [
-                    fig.data[0].value.map(function(v) { return '!! ' + v + ' !!'; })
+                    fig.data[0].value.map(function(v) {
+                        return '!! ' + v + ' !!';
+                    })
                 ]);
             })
             .then(delay(20))

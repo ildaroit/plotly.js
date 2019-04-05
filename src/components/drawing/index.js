@@ -51,8 +51,12 @@ drawing.font = function(s, family, size, color) {
  * `svgTextUtils.convertToTspans`. Use `svgTextUtils.positionText`
  * instead, so that <tspan.line> elements get updated to match.
  */
-drawing.setPosition = function(s, x, y) { s.attr('x', x).attr('y', y); };
-drawing.setSize = function(s, w, h) { s.attr('width', w).attr('height', h); };
+drawing.setPosition = function(s, x, y) {
+    s.attr('x', x).attr('y', y);
+};
+drawing.setSize = function(s, w, h) {
+    s.attr('width', w).attr('height', h);
+};
 drawing.setRect = function(s, x, y, w, h) {
     s.call(drawing.setPosition, x, y).call(drawing.setSize, w, h);
 };
@@ -177,8 +181,7 @@ drawing.dashStyle = function(dash, lineWidth) {
     else if(dash === 'longdash') dash = (5 * dlw) + 'px,' + (5 * dlw) + 'px';
     else if(dash === 'dashdot') {
         dash = (3 * dlw) + 'px,' + dlw + 'px,' + dlw + 'px,' + dlw + 'px';
-    }
-    else if(dash === 'longdashdot') {
+    } else if(dash === 'longdashdot') {
         dash = (5 * dlw) + 'px,' + (2 * dlw) + 'px,' + dlw + 'px,' + (2 * dlw) + 'px';
     }
     // otherwise user wrote the dasharray themselves - leave it be
@@ -228,8 +231,7 @@ Object.keys(SYMBOLDEFS).forEach(function(k) {
     }
     if(symDef.noDot) {
         drawing.symbolNoDot[symDef.n] = true;
-    }
-    else {
+    } else {
         drawing.symbolList = drawing.symbolList.concat(
             [symDef.n + 200, k + '-dot', symDef.n + 300, k + '-open-dot']);
     }
@@ -254,9 +256,13 @@ drawing.symbolNumber = function(v) {
             v = v.replace('-dot', '');
         }
         v = drawing.symbolNames.indexOf(v);
-        if(v >= 0) { v += vbase; }
+        if(v >= 0) {
+            v += vbase;
+        }
     }
-    if((v % 100 >= MAXSYMBOL) || v >= 400) { return 0; }
+    if((v % 100 >= MAXSYMBOL) || v >= 400) {
+        return 0;
+    }
     return Math.floor(Math.max(v, 0));
 };
 
@@ -298,8 +304,7 @@ drawing.gradient = function(sel, gd, gradientID, type, colorscale, prop) {
     for(var i = 0; i < len; i++) {
         if(info.reversed) {
             colorStops[len - 1 - i] = [stopFormatter((1 - colorscale[i][0]) * 100), colorscale[i][1]];
-        }
-        else {
+        } else {
             colorStops[i] = [stopFormatter(colorscale[i][0] * 100), colorscale[i][1]];
         }
     }
@@ -493,7 +498,9 @@ drawing.makePointStyleFns = function(trace) {
     if(Registry.traceIs(trace, 'symbols')) {
         out.ms2mrc = subTypes.isBubble(trace) ?
             makeBubbleSizeFn(trace) :
-            function() { return (marker.size || 6) / 2; };
+            function() {
+                return (marker.size || 6) / 2;
+            };
     }
 
     if(trace.selectedpoints) {
@@ -743,7 +750,9 @@ drawing.selectedTextStyle = function(s, trace) {
 // http://www.cemyuksel.com/research/catmullrom_param/catmullrom.pdf
 var CatmullRomExp = 0.5;
 drawing.smoothopen = function(pts, smoothness) {
-    if(pts.length < 3) { return 'M' + pts.join('L');}
+    if(pts.length < 3) {
+        return 'M' + pts.join('L');
+    }
     var path = 'M' + pts[0];
     var tangents = [];
     var i;
@@ -759,7 +768,9 @@ drawing.smoothopen = function(pts, smoothness) {
 };
 
 drawing.smoothclosed = function(pts, smoothness) {
-    if(pts.length < 3) { return 'M' + pts.join('L') + 'Z'; }
+    if(pts.length < 3) {
+        return 'M' + pts.join('L') + 'Z';
+    }
     var path = 'M' + pts[0];
     var pLast = pts.length - 1;
     var tangents = [makeTangent(pts[pLast], pts[0], pts[1], smoothness)];
@@ -902,8 +913,7 @@ drawing.bBox = function(node, inTester, hash) {
     if(hash) {
         out = drawing.savedBBoxes[hash];
         if(out) return Lib.extendFlat({}, out);
-    }
-    else if(node.childNodes.length === 1) {
+    } else if(node.childNodes.length === 1) {
         /*
          * If we have only one child element, which is itself hashable, make
          * a new hash from this element plus its x,y,transform
@@ -951,8 +961,7 @@ drawing.bBox = function(node, inTester, hash) {
     var testNode, tester;
     if(inTester) {
         testNode = node;
-    }
-    else {
+    } else {
         tester = drawing.tester.node();
 
         // copy the node to test into the tester

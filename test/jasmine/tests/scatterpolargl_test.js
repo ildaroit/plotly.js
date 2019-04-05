@@ -93,7 +93,9 @@ describe('Test scatterpolargl hover:', function() {
     }, {
         desc: 'with custom text scalar',
         patch: function(fig) {
-            fig.data.forEach(function(t) { t.text = 'a'; });
+            fig.data.forEach(function(t) {
+                t.text = 'a';
+            });
             return fig;
         },
         nums: 'r: 3.886013\nθ: 125.2822°\na',
@@ -101,7 +103,9 @@ describe('Test scatterpolargl hover:', function() {
     }, {
         desc: 'with custom text array',
         patch: function(fig) {
-            fig.data.forEach(function(t) { t.text = t.r.map(String); });
+            fig.data.forEach(function(t) {
+                t.text = t.r.map(String);
+            });
             return fig;
         },
         nums: 'r: 3.886013\nθ: 125.2822°\n3.88601339194',
@@ -128,7 +132,9 @@ describe('Test scatterpolargl interactions:', function() {
 
     function totalPixels() {
         return readPixel(gd.querySelector('.gl-canvas-context'), 0, 0, 400, 400)
-            .reduce(function(acc, v) { return acc + v; }, 0);
+            .reduce(function(acc, v) {
+                return acc + v;
+            }, 0);
     }
 
     it('@gl should be able to toggle from svg to gl', function(done) {
@@ -288,7 +294,9 @@ describe('Test scatterpolargl autorange:', function() {
                 Lib.extendDeep(svgFig.layout.polar, {radialaxis: {autorange: true}});
 
                 var glFig = Lib.extendDeep({}, svgFig);
-                glFig.data.forEach(function(t) { t.type = 'scatterpolargl'; });
+                glFig.data.forEach(function(t) {
+                    t.type = 'scatterpolargl';
+                });
 
                 Plotly.newPlot(gd, svgFig).then(function() {
                     svgRange = gd._fullLayout.polar.radialaxis.range;

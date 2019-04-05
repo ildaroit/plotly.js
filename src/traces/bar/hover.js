@@ -39,8 +39,12 @@ function hoverOnBars(pointData, xval, yval, hovermode) {
 
     var posVal, sizeVal, posLetter, sizeLetter, dx, dy, pRangeCalc;
 
-    function thisBarMinPos(di) { return di[posLetter] - di.w / 2; }
-    function thisBarMaxPos(di) { return di[posLetter] + di.w / 2; }
+    function thisBarMinPos(di) {
+        return di[posLetter] - di.w / 2;
+    }
+    function thisBarMaxPos(di) {
+        return di[posLetter] + di.w / 2;
+    }
 
     var minPos = isClosest ?
         thisBarMinPos :
@@ -95,8 +99,7 @@ function hoverOnBars(pointData, xval, yval, hovermode) {
         sizeLetter = 'x';
         dx = sizeFn;
         dy = positionFn;
-    }
-    else {
+    } else {
         posVal = xval;
         sizeVal = yval;
         posLetter = 'x';
@@ -110,7 +113,9 @@ function hoverOnBars(pointData, xval, yval, hovermode) {
 
     pRangeCalc = Math.abs(pa.r2c(pa.range[1]) - pa.r2c(pa.range[0]));
 
-    function dxy(di) { return (dx(di) + dy(di)) / 2; }
+    function dxy(di) {
+        return (dx(di) + dy(di)) / 2;
+    }
     var distfn = Fx.getDistanceFunction(hovermode, dx, dy, dxy);
     Fx.getClosest(cd, distfn, pointData);
 

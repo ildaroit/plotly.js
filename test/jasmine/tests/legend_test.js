@@ -1035,7 +1035,9 @@ describe('legend interaction', function() {
         }
 
         function assertVisible(gd, expectation) {
-            var actual = gd._fullData.map(function(trace) { return trace.visible; });
+            var actual = gd._fullData.map(function(trace) {
+                return trace.visible;
+            });
             expect(actual).toEqual(expectation);
         }
 
@@ -1199,7 +1201,9 @@ describe('legend interaction', function() {
 
         function assertVisible(expectation) {
             return function() {
-                var actual = gd._fullData.map(function(t) { return t.visible; });
+                var actual = gd._fullData.map(function(t) {
+                    return t.visible;
+                });
                 expect(actual).toEqual(expectation);
             };
         }
@@ -1267,7 +1271,9 @@ describe('legend interaction', function() {
         }
 
         function extractVisibilities(data) {
-            return data.map(function(trace) { return trace.visible; });
+            return data.map(function(trace) {
+                return trace.visible;
+            });
         }
 
         function assertVisible(expectation) {

@@ -161,7 +161,9 @@ describe('Test scatterpolar hover:', function() {
         desc: 'on category axes',
         mock: require('@mocks/polar_categories.json'),
         patch: function(fig) {
-            fig.data.forEach(function(t) { t.fill = 'none'; });
+            fig.data.forEach(function(t) {
+                t.fill = 'none';
+            });
             return fig;
         },
         pos: [465, 90],
@@ -178,7 +180,9 @@ describe('Test scatterpolar hover:', function() {
     }, {
         desc: 'with custom text scalar',
         patch: function(fig) {
-            fig.data.forEach(function(t) { t.text = 'a'; });
+            fig.data.forEach(function(t) {
+                t.text = 'a';
+            });
             return fig;
         },
         nums: 'r: 4.022892\nθ: 128.342°\na',
@@ -186,7 +190,9 @@ describe('Test scatterpolar hover:', function() {
     }, {
         desc: 'with custom text array',
         patch: function(fig) {
-            fig.data.forEach(function(t) { t.text = t.r.map(String); });
+            fig.data.forEach(function(t) {
+                t.text = t.r.map(String);
+            });
             return fig;
         },
         nums: 'r: 4.022892\nθ: 128.342°\n4.02289202968',

@@ -16,17 +16,27 @@ module.exports = function joinAllPaths(trace, pi, perimeter, ab2p, carpet, carpe
     var i;
     var fullpath = '';
 
-    var startsleft = pi.edgepaths.map(function(v, i) { return i; });
+    var startsleft = pi.edgepaths.map(function(v, i) {
+        return i;
+    });
     var newloop = true;
     var endpt, newendpt, cnt, nexti, possiblei, addpath;
 
     var atol = Math.abs(perimeter[0][0] - perimeter[2][0]) * 1e-4;
     var btol = Math.abs(perimeter[0][1] - perimeter[2][1]) * 1e-4;
 
-    function istop(pt) { return Math.abs(pt[1] - perimeter[0][1]) < btol; }
-    function isbottom(pt) { return Math.abs(pt[1] - perimeter[2][1]) < btol; }
-    function isleft(pt) { return Math.abs(pt[0] - perimeter[0][0]) < atol; }
-    function isright(pt) { return Math.abs(pt[0] - perimeter[2][0]) < atol; }
+    function istop(pt) {
+        return Math.abs(pt[1] - perimeter[0][1]) < btol;
+    }
+    function isbottom(pt) {
+        return Math.abs(pt[1] - perimeter[2][1]) < btol;
+    }
+    function isleft(pt) {
+        return Math.abs(pt[0] - perimeter[0][0]) < atol;
+    }
+    function isright(pt) {
+        return Math.abs(pt[0] - perimeter[2][0]) < atol;
+    }
 
     function pathto(pt0, pt1) {
         var i, j, segments, axis;

@@ -106,7 +106,9 @@ module.exports = function calc(gd, trace) {
     var pathModels = {};
 
     // Category inds array for each dimension
-    var categoryIndsDims = uniqueInfoDims.map(function(di) {return di.inds;});
+    var categoryIndsDims = uniqueInfoDims.map(function(di) {
+        return di.inds;
+    });
 
     // Initialize total count
     totalCount = 0;
@@ -197,8 +199,12 @@ module.exports = function calc(gd, trace) {
  */
 function createParcatsModel(dimensions, paths, count) {
     var maxCats = dimensions
-        .map(function(d) {return d.categories.length;})
-        .reduce(function(v1, v2) {return Math.max(v1, v2);});
+        .map(function(d) {
+            return d.categories.length;
+        })
+        .reduce(function(v1, v2) {
+            return Math.max(v1, v2);
+        });
     return {dimensions: dimensions, paths: paths, trace: undefined, maxCats: maxCats, count: count};
 }
 
@@ -390,7 +396,9 @@ function getUniqueInfo(values, uniqueValues) {
         uniqueValues = [];
     } else {
         // Shallow copy so append below doesn't alter input array
-        uniqueValues = uniqueValues.map(function(e) {return e;});
+        uniqueValues = uniqueValues.map(function(e) {
+            return e;
+        });
     }
 
     // Initialize Variables
@@ -423,7 +431,9 @@ function getUniqueInfo(values, uniqueValues) {
     }
 
     // Build UniqueInfo
-    var uniqueCounts = uniqueValues.map(function(v) { return uniqueValueCounts[v]; });
+    var uniqueCounts = uniqueValues.map(function(v) {
+        return uniqueValueCounts[v];
+    });
 
     return {
         uniqueValues: uniqueValues,
@@ -440,7 +450,9 @@ function getUniqueInfo(values, uniqueValues) {
  * @param {Object} trace
  */
 function validateDimensionDisplayInds(visibleDims) {
-    var displayInds = visibleDims.map(function(d) { return d.displayindex; });
+    var displayInds = visibleDims.map(function(d) {
+        return d.displayindex;
+    });
     var i;
 
     if(isRangePermutation(displayInds)) {

@@ -1075,7 +1075,9 @@ describe('Editable titles', function() {
         var xCenter = (bb.left + bb.right) / 2;
         var yCenter = (bb.top + bb.bottom) / 2;
         var done;
-        var promise = new Promise(function(resolve) { done = resolve; });
+        var promise = new Promise(function(resolve) {
+            done = resolve;
+        });
 
         mouseEvent('mouseover', xCenter, yCenter);
         setTimeout(function() {

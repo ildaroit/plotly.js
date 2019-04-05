@@ -17,7 +17,9 @@ function supplyDataDefaults(dataIn, dataOut) {
         _modules: [],
         _visibleModules: [],
         _basePlotModules: [],
-        _traceUids: dataIn.map(function() { return Lib.randstr(); })
+        _traceUids: dataIn.map(function() {
+            return Lib.randstr();
+        })
     });
 }
 

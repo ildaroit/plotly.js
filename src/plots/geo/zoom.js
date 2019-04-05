@@ -117,7 +117,9 @@ function zoomNonClipped(geo, projection) {
     var mouse0, rotate0, translate0, lastRotate, zoomPoint,
         mouse1, rotate1, point1, didZoom;
 
-    function position(x) { return projection.invert(x); }
+    function position(x) {
+        return projection.invert(x);
+    }
 
     function outside(x) {
         var pos = position(x);
@@ -155,8 +157,7 @@ function zoomNonClipped(geo, projection) {
         if(!zoomPoint) {
             mouse0 = mouse1;
             zoomPoint = position(mouse0);
-        }
-        else if(position(mouse1)) {
+        } else if(position(mouse1)) {
             point1 = position(mouse1);
             rotate1 = [lastRotate[0] + (point1[0] - zoomPoint[0]), rotate0[1], rotate0[2]];
             projection.rotate(rotate1);

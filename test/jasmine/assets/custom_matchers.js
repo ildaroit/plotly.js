@@ -154,7 +154,9 @@ var matchers = {
 
                 var passed = (
                     actual.length === expected.length &&
-                    expected.every(function(e) { return actual.contains(e); })
+                    expected.every(function(e) {
+                        return actual.contains(e);
+                    })
                 );
 
                 var message = [

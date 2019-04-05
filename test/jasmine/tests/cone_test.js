@@ -84,7 +84,9 @@ describe('Test cone autorange:', function() {
         var rng0 = [0.103, 3.897];
 
         function makeScaleFn(s) {
-            return function(v) { return v * s; };
+            return function(v) {
+                return v * s;
+            };
         }
 
         Plotly.plot(gd, fig).then(function() {

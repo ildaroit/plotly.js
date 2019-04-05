@@ -312,7 +312,9 @@ describe('Test violin calc:', function() {
         });
 
         expect(cd.length).toBe(6, '# of violins');
-        expect(cd.every(function(d) { return d.bandwidth; })).toBe(false, 'bandwidth');
+        expect(cd.every(function(d) {
+            return d.bandwidth;
+        })).toBe(false, 'bandwidth');
     });
 
     it('handle multi-value / single-but-unique-value case', function() {
@@ -449,7 +451,9 @@ describe('Test violin hover:', function() {
             fig.data.forEach(function(trace) {
                 trace.points = 'all';
                 trace.hoveron = 'points';
-                trace.text = trace.y.map(function(v) { return 'look:' + v; });
+                trace.text = trace.y.map(function(v) {
+                    return 'look:' + v;
+                });
             });
             fig.layout.hovermode = 'closest';
             return fig;
@@ -463,7 +467,9 @@ describe('Test violin hover:', function() {
             fig.data.forEach(function(trace) {
                 trace.points = 'all';
                 trace.hoveron = 'points';
-                trace.text = trace.y.map(function(v) { return 'look:' + v; });
+                trace.text = trace.y.map(function(v) {
+                    return 'look:' + v;
+                });
                 trace.hoverinfo = 'text';
             });
             fig.layout.hovermode = 'closest';
@@ -478,8 +484,12 @@ describe('Test violin hover:', function() {
             fig.data.forEach(function(trace) {
                 trace.points = 'all';
                 trace.hoveron = 'points';
-                trace.hovertext = trace.y.map(function(v) { return 'look:' + v; });
-                trace.text = trace.y.map(function(v) { return 'NOT THIS:' + v; });
+                trace.hovertext = trace.y.map(function(v) {
+                    return 'look:' + v;
+                });
+                trace.text = trace.y.map(function(v) {
+                    return 'NOT THIS:' + v;
+                });
                 trace.hoverinfo = 'text';
             });
             fig.layout.hovermode = 'closest';
@@ -733,23 +743,33 @@ describe('Test violin restyle:', function() {
         .then(function() {
             _assert('base', {violinCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'box.visible', true); })
+        .then(function() {
+            return Plotly.restyle(gd, 'box.visible', true);
+        })
         .then(function() {
             _assert('with inner box', {violinCnt: 1, boxCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'meanline.visible', true); })
+        .then(function() {
+            return Plotly.restyle(gd, 'meanline.visible', true);
+        })
         .then(function() {
             _assert('with inner box & meanline', {violinCnt: 1, boxCnt: 1, meanlineInBoxCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'box.visible', false); })
+        .then(function() {
+            return Plotly.restyle(gd, 'box.visible', false);
+        })
         .then(function() {
             _assert('with meanline', {violinCnt: 1, meanlineOutOfBoxCnt: 1});
         })
-        .then(function() { return Plotly.restyle(gd, 'points', 'all'); })
+        .then(function() {
+            return Plotly.restyle(gd, 'points', 'all');
+        })
         .then(function() {
             _assert('with meanline & pts', {violinCnt: 1, meanlineOutOfBoxCnt: 1, ptsCnt: 272});
         })
-        .then(function() { return Plotly.restyle(gd, 'meanline.visible', false); })
+        .then(function() {
+            return Plotly.restyle(gd, 'meanline.visible', false);
+        })
         .then(function() {
             _assert('with pts', {violinCnt: 1, ptsCnt: 272});
         })

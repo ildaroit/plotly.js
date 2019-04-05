@@ -154,7 +154,9 @@ module.exports = function supplyLayoutDefaults(layoutIn, layoutOut, fullData) {
         axLayoutOut = Template.newContainer(layoutOut, axName, axLetter + 'axis');
 
         var traces = ax2traces[axName] || [];
-        axLayoutOut._traceIndices = traces.map(function(t) { return t._expandedIndex; });
+        axLayoutOut._traceIndices = traces.map(function(t) {
+            return t._expandedIndex;
+        });
         axLayoutOut._annIndices = [];
         axLayoutOut._shapeIndices = [];
         axLayoutOut._imgIndices = [];

@@ -24,8 +24,12 @@ describe('Plotly.toImage', function() {
         return new Promise(function(resolve, reject) {
             var img = document.createElement('img');
             img.src = url;
-            img.onload = function() { return resolve(img); };
-            img.onerror = function() { return reject('error during createImage'); };
+            img.onload = function() {
+                return resolve(img);
+            };
+            img.onerror = function() {
+                return reject('error during createImage');
+            };
         });
     }
 
@@ -64,7 +68,9 @@ describe('Plotly.toImage', function() {
 
         Plotly.plot(gd, fig.data, fig.layout)
         .then(function(gd) {
-            expect(function() { Plotly.toImage(gd, {format: 'x'}); })
+            expect(function() {
+                Plotly.toImage(gd, {format: 'x'});
+            })
                 .toThrow(new Error('Image format is not jpeg, png, svg or webp.'));
         })
         .catch(failTest)
@@ -76,11 +82,15 @@ describe('Plotly.toImage', function() {
 
         Plotly.plot(gd, fig.data, fig.layout)
         .then(function() {
-            expect(function() { Plotly.toImage(gd, {height: 0.5}); })
+            expect(function() {
+                Plotly.toImage(gd, {height: 0.5});
+            })
                 .toThrow(new Error('Height and width should be pixel values.'));
         })
         .then(function() {
-            expect(function() { Plotly.toImage(gd, {width: 0.5}); })
+            expect(function() {
+                Plotly.toImage(gd, {width: 0.5});
+            })
                 .toThrow(new Error('Height and width should be pixel values.'));
         })
         .catch(failTest)
@@ -119,23 +129,39 @@ describe('Plotly.toImage', function() {
         var fig = Lib.extendDeep({}, subplotMock);
 
         Plotly.plot(gd, fig.data, fig.layout)
-        .then(function() { return Plotly.toImage(gd, {format: 'png'}); })
-        .then(function(url) { return assertSize(url, 700, 450); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'png'});
+        })
+        .then(function(url) {
+            return assertSize(url, 700, 450);
+        })
         .then(function(url) {
             expect(url.split('png')[0]).toBe('data:image/');
         })
-        .then(function() { return Plotly.toImage(gd, {format: 'jpeg'}); })
-        .then(function(url) { return assertSize(url, 700, 450); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'jpeg'});
+        })
+        .then(function(url) {
+            return assertSize(url, 700, 450);
+        })
         .then(function(url) {
             expect(url.split('jpeg')[0]).toBe('data:image/');
         })
-        .then(function() { return Plotly.toImage(gd, {format: 'svg'}); })
-        .then(function(url) { return assertSize(url, 700, 450); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'svg'});
+        })
+        .then(function(url) {
+            return assertSize(url, 700, 450);
+        })
         .then(function(url) {
             expect(url.split('svg')[0]).toBe('data:image/');
         })
-        .then(function() { return Plotly.toImage(gd, {format: 'webp'}); })
-        .then(function(url) { return assertSize(url, 700, 450); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'webp'});
+        })
+        .then(function(url) {
+            return assertSize(url, 700, 450);
+        })
         .then(function(url) {
             expect(url.split('webp')[0]).toBe('data:image/');
         })
@@ -147,22 +173,30 @@ describe('Plotly.toImage', function() {
         var fig = Lib.extendDeep({}, subplotMock);
 
         Plotly.plot(gd, fig.data, fig.layout)
-        .then(function() { return Plotly.toImage(gd, {format: 'png', imageDataOnly: true}); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'png', imageDataOnly: true});
+        })
         .then(function(d) {
             expect(d.indexOf('data:image/')).toBe(-1);
             expect(d.length).toBeWithin(52500, 7500, 'png image length');
         })
-        .then(function() { return Plotly.toImage(gd, {format: 'jpeg', imageDataOnly: true}); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'jpeg', imageDataOnly: true});
+        })
         .then(function(d) {
             expect(d.indexOf('data:image/')).toBe(-1);
             expect(d.length).toBeWithin(43251, 5e3, 'jpeg image length');
         })
-        .then(function() { return Plotly.toImage(gd, {format: 'svg', imageDataOnly: true}); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'svg', imageDataOnly: true});
+        })
         .then(function(d) {
             expect(d.indexOf('data:image/')).toBe(-1);
             expect(d.length).toBeWithin(32062, 1e3, 'svg image length');
         })
-        .then(function() { return Plotly.toImage(gd, {format: 'webp', imageDataOnly: true}); })
+        .then(function() {
+            return Plotly.toImage(gd, {format: 'webp', imageDataOnly: true});
+        })
         .then(function(d) {
             expect(d.indexOf('data:image/')).toBe(-1);
             expect(d.length).toBeWithin(15831, 1e3, 'webp image length');
@@ -176,10 +210,18 @@ describe('Plotly.toImage', function() {
             var fig = Lib.extendDeep({}, subplotMock);
 
             Plotly.plot(gd, fig.data, fig.layout)
-            .then(function() { return Plotly.toImage(gd, {format: f, scale: 2}); })
-            .then(function(url) { return assertSize(url, 1400, 900); })
-            .then(function() { return Plotly.toImage(gd, {format: f, scale: 0.5}); })
-            .then(function(url) { return assertSize(url, 350, 225); })
+            .then(function() {
+                return Plotly.toImage(gd, {format: f, scale: 2});
+            })
+            .then(function(url) {
+                return assertSize(url, 1400, 900);
+            })
+            .then(function() {
+                return Plotly.toImage(gd, {format: f, scale: 0.5});
+            })
+            .then(function(url) {
+                return assertSize(url, 350, 225);
+            })
             .catch(failTest)
             .then(done);
         });
@@ -202,7 +244,9 @@ describe('Plotly.toImage', function() {
         var fig = Lib.extendDeep({}, subplotMock);
 
         Plotly.plot(gd, fig)
-        .then(function() { return Plotly.toImage('graph'); })
+        .then(function() {
+            return Plotly.toImage('graph');
+        })
         .then(createImage)
         .then(function(img) {
             expect(img.width).toBe(700);

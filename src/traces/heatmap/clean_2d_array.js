@@ -22,13 +22,20 @@ module.exports = function clean2dArray(zOld, transpose) {
         rowlen = 0;
         for(i = 0; i < zOld.length; i++) rowlen = Math.max(rowlen, zOld[i].length);
         if(rowlen === 0) return false;
-        getCollen = function(zOld) { return zOld.length; };
-        old2new = function(zOld, i, j) { return zOld[j][i]; };
-    }
-    else {
+        getCollen = function(zOld) {
+            return zOld.length;
+        };
+        old2new = function(zOld, i, j) {
+            return zOld[j][i];
+        };
+    } else {
         rowlen = zOld.length;
-        getCollen = function(zOld, i) { return zOld[i].length; };
-        old2new = function(zOld, i, j) { return zOld[i][j]; };
+        getCollen = function(zOld, i) {
+            return zOld[i].length;
+        };
+        old2new = function(zOld, i, j) {
+            return zOld[i][j];
+        };
     }
 
     var zNew = new Array(rowlen);

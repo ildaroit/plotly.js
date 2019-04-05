@@ -72,7 +72,9 @@ exports.hover = function hover(gd, evt, subplot, noHoverEvent) {
     Lib.throttle(
         gd._fullLayout._uid + constants.HOVERID,
         constants.HOVERMINTIME,
-        function() { _hover(gd, evt, subplot, noHoverEvent); }
+        function() {
+            _hover(gd, evt, subplot, noHoverEvent);
+        }
     );
 };
 
@@ -214,7 +216,9 @@ exports.multiHovers = function multiHovers(hoverItems, opts) {
     var tooltipSpacing = 5;
     var lastBottomY = 0;
     hoverLabel
-        .sort(function(a, b) {return a.y0 - b.y0;})
+        .sort(function(a, b) {
+            return a.y0 - b.y0;
+        })
         .each(function(d) {
             var topY = d.y0 - d.by / 2;
 
@@ -339,8 +343,7 @@ function _hover(gd, evt, subplot, noHoverEvent) {
                 }
             }
         }
-    }
-    else {
+    } else {
         for(curvenum = 0; curvenum < gd.calcdata.length; curvenum++) {
             cd = gd.calcdata[curvenum];
             trace = cd[0].trace;
@@ -364,8 +367,7 @@ function _hover(gd, evt, subplot, noHoverEvent) {
 
             if('ypx' in evt) ypx = evt.ypx;
             else ypx = yaArray[0]._length / 2;
-        }
-        else {
+        } else {
             // fire the beforehover event and quit if it returns false
             // note that we're only calling this on real mouse events, so
             // manual calls to fx.hover will always run.
@@ -492,8 +494,7 @@ function _hover(gd, evt, subplot, noHoverEvent) {
             if('pointNumber' in selection) {
                 pointData.index = selection.pointNumber;
                 mode = 'closest';
-            }
-            else {
+            } else {
                 mode = '';
                 if('xval' in selection) {
                     xval = selection.xval;
@@ -504,8 +505,7 @@ function _hover(gd, evt, subplot, noHoverEvent) {
                     mode = mode ? 'closest' : 'y';
                 }
             }
-        }
-        else {
+        } else {
             xval = xvalArray[subploti];
             yval = yvalArray[subploti];
         }
@@ -523,8 +523,7 @@ function _hover(gd, evt, subplot, noHoverEvent) {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 Lib.log('Unrecognized trace type in hover:', trace);
             }
         }
@@ -659,7 +658,9 @@ function _hover(gd, evt, subplot, noHoverEvent) {
         }
     }
 
-    hoverData.sort(function(d1, d2) { return d1.distance - d2.distance; });
+    hoverData.sort(function(d1, d2) {
+        return d1.distance - d2.distance;
+    });
 
     // lastly, emit custom hover/unhover events
     var oldhoverdata = gd._hoverdata;
@@ -853,8 +854,7 @@ function createHoverText(hoverData, opts, gd) {
             label.attr('transform', 'translate(' +
                 (xa._offset + (c0.x0 + c0.x1) / 2) + ',' +
                 (ya._offset + (xa.side === 'top' ? 0 : ya._length)) + ')');
-        }
-        else {
+        } else {
             ltext.attr('text-anchor', ya.side === 'right' ? 'start' : 'end')
                 .call(svgTextUtils.positionText,
                     (ya.side === 'right' ? 1 : -1) * (HOVERTEXTPAD + HOVERARROWSIZE),
@@ -944,14 +944,11 @@ function createHoverText(hoverData, opts, gd) {
             if(d.xLabel !== undefined) text += 'x: ' + d.xLabel + '<br>';
             if(d.yLabel !== undefined) text += 'y: ' + d.yLabel + '<br>';
             text += (text ? 'z: ' : '') + d.zLabel;
-        }
-        else if(showCommonLabel && d[hovermode + 'Label'] === t0) {
+        } else if(showCommonLabel && d[hovermode + 'Label'] === t0) {
             text = d[(hovermode === 'x' ? 'y' : 'x') + 'Label'] || '';
-        }
-        else if(d.xLabel === undefined) {
+        } else if(d.xLabel === undefined) {
             if(d.yLabel !== undefined && d.trace.type !== 'scattercarpet') text = d.yLabel;
-        }
-        else if(d.yLabel === undefined) text = d.xLabel;
+        } else if(d.yLabel === undefined) text = d.xLabel;
         else text = '(' + d.xLabel + ', ' + d.yLabel + ')';
 
         if((d.text || d.text === 0) && !Array.isArray(d.text)) {
@@ -1060,8 +1057,7 @@ function createHoverText(hoverData, opts, gd) {
                 hty += dy / 2;
                 d.anchor = 'start';
             } else d.anchor = 'middle';
-        }
-        else {
+        } else {
             d.pos = hty;
             anchorStartOK = htx + dx / 2 + txTotalWidth <= outerWidth;
             anchorEndOK = htx - dx / 2 - txTotalWidth >= 0;
@@ -1251,8 +1247,7 @@ function hoverAvoidOverlaps(hoverLabels, ax, fullLayout) {
                 bottomOverlap = sumdp / g0.length;
                 for(j = g0.length - 1; j >= 0; j--) g0[j].dp -= bottomOverlap;
                 donepositioning = false;
-            }
-            else i++;
+            } else i++;
         }
 
         // check if we're going off the plot on either side and fix
@@ -1387,8 +1382,7 @@ function cleanPoint(d, hovermode) {
         if(d.xerrneg !== undefined) {
             d.xLabel += ' +' + xeText + ' / -' +
                 Axes.tickText(d.xa, d.xa.c2l(d.xerrneg), 'hover').text;
-        }
-        else d.xLabel += ' ± ' + xeText;
+        } else d.xLabel += ' ± ' + xeText;
 
         // small distance penalty for error bars, so that if there are
         // traces with errors and some without, the error bar label will
@@ -1400,8 +1394,7 @@ function cleanPoint(d, hovermode) {
         if(d.yerrneg !== undefined) {
             d.yLabel += ' +' + yeText + ' / -' +
                 Axes.tickText(d.ya, d.ya.c2l(d.yerrneg), 'hover').text;
-        }
-        else d.yLabel += ' ± ' + yeText;
+        } else d.yLabel += ' ± ' + yeText;
 
         if(hovermode === 'y') d.distance += 1;
     }

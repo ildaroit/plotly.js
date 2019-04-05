@@ -23,9 +23,15 @@ var DUMMY_REGEX = new RegExp('("' + DUMMY_SUB + ')|(' + DUMMY_SUB + '")', 'g');
 function htmlEntityDecode(s) {
     var hiddenDiv = d3.select('body').append('div').style({display: 'none'}).html('');
     var replaced = s.replace(/(&[^;]*;)/gi, function(d) {
-        if(d === '&lt;') { return '&#60;'; } // special handling for brackets
-        if(d === '&rt;') { return '&#62;'; }
-        if(d.indexOf('<') !== -1 || d.indexOf('>') !== -1) { return ''; }
+        if(d === '&lt;') {
+            return '&#60;';
+        } // special handling for brackets
+        if(d === '&rt;') {
+            return '&#62;';
+        }
+        if(d.indexOf('<') !== -1 || d.indexOf('>') !== -1) {
+            return '';
+        }
         return hiddenDiv.html(d).text(); // everything else, let the browser decode it to unicode
     });
     hiddenDiv.remove();
@@ -100,8 +106,7 @@ module.exports = function toSVG(gd, format, scale) {
             if(this.style.visibility === 'hidden' || this.style.display === 'none') {
                 txt.remove();
                 return;
-            }
-            else {
+            } else {
                 // clear other visibility/display values to default
                 // to not potentially confuse non-browser SVG implementations
                 txt.style({visibility: null, display: null});

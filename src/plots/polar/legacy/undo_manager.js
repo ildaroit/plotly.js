@@ -34,7 +34,9 @@ module.exports = function UndoManager() {
             index = undoCommands.length - 1;
             return this;
         },
-        setCallback: function(callbackFunc) { callback = callbackFunc; },
+        setCallback: function(callbackFunc) {
+            callback = callbackFunc;
+        },
         undo: function() {
             var command = undoCommands[index];
             if(!command) return this;
@@ -55,10 +57,20 @@ module.exports = function UndoManager() {
             undoCommands = [];
             index = -1;
         },
-        hasUndo: function() { return index !== -1; },
-        hasRedo: function() { return index < (undoCommands.length - 1); },
-        getCommands: function() { return undoCommands; },
-        getPreviousCommand: function() { return undoCommands[index - 1]; },
-        getIndex: function() { return index; }
+        hasUndo: function() {
+            return index !== -1;
+        },
+        hasRedo: function() {
+            return index < (undoCommands.length - 1);
+        },
+        getCommands: function() {
+            return undoCommands;
+        },
+        getPreviousCommand: function() {
+            return undoCommands[index - 1];
+        },
+        getIndex: function() {
+            return index;
+        }
     };
 };
