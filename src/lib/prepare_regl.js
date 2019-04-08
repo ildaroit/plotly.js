@@ -42,7 +42,7 @@ module.exports = function prepareRegl(gd, extensions) {
                     antialias: !d.pick,
                     preserveDrawingBuffer: true
                 },
-                pixelRatio: gd._context.plotGlPixelRatio || global.devicePixelRatio,
+                pixelRatio: global.devicePixelRatio,
                 extensions: extensions || []
             });
         } catch(e) {
